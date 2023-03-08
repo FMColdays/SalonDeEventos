@@ -21,3 +21,7 @@ Route::get('/', function () {
 Route::get('login', [SistemaController::class, 'entrada'])->name(('login'));
 Route::post('@me', [SistemaController::class, 'validar'])->name('sesion');
 Route::get('evento', [SistemaController::class, 'verEventos'])->name('evento');
+
+Route::get('gerente', [SistemaController::class, 'mostrar'])->name("gerente");
+Route::get('añadir', [SistemaController::class, 'agregar'])->name("añadir");
+

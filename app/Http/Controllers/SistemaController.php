@@ -26,4 +26,12 @@ class SistemaController extends Controller
     {
         return view('conjunto.eventos');
     }
+    public function mostrar()
+    {
+        return view("gerente.tabla");
+    }
+    public function agregar()
+    {
+        return view("gerente.añadirserv");
+    }
 }
