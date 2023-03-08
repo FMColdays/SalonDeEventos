@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SistemaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('principal');
 });
+
+Route::get('login', [SistemaController::class, 'entrada'])->name(('login'));
+Route::post('@me', [SistemaController::class, 'validar'])->name('sesion');
+Route::get('evento', [SistemaController::class, 'verEventos'])->name('evento');

@@ -1,0 +1,84 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+
+/*Aqui inicia css navbar*/
+.navbar{
+  width: 100%;
+  background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(209, 213, 215, 0.918));
+  background-position: center;
+  background-repeat: no-repeat;
+  position:  relative ;
+  top: 0%;
+  background-size: cover;
+}
+
+.navbarC{
+  width: 70%;
+  margin: auto;
+  padding: 25px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo{
+  position: relative;
+  width: 120px;
+  left: 130px;
+}
+
+.opciones{
+  position: relative;
+  right: 270px;
+}
+
+.navbarC ul li{
+  list-style: none;
+  display: inline-block;
+  position: relative;
+  margin-left: 15px;
+}
+
+.navbarC ul li a{ 
+  text-decoration: none;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  margin: 25px;
+}
+
+.navbarC ul li:hover:before{ 
+ content: "";
+ height: 1px;
+ width:100%;
+ background: black;
+ position: absolute;
+ left: 0;
+ top: -6px;
+ transition: 0.4s ease-out;
+}
+
+.navbarC ul li:hover:after{ 
+ content: "";
+ height: 1px;
+ width: 100%;
+ background: black;
+ position: absolute;
+ left: 0;
+ bottom: -6px;
+ transition: 0.4s ease-out;
+}
+/*Aqui termina css navbar*/
+
+body::-webkit-scrollbar {
+ display: none;
+}
+
+
+
+/*.navbarC ul li:hover::before{
+  width: 100%;
+}*/
