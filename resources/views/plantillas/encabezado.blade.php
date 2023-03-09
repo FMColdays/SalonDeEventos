@@ -30,6 +30,11 @@
                     <li><a href="{{ route('añadirEvento') }}">AGREGAR EVENTO</a></li>
                     <li><a href="{{ route('añadirEvento') }}">AGREGAR FOTO</a></li>
                 @endif
+                @if (Route::currentRouteName() == 'salirb')
+                    <li><a href="{{ route('agregaru') }}">AGREGAR USUARIO</a></li>
+                    <li><a href="{{ route('agregarp') }}">AGREGAR PAQUETE</a></li>
+                    <li> <a href="{{ route('listap') }}">PAQUETES REGISTRADOS</a></li>
+                @endif
             </ul>
         </div>
     </nav>
