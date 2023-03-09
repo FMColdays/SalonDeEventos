@@ -15,13 +15,13 @@
         <input type="text" id="nombre" name="nombre" required>
 
         <label for="descripcion">Descripción:</label>
-        <input id="descripcion" name="descripcion" required></input>
+        <input id="descripcion" name="descripcion" required>
 
         <label for="descripcion">Descripción:</label>
-        <input id="descripcion" name="descripcion" required></input>
+        <input id="descripcion" name="descripcion" required>
 
         <label for="descripcion">Descripción:</label>
-        <input id="descripcion" name="descripcion" required></input>
+        <input id="descripcion" name="descripcion" required>
 
         <button type="submit">Añadir persona</button>
     </form>

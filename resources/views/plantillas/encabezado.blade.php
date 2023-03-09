@@ -10,24 +10,26 @@
 </head>
 
 <body>
-
     <nav class="navbar">
+        <div class="logodiv">
+            <img class="logo" src="imagenes/logo.png">
+        </div>
         <div class="navbarC">
-            <a><img class="logo" src="imagenes/logo.png"></a>
-            <ul class="opciones">
-                @if (Route::currentRouteName() != 'login')
-                <li><a href="{{ route('evento') }}">EVENTOS</a></li>
-                <li><a href="">VIÑEDO</a></li>
-                <li><a href="">RESTAURANTE</a></li>
+            <ul class="contenedor-registrar">
                 @if (Route::currentRouteName() != 'sesion')
-                <li><a href="{{ route('login') }}"> INICIAR SESIÓN</a></li>
+                    <li><a class="cae" href="{{ route('login') }}">INICIAR SESIÓN</a></li>
+                    <li><a href="">REGISTRARSE</a></li>
                 @endif
-                <li><a href="{{ route ('gerente') }}">Servicios</a></li>
-
+                @if (Route::currentRouteName() == 'sesion')
+                    <li><a href="{{ route('evento') }}">EVENTOS</a></li>
+                    <li><a href="">VIÑEDO</a></li>
+                    <li><a href="">RESTAURANTE</a></li>
+                    <li><a href="{{ route('gerente') }}">SERVICIOS</a></li>
                 @endif
             </ul>
         </div>
     </nav>
+
     @yield('cuerpo')
 </body>
 
