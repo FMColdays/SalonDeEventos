@@ -17,8 +17,9 @@ class SistemaController extends Controller
         $password = $solicitud->input('contraseña');
         if ($usuario == $password) {
             return view('principal');
-        } else if ($usuario == "gerente" && $password == "hola") {
-            return view("/usuarios.gerentevista");
+        }
+        if ($usuario == "gerente" && $password == "hola") {
+            return redirect('gerentevista');
         }
     }
 
