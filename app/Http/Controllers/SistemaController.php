@@ -17,8 +17,8 @@ class SistemaController extends Controller
         $password = $solicitud->input('contraseña');
         if ($usuario == $password) {
             return view('principal');
-        } else {
-            echo "error";
+        } else if($usuario=="gerente"&&$password=="hola"){
+            return view ("/usuarios.gerentevista");
         }
     }
 
@@ -33,5 +33,24 @@ class SistemaController extends Controller
     public function agregar()
     {
         return view("gerente.añadirserv");
+    }
+    public function agregaru()
+    {
+        return view('usuarios.agregarusuario');
+    }
+
+    public function agregarp()
+    {
+        return view('usuarios.agregarpaquetes');
+    }
+
+    public function listap()
+    {
+        return view('usuarios.listadepaquetes');
+    }
+
+    public function salirb()
+    {
+        return view('/usuarios/gerentevista');
     }
 }
