@@ -22,6 +22,11 @@ class SistemaController extends Controller
         }
     }
 
+    public function añadirEvento()
+    {
+        return view('conjunto.agregarevento');
+    }
+
     public function verEventos()
     {
         return view('conjunto.eventos');

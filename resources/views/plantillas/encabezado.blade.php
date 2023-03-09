@@ -16,15 +16,19 @@
         </div>
         <div class="navbarC">
             <ul class="contenedor-registrar">
-                @if (Route::currentRouteName() != 'sesion')
-                    <li><a class="cae" href="{{ route('login') }}">INICIAR SESIÓN</a></li>
+                @if (Route::currentRouteName() == '')
+                    <li><a href="{{ route('login') }}">INICIAR SESIÓN</a></li>
                     <li><a href="">REGISTRARSE</a></li>
                 @endif
                 @if (Route::currentRouteName() == 'sesion')
                     <li><a href="{{ route('evento') }}">EVENTOS</a></li>
-                    <li><a href="">VIÑEDO</a></li>
-                    <li><a href="">RESTAURANTE</a></li>
+                    <li><a href="#">RESTAURANTE</a></li>
                     <li><a href="{{ route('gerente') }}">SERVICIOS</a></li>
+                    <li><a href="#">CERRAR SESIÓN</a></li>
+                @endif
+                @if (Route::currentRouteName() == 'evento')
+                    <li><a href="{{ route('añadirEvento') }}">AGREGAR EVENTO</a></li>
+                    <li><a href="{{ route('añadirEvento') }}">AGREGAR FOTO</a></li>
                 @endif
             </ul>
         </div>
