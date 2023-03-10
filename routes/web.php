@@ -19,12 +19,15 @@ Route::get('/', function () {
 });
 
 Route::get('login', [SistemaController::class, 'entrada'])->name(('login'));
-Route::post('@me', [SistemaController::class, 'validar'])->name('sesion');
-Route::get('evento', [SistemaController::class, 'verEventos'])->name('evento');
-Route::get('gerente', [SistemaController::class, 'mostrar'])->name("gerente");
-Route::get('añadir', [SistemaController::class, 'agregar'])->name("añadir");
+
 Route::post('validar', [SistemaController::class, 'validar'])->name('sesion');
+Route::get('cliente', [SistemaController::class, 'clienteV'])->name(("cliente"));
+Route::get('gerente', [SistemaController::class, 'gerenteV'])->name(("gerente"));
+
+
+Route::get('evento', [SistemaController::class, 'verEventos'])->name('evento');
+Route::get('tabla', [SistemaController::class, 'mostrar'])->name("tabla");
+Route::get('añadir', [SistemaController::class, 'agregar'])->name("añadir");
 Route::get('agregarusuario', [SistemaController::class, 'agregaru'])->name(("agregaru"));
 Route::get('agregarpaquetes', [SistemaController::class, 'agregarp'])->name(("agregarp"));
 Route::get('listadepaquetes', [SistemaController::class, 'listap'])->name(("listap"));
-Route::get('gerentevista', [SistemaController::class, 'salirb'])->name(("salirb"));

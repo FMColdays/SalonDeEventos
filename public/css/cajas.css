@@ -1,0 +1,80 @@
+
+
+
+
+
+.contenedor-cajas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.cajas{
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background-image: url('https://static8.depositphotos.com/1377527/949/i/450/depositphotos_9499145-stock-photo-bride-and-groom-laughing.jpg');
+    background-size: cover;
+    border-radius: 10% 10% 0% 0%;
+    border: 0.01px solid rgb(229, 181, 112);
+    margin-top: 80px;
+
+}
+
+
+.cajas::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 10% 10% 0% 0%;
+    background: rgba(229, 181, 181, 0.2) ;
+    z-index: 1;
+}
+
+.boton{
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    color: black;
+    font-size: 21px;
+    text-align: center;
+    box-shadow: 5px 5px  black;
+    top: 80%;
+    right: 34%;
+    background-color: azure;
+    border: none;
+    border-radius: 20px;
+    z-index: 2;
+}
+.titulo{
+    position: absolute;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 40px;
+    color: white;
+    right: 32%;
+    top: 5%;
+    z-index: 2;
+}
+.cuerpo{
+    position: absolute;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 25px;
+    color: white;
+    right: 20%;
+    top: 55%;
+    z-index: 2;
+}
+
+.boton:hover{
+    width: 95px;
+    height: 25px;
+    color: white;
+    background-color: rgba(94, 97, 97, 0.7);
+}
+
+
+
+

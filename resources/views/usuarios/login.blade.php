@@ -23,7 +23,7 @@
             <div>Por favor inserta tus datos</div>
         </div>
         <div class="contenedorItems">
-            <form action="@me" method="post">
+            <form action="validar" method="post">
                 @csrf
                 <div class="items">
 

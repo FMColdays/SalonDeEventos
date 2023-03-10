@@ -16,12 +16,23 @@ class SistemaController extends Controller
         $usuario = $solicitud->input('usuario');
         $password = $solicitud->input('contraseña');
         if ($usuario == $password) {
-            return view('principal');
-        }
-        if ($usuario == "gerente" && $password == "hola") {
-            return redirect('gerentevista');
+            return redirect('cliente');
+        } else if ($usuario == "gerente" && $password == "hola") {
+            return redirect('gerente');
         }
     }
+
+    public function clienteV()
+    {
+        return view('principal');
+    }
+    public function gerenteV()
+    {
+        return view('usuarios.gerentevista');
+    }
+
+
+
 
     public function añadirEvento()
     {
@@ -53,10 +64,5 @@ class SistemaController extends Controller
     public function listap()
     {
         return view('usuarios.listadepaquetes');
-    }
-
-    public function salirb()
-    {
-        return view('usuarios.gerentevista');
     }
 }
