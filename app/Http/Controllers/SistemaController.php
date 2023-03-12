@@ -26,23 +26,24 @@ class SistemaController extends Controller
     {
         return view('principal');
     }
-    public function gerenteV()
-    {
-        return view('usuarios.gerentevista');
-    }
-
-
-
 
     public function añadirEvento()
     {
         return view('conjunto.agregarevento');
     }
-
     public function verEventos()
     {
         return view('conjunto.eventos');
     }
+
+
+    public function gerenteV()
+    {
+        return view('gerente.gerentevista');
+    }
+
+
+
     public function mostrar()
     {
         return view("gerente.tabla");
@@ -53,16 +54,14 @@ class SistemaController extends Controller
     }
     public function agregaru()
     {
-        return view('usuarios.agregarusuario');
+        return view('gerente.agregarusuario');
     }
-
     public function agregarp()
     {
-        return view('usuarios.agregarpaquetes');
+        return view('gerente.agregarpaquetes');
     }
-
     public function listap()
     {
-        return view('usuarios.listadepaquetes');
+        return view('gerente.listadepaquetes');
     }
 }

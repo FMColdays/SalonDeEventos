@@ -1,3 +1,4 @@
 @extends('plantillas.encabezado')
-@section('body')
+@section('cuerpo')
+    <h1>Hola</h1>
 @endsection
