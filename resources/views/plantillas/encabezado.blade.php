@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/cajas.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/gerente.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cliente.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <title>Inicio</title>
 </head>
@@ -20,17 +21,16 @@
         <a href="#" class="enlace"><img class="logo" src="imagenes/logo.png"></a>
         <ul class="contenedor-navbar">
             @if (Route::currentRouteName() == '')
-                <li><a class="active" href="{{ route('login') }}">INICIAR SESIÓN</a></li>
+                <li><a href="{{ route('login') }}">INICIAR SESIÓN</a></li>
                 <li><a href="">REGISTRARSE</a></li>
             @endif
             @if (Route::currentRouteName() == 'cliente')
-                <li><a class="active" href="{{ route('evento') }}">EVENTOS</a></li>
+                <li><a href="{{ route('evento') }}">EVENTOS</a></li>
                 <li><a href="#">RESTAURANTE</a></li>
                 <li><a href="#">CERRAR SESIÓN</a></li>
             @endif
             @if (Route::currentRouteName() == 'evento')
-                <li><a class="active" href="">AGREGAR EVENTO</a></li>
-                <li><a href="">AGREGAR FOTO</a></li>
+                <li><a href="{{ route('añadirEventC') }}">AGREGAR EVENTO</a></li>
             @endif
             @if (Route::currentRouteName() == 'gerente')
                 <li><a class="active" href="{{ route('agregaru') }}">AGREGAR USUARIO</a></li>
@@ -39,7 +39,7 @@
                 <li><a href="{{ route('listap') }}">PAQUETES REGISTRADOS</a></li>
                 <li><a href="#">CERRAR SESIÓN</a></li>
             @endif
-            
+
 
         </ul>
     </nav>

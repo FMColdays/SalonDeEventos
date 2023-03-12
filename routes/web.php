@@ -25,6 +25,8 @@ Route::get('cliente', [SistemaController::class, 'clienteV'])->name(("cliente"))
 Route::get('gerente', [SistemaController::class, 'gerenteV'])->name(("gerente"));
 
 Route::get('evento', [SistemaController::class, 'verEventos'])->name('evento');
+Route::get('agregarPaquete',[SistemaController::class, 'añadirEvento'])->name('añadirEventC');
+
 Route::get('tabla-servicios', [SistemaController::class, 'mostrar'])->name("tablaserv");
 Route::get('añadir-servicio', [SistemaController::class, 'agregar'])->name("añadirserv");
 Route::get('agregarusuario', [SistemaController::class, 'agregaru'])->name(("agregaru"));

@@ -26,23 +26,21 @@ class SistemaController extends Controller
     {
         return view('principal');
     }
+    public function verEventos()
+    {
+        return view('cliente.eventos');
+    }
 
     public function añadirEvento()
     {
-        return view('conjunto.agregarevento');
+        return view('cliente.agregarevento');
     }
-    public function verEventos()
-    {
-        return view('conjunto.eventos');
-    }
-
+    
 
     public function gerenteV()
     {
         return view('gerente.gerentevista');
     }
-
-
 
     public function mostrar()
     {
