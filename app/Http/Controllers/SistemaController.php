@@ -64,4 +64,8 @@ class SistemaController extends Controller
     {
         return view('gerente.listadepaquetes');
     }
+    public function bono()
+    {
+        return view('gerente.abonar');
+    }
 }

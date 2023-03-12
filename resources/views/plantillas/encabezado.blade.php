@@ -35,10 +35,12 @@
             @if (Route::currentRouteName() == 'gerente')
                 <li><a class="active" href="{{ route('agregaru') }}">AGREGAR USUARIO</a></li>
                 <li><a href="{{ route('agregarp') }}">AGREGAR PAQUETE</a></li>
-                <li><a href="{{ route('tabla') }}">SERVICIOS</a></li>
+                <li><a href="{{ route('tablaserv') }}">SERVICIOS</a></li>
                 <li><a href="{{ route('listap') }}">PAQUETES REGISTRADOS</a></li>
                 <li><a href="#">CERRAR SESIÓN</a></li>
             @endif
+            
+
         </ul>
     </nav>
     @yield('cuerpo')

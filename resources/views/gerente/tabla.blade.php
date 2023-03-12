@@ -9,7 +9,10 @@
     @endphp
 
     <h1>Registro de Servicios</h1>
-    <div><a href="{{ route('añadir') }}" class="btn btn-success">Añadir</a></div>
+    <div class="well clearfix">
+            <a href="{{ route('añadirserv') }}" class="btn btn-primary"> Añadir nuevo servicio</a>
+            <a href="{{ route('abonarserv') }}" class="btn btn-primary">Abonar servicio</a>
+        </div>
     <table class="table table-bordered" id="tbl_posts">
         <thead>
             <tr>
