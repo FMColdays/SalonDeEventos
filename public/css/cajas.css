@@ -1,3 +1,8 @@
+body {
+    width: 100%;
+    height: 100vh;
+}
+
 .contenedor-cajas {
     font-family: 'Kaushan Script', cursive;
     display: flex;
@@ -8,68 +13,65 @@
 }
 
 .caja {
+    width: 300px;
+    height: 400px;
+    border-radius: 50px;
     position: relative;
-    width: 300px;
-    height: 400px;
-    border-radius: 10% 10% 0% 0%;
-    border: 0.01px solid rgb(229, 181, 112);
-    margin: 50px 50px 0px 50px;
+    border-radius: 10px;
+    border: 0.1px solid rgb(229, 181, 112);
+    margin: 25px 70px 25px 70px;
 }
 
+/*  */
 .imagen-caja {
-    width: 300px;
-    height: 400px;
-    border-radius: 10% 10% 0% 0%;
+    position: absolute;
+    border-radius: 10px 10px 0px 0px;
+    width: 100%;
+    height: 100%;
 }
 
-.caja::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 10% 10% 0% 0%;
-    background: rgba(229, 181, 181, 0.2);
-    z-index: 1;
-}
-
-.boton-caja {
-    position: absolute;
-    width: 100px;
-    height: 30px;
-    color: black;
-    font-size: 21px;
-    text-align: center;
-    box-shadow: 3px 3px black;
-    top: 80%;
-    right: 34%;
-    background-color: white;
-    border: none;
-    border-radius: 20px;
-    z-index: 2;
+/*  */
+.caja-items {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
 }
 
 .titulo-caja {
-    position: absolute;
     font-family: 'Kaushan Script', cursive;
-    font-size: 40px;
     color: white;
-    right: 32%;
-    top: 5%;
-    z-index: 2;
+    text-shadow: 3px 3px black;
 }
 
 .descripcion-caja {
-    position: absolute;
     font-family: 'Kaushan Script', cursive;
     font-size: 25px;
+    text-shadow: 3px 3px black;
     color: white;
-    right: 20%;
-    top: 55%;
-    z-index: 2;
+}
+
+.boton-caja {
+    width: 100px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 3px 3px black;
+    background-color: white;
+    border: none;
+    border-radius: 20px;
 }
 
 .boton-caja:hover {
     width: 95px;
-    height: 25px;
     color: white;
     background-color: rgba(94, 97, 97, 0.7);
+}
+
+.footer-principal {
+    width: 100%;
+    height: 7%;
+    background: black;
 }

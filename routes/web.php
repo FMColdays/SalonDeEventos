@@ -15,12 +15,14 @@ use App\Http\Controllers\SistemaController;
 */
 
 Route::get('/', function () {
-    return view('principal');
+    return redirect('inicio');
 });
 
-Route::get('login', [SistemaController::class, 'entrada'])->name(('login'));
 
+Route::get('inicio', [SistemaController::class, 'inicio'])->name(('inicio'));
+Route::get('login', [SistemaController::class, 'entrada'])->name(('login'));
 Route::post('validar', [SistemaController::class, 'validar'])->name('sesion');
+
 Route::get('cliente', [SistemaController::class, 'clienteV'])->name(("cliente"));
 Route::get('gerente', [SistemaController::class, 'gerenteV'])->name(("gerente"));
 

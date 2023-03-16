@@ -16,7 +16,7 @@
 
     <div class="cabeceraS animate__animated animate__flipInY">
         <div class="cabeceraF">
-            <img src="https://www.freepnglogos.com/uploads/panda-png/baby-bear-face-panda-toy-icon-30.png">
+            <img src="imagenes/logo.png" style="width: 120px;">
         </div>
         <div class="cabeza-login">
             <h1>Inicia sesión</h1>
@@ -26,7 +26,6 @@
             <form action="validar" method="post">
                 @csrf
                 <div class="items">
-
                     <span class="icono material-symbols-rounded">person</span>
                     <input class="cajas" name="usuario" type="text" placeholder="Usuario">
                 </div>

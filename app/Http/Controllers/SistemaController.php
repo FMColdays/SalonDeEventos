@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class SistemaController extends Controller
 {
+
+    public function inicio()
+    {
+        return view('principal');
+    }
     public function entrada()
     {
         return view('usuarios.login');
@@ -35,7 +40,7 @@ class SistemaController extends Controller
     {
         return view('cliente.agregarevento');
     }
-    
+
 
     public function gerenteV()
     {
