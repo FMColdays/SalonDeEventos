@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Paquete;
 use Illuminate\Http\Request;
 
 class SistemaController extends Controller
@@ -9,11 +10,12 @@ class SistemaController extends Controller
 
     public function inicio()
     {
-        return view('principal');
+        $todos = Paquete::all();
+        return view('principal', compact('todos'));
     }
     public function entrada()
     {
-        return view('usuarios.login');
+        return view('login');
     }
 
     public function validar(Request $solicitud)

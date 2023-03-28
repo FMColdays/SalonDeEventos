@@ -17,15 +17,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
         integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
         integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous">
     </script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     {{-- Termina libreria boostrap   --}}
-
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
@@ -33,6 +31,7 @@
     <link rel="stylesheet" href="{{ asset('css/gerente.css') }}">
     <link rel="stylesheet" href="{{ asset('css/cliente.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="shortcut icon" href="imagenes/logo.png">
     <title>Inicio</title>
 </head>
 
@@ -56,10 +55,15 @@
                     </li>
                 @endif
                 @if (Route::currentRouteName() == 'gerente')
-                    <li><a class="nav-link px-2 link-secondary" href="{{ route('agregaru') }}">Agregar usuario</a></li>
-                    <li><a class="nav-link px-2 link-dark" href="{{ route('agregarp') }}">Agregar paquete</a></li>
+                    <li><a class="nav-link px-2 link-secondary" href="{{ route('usuarios.index') }}">Usuarios</a></li>
+                    <li><a class="nav-link px-2 link-dark" href="{{ route('paquetes.index') }}">Paquetes</a></li>
                     <li><a class="nav-link px-2 link-dark" href="{{ route('tablaserv') }}">Servicios</a></li>
-                    <li><a class="nav-link px-2 link-dark" href="{{ route('listap') }}">Paquetes registrados</a></li>
+                @endif
+                @if (Route::currentRouteName() == 'usuarios.index')
+                    <li><a class="nav-link px-2 link-secondary" href="{{ route('usuarios.create') }}">agregar</a></li>
+                @endif
+                @if (Route::currentRouteName() == 'paquetes.index')
+                    <li><a class="nav-link px-2 link-secondary" href="{{ route('paquetes.create') }}">agregar</a></li>
                 @endif
             </ul>
             {{-- Botón de sesión --}}

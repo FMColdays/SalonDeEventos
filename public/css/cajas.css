@@ -1,77 +1,100 @@
-body {
-    width: 100%;
-    height: 100vh;
+/* contenedor movil */
+a {
+    text-decoration: none;
 }
 
-.contenedor-cajas {
-    font-family: 'Kaushan Script', cursive;
+.contenedor {
+    margin: 50px auto;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
     justify-content: center;
-    align-items: center;
 }
 
-.caja {
+.contenedor_tarjeta {
+    margin: 20px;
+}
+
+.contenedor_tarjeta a {
+    display: inline-block;
+}
+
+.contenedor_tarjeta:hover figure {
+    transform: perspective(600px) rotateY(180deg);
+    -webkit-box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.25);
+}
+
+.contenedor_tarjeta:hover figure img {
+    filter: blur(2px);
+}
+
+figure {
     width: 300px;
-    height: 400px;
-    border-radius: 50px;
+    height: 350px;
+    margin: 0;
     position: relative;
-    border-radius: 10px;
-    border: 0.1px solid rgb(229, 181, 112);
-    margin: 25px 70px 25px 70px;
+    transition: all ease .5s;
+    transform-style: preserve-3d;
+    transform: perspective(600px) rotateY(0deg);
 }
 
-/*  */
-.imagen-caja {
+figure .frontal,
+figure .trasera {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    transition: all ease .5s;
+}
+
+figure .frontal {
+    display: block;
+    background: #000;
+}
+
+figure .trasera {
     position: absolute;
-    border-radius: 10px 10px 0px 0px;
-    width: 100%;
-    height: 100%;
+    top: 0;
+    padding: 20px;
+    color: #fff;
+    transform: perspective(600px) rotateY(180deg);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: auto;
 }
 
-/*  */
-.caja-items {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
+figure .trasera .titulo {
+    color: #fff;
+    font-weight: normal;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
 }
 
-.titulo-caja {
-    font-family: 'Kaushan Script', cursive;
-    color: white;
-    text-shadow: 3px 3px black;
-}
-
-.descripcion-caja {
-    font-family: 'Kaushan Script', cursive;
-    font-size: 25px;
-    text-shadow: 3px 3px black;
-    color: white;
-}
-
-.boton-caja {
-    width: 100px;
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    box-shadow: 3px 3px black;
-    background-color: white;
+figure .trasera hr {
+    height: 2px;
+    background: #fff;
     border: none;
-    border-radius: 20px;
+    margin-bottom: 20px;
+    opacity: .5;
 }
 
-.boton-caja:hover {
-    width: 95px;
-    color: white;
-    background-color: rgba(94, 97, 97, 0.7);
+figure .trasera p {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 22px;
+    font-size: 14px;
 }
 
-.footer-principal {
-    width: 100%;
-    height: 7%;
-    background: black;
+@media screen and (max-width: 992px) {
+    figure .trasera {
+        /*position: relative;*/
+        -webkit-backface-visibility: visible;
+        backface-visibility: visible;
+        transform: perspective(600px) rotateY(0deg);
+    }
+
+    .contenedor_tarjeta:hover figure {
+        transform: perspective(600px) rotateY(0deg);
+    }
+
 }
