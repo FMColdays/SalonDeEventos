@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Imagen;
 use App\Models\Paquete;
 use Illuminate\Http\Request;
+use App\Models\Usuario;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class SistemaController extends Controller
 {
@@ -11,38 +15,81 @@ class SistemaController extends Controller
     public function inicio()
     {
         $todos = Paquete::all();
-        return view('principal', compact('todos'));
+        $imagenes = Imagen::all();
+        return view('principal', compact('todos', 'imagenes'));
     }
-    public function entrada()
+
+
+    //Vista login y registro
+    public function login()
     {
         return view('login');
     }
+    public function registro()
+    {
+        return view('registrarse');
+    }
 
+    //Sistem de registro de nuevo usurio
+    public function registrar(Request $solicitud)
+    {
+        $nombre = $solicitud->input('nombre');
+        $usuario = $solicitud->input('usuario');
+        $contraseña = $solicitud->input('contraseña');
+        $nuevo = new Usuario();
+        $nuevo->nombre = $nombre;
+        $nuevo->usuario = $usuario;
+        $nuevo->contraseña = Hash::make($contraseña);
+        $nuevo->save();
+        return redirect('inicio');
+    }
+
+    //Sistema de validación de usuario
     public function validar(Request $solicitud)
     {
         $usuario = $solicitud->input('usuario');
-        $password = $solicitud->input('contraseña');
-        if ($usuario == $password) {
-            return redirect('cliente');
-        } else if ($usuario == "gerente" && $password == "hola") {
-            return redirect('gerente');
+        $contraseña = $solicitud->input('contraseña');
+
+        $encontrado = Usuario::where('usuario', $usuario)->first();
+
+        if (is_null($encontrado)) {
+            echo "error";
+        } else {
+            $contraseña_bd = $encontrado->contraseña;
+            $conincide = Hash::check($contraseña, $contraseña_bd);
+
+            if ($conincide) {
+                Auth::login($encontrado);
+                return redirect(route('@me'));
+            } else {
+                echo "error";
+            }
         }
     }
 
-    public function clienteV()
+    public function tipoVistaUsuario()
     {
-        return view('principal');
-    }
-    public function verEventos()
-    {
-        return view('cliente.eventos');
+        $tipo_de_usurio = Auth::user()->rol;
+        $todos = Paquete::all();
+        $imagenes = Imagen::all();
+        
+        if ($tipo_de_usurio == "Gerente") {
+            return view('gerente.gerentevista', compact('todos', 'imagenes'));
+        }else{
+            return view('principal', compact('todos', 'imagenes'));
+        }
+        
     }
 
-    public function añadirEvento()
-    {
-        return view('cliente.agregarevento');
+    public function cerrar_sesion(){
+        Auth::logout();
+        return redirect('inicio');
     }
 
+
+
+
+ 
 
     public function gerenteV()
     {
@@ -57,18 +104,7 @@ class SistemaController extends Controller
     {
         return view("gerente.añadirserv");
     }
-    public function agregaru()
-    {
-        return view('gerente.agregarusuario');
-    }
-    public function agregarp()
-    {
-        return view('gerente.agregarpaquetes');
-    }
-    public function listap()
-    {
-        return view('gerente.listadepaquetes');
-    }
+
     public function bono()
     {
         return view('gerente.abonar');

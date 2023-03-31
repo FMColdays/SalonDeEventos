@@ -1,29 +1,39 @@
 @extends('plantillas.encabezado')
 @section('cuerpo')
-    <div class="contenedor-evento-cliente">
-        <header>
-            <h1>Añadir evento</h1>
-        </header>
-        <form>
-            <div>
-                <label for="nombre">Nombre del evento:</label>
-                <input type="text" id="nombre" name="nombre" required>
+    <div class="contenedor-agregar">
+        <div class="header-agregar">
+            <h1>Añadir Paquete de Eventos</h1>
+        </div>
+        <form action="{{ route('paquetes.store') }}" method="post" enctype="multipart/form-data"> {{-- Cambiar ruta  --}}
+
+            @csrf
+            <div class="div-agregar">
+                <div class="contenedor-items">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" required style="width: 90%"></textarea>
+                    <label for="evento">Paquete:</label>
+                    <select name="evento" id="evento">
+                        <option value="opcion1">Boda</option>
+                        <option value="opcion2">Cumpleaños</option>
+                    </select>
+                </div>
+                <div class="contenedor-items">
+                    <label for="ubicacion">Ubicación:</label>
+                    <input type="text" id="ubicacion" name="ubicacion" required>
+                    <label for="servicios">Servicios:</label>
+                    <select name="servicios">
+                        <option value="opcion1">Manteleria</option>
+                        <option value="opcion2">Vinos y licores</option>
+                    </select>
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                    <label for="imagen">Imagen:</label>
+                    <input type="file" name="imagen[]" multiple accept="image/*" required>
+                </div>
             </div>
-            <div>
-                <label for="costo">Costo del evento:</label>
-                <input type="number" id="costo" name="costo" required>
-            </div>
-            <div>
-                <label for="mensaje">Seleccione una imagen del evento:</label>
-                <input type="file" id="imagen" name="imagen" required>
-            </div>
-            <div>
-                <label for="mensaje">Descripción del evento:</label>
-                <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
-            </div>
-            <div>
-                <button type="submit">Enviar</button>
-            </div>
+            <input class="boton" type="submit" value="Guardar">
         </form>
     </div>
 @endsection

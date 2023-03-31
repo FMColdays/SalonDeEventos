@@ -14,8 +14,6 @@
                     <input id="usuario" id="usuario" name="usuario" required>
                     <label for="nacimiento">Fecha de nacimiento:</label>
                     <input type="date" id="nacimiento" name="nacimiento" required>
-                    <label for="apellidos">Apellidos:</label>
-                    <input type="text" id="apellidos" name="apellidos" required>
                 </div>
                 <div class="contenedor-items">
                     <label for="contraseña">Contraseña:</label>

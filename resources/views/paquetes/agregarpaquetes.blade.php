@@ -25,7 +25,7 @@
                     <label for="fecha">Fecha:</label>
                     <input type="date" id="fecha" name="fecha" required>
                     <label for="imagen">Imagen:</label>
-                    <input type="file" id="imagen" name="imagen" required>
+                    <input type="file" name="imagen[]" multiple accept="image/*" required>
                 </div>
             </div>
             <input class="boton" type="submit" value="Guardar">

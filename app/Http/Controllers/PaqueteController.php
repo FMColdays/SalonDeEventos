@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Paquete;
 use App\Http\Requests\StorePaqueteRequest;
 use App\Http\Requests\UpdatePaqueteRequest;
+use App\Models\Imagen;
+
 
 class PaqueteController extends Controller
 {
@@ -14,7 +16,8 @@ class PaqueteController extends Controller
     public function index()
     {
         $todos = Paquete::all();
-        return view("paquetes.index", compact('todos'));
+        $imagenes = Imagen::all();
+        return view("paquetes.index", compact('todos', 'imagenes'));
     }
 
     /**
@@ -32,6 +35,7 @@ class PaqueteController extends Controller
     {
         $nuevo = new Paquete();
 
+
         $nuevo->nombre = $request->input('nombre');
         $nuevo->fecha = $request->input('fecha');
         $nuevo->ubicacion = $request->input('ubicacion');
@@ -39,15 +43,21 @@ class PaqueteController extends Controller
         $nuevo->costo = $request->input('costo');
         $nuevo->descripcion = $request->input('descripcion');
         $nuevo->servicios = $request->input('servicios');
-        if ($request->hasFile('imagen')) {
-            $imagen = $request->file('imagen');
-            $ruta = 'imagenes/';
-            $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
-            $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
-            $nuevo->imagen = $ruta . $nombreimagen;
-        }
-
         $nuevo->save();
+
+        if ($request->hasFile('imagen')) {
+            $imagenesob = $request->file('imagen');
+
+            foreach ($imagenesob as $imagen) {
+                $ruta = 'imagenes/';
+                $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
+                $imagen->storeAs('public/imagenes', $nombreimagen);
+                $imagenes = new Imagen();
+                $imagenes->imagen = $ruta . $nombreimagen;
+                $imagenes->paquete_id  = $nuevo->id;
+                $imagenes->save();
+            }
+        }
         return redirect(route('paquetes.index'));
     }
 

@@ -24,8 +24,6 @@
     {{-- Termina libreria boostrap   --}}
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/cajas.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/gerente.css') }}">
@@ -39,33 +37,47 @@
     <header class="p-3 border-bottom">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none"><img
-                    class="logo"src="imagenes/logo.png"> </a>
+                    class="logo"src="/imagenes/logo.png"> </a>
 
             <ul class="nav col-20 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                @if (Route::currentRouteName() == 'inicio')
+                @if (Auth::check())
+                    @if (Auth::user()->rol == 'Gerente' && Route::currentRouteName() != 'inicio')
+                        @if (Route::currentRouteName() == '@me')
+                            <li><a class="nav-link px-2 link-secondary"href="{{ route('usuarios.index') }}">Usuarios</a>
+                            </li>
+                            <li><a class="nav-link px-2 link-dark" href="{{ route('paquetes.index') }}">Paquetes</a>
+                            </li>
+                            <li><a class="nav-link px-2 link-dark" href="{{ route('tablaserv') }}">Servicios</a></li>
+                        @endif
+                        @if (Route::currentRouteName() == 'evento')
+                            <li><a class="nav-link px-2 link-secondary"
+                                    href="{{ route('añadirEventC') }}">Agregarevento</a>
+                            </li>
+                        @endif
+                        @if (Route::currentRouteName() == 'usuarios.index')
+                            <li><a class="nav-link px-2 link-secondary"href="{{ route('usuarios.create') }}">agregar</a>
+                            </li>
+                        @endif
+                        @if (Route::currentRouteName() == 'paquetes.index')
+                            <li><a class="nav-link px-2 link-secondary"href="{{ route('paquetes.create') }}">agregar</a>
+                            </li>
+                        @endif
+                    @elseif (Auth::user()->rol == 'Cliente' && Route::currentRouteName() != 'inicio')
+                        @if (Route::currentRouteName() == '@me')
+                            <li><a class="nav-link px-2 link-secondary" href="{{ route('eventos.index') }}">Eventos</a></li>
+                        @endif
+                        @if (Route::currentRouteName() == 'eventos.index')
+                            <li><a class="nav-link px-2 link-secondary" href="{{ route('eventos.create') }}">Agregar</a></li>
+                        @endif
+                    @endif
+                @else
                     <li><a class="nav-link px-2 link-secondary" href="{{ route('login') }}">Iniciar sesión</a></li>
-                    <li><a class="nav-link px-2 link-dark" href="">Registrarse</a></li>
+                    <li><a class="nav-link px-2 link-dark" href="{{ route('registrarse') }}">Registrarse</a></li>
                 @endif
-                @if (Route::currentRouteName() == 'cliente')
-                    <li><a class="nav-link px-2 link-secondary" href="{{ route('evento') }}">Eventos</a></li>
-                    <li><a class="nav-link px-2 link-dark" href="#">Restaurante</a></li>
-                @endif
-                @if (Route::currentRouteName() == 'evento')
-                    <li><a class="nav-link px-2 link-secondary" href="{{ route('añadirEventC') }}">Agregar evento</a>
-                    </li>
-                @endif
-                @if (Route::currentRouteName() == 'gerente')
-                    <li><a class="nav-link px-2 link-secondary" href="{{ route('usuarios.index') }}">Usuarios</a></li>
-                    <li><a class="nav-link px-2 link-dark" href="{{ route('paquetes.index') }}">Paquetes</a></li>
-                    <li><a class="nav-link px-2 link-dark" href="{{ route('tablaserv') }}">Servicios</a></li>
-                @endif
-                @if (Route::currentRouteName() == 'usuarios.index')
-                    <li><a class="nav-link px-2 link-secondary" href="{{ route('usuarios.create') }}">agregar</a></li>
-                @endif
-                @if (Route::currentRouteName() == 'paquetes.index')
-                    <li><a class="nav-link px-2 link-secondary" href="{{ route('paquetes.create') }}">agregar</a></li>
-                @endif
+
             </ul>
+
+
             {{-- Botón de sesión --}}
             @if (Route::currentRouteName() != 'inicio')
                 <div class="dropdown text-end">
@@ -81,7 +93,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="{{ route('inicio') }}">Cerrar sesión</a></li>
+                        <li><a class="dropdown-item" href="{{ route('cerrar_sesion') }}">Cerrar sesión</a></li>
                     </ul>
                 </div>
         </div>

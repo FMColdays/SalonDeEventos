@@ -15,14 +15,16 @@
                     <input id="usuario" id="usuario" name="usuario" value="{{ $usuario->usuario }}" required>
                     <label for="nacimiento">Fecha de nacimiento:</label>
                     <input type="date" id="nacimiento" name="nacimiento" value="{{ $usuario->nacimiento }}" required>
-                    <label for="apellidos">Apellidos:</label>
-                    <input type="text" id="apellidos" name="apellidos" value="{{ $usuario->apellidos }}" required>
                 </div>
                 <div class="contenedor-items">
-                    <label for="contraseña">Contraseña:</label>
-                    <input type="text" id="contraseña" name="contraseña" value="{{ $usuario->contraseña }}" required>
+                    <input type="hidden" name="contraseña" value="{{ $usuario->contraseña }}" required>
                     <label for="rol">Rol:</label>
-                    <input type="text" id="rol" name="rol" value="{{ $usuario->rol }}" required>
+                    <select name="rol">
+                        <option name="rol" name="rol">Seleccionar</option>
+                        <option id="opcion1" name="rol">Gerente</option>
+                        <option id="opcion2" name="rol">Cliente</option>
+                    </select>
+
                     <label for="imagen">Imagen:</label>
                     <input type="file" id="imagen" name="imagen" required>
                 </div>

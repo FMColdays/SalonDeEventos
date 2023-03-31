@@ -11,15 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paquetes', function (Blueprint $table) {
+        Schema::create('eventos', function (Blueprint $table) {
             $table->id();
-            $table->string("nombre");
-            $table->string("fecha");
-            $table->string("ubicacion");
-            $table->string("capacidad");
-            $table->string("costo");
-            $table->string("descripcion");
-            $table->string("servicios");
             $table->timestamps();
         });
     }
@@ -29,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paquetes');
+        Schema::dropIfExists('eventos');
     }
 };

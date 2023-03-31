@@ -7,14 +7,44 @@
         <div class="paquetes">
             @foreach ($todos as $uno)
                 <div class="paquete">
-                    <div class="fecha">{{ $uno->fecha }}</div>
-                    <h2>{{ $uno->nombre }}</h2>
-                    <div class="ubicacion">{{ $uno->ubicacion }}</div>
-                    <p>{{ $uno->capacidad }}</p>
-                    <p>{{ $uno->descripcion }}</p>
-                    <p>{{ $uno->costo }}</p>
-                    <p>{{ $uno->servicios }}</p>
-                    <img src="{{ asset($uno->imagen) }}" alt="" class="img-fluid" width="400px">
+                    @foreach ($imagenes as $dos)
+                        <img src="{{ asset($dos->imagen) }}" alt="" class="img-fluid" width="400px">
+                    @endforeach
+                    <div class="descripcion">
+
+                        <div class="opciones">
+                            <a class="icono material-symbols-rounded edit" href="#">edit</a>
+                            <a class="icono material-symbols-rounded delete" href="#">delete</a>
+                        </div>
+
+                        <h2>{{ $uno->nombre }}</h2>
+
+                        <div class="items">
+                            <span class="icono material-symbols-rounded">location_on</span>
+                            <p class="ubicacion">{{ $uno->ubicacion }}</p>
+                        </div>
+                        <div class="items">
+                            <span class="icono material-symbols-rounded">group</span>
+                            <p>{{ $uno->capacidad }}</p>
+                        </div>
+                        <div class="items">
+                            <span class="icono material-symbols-rounded">description</span>
+                            <p>{{ $uno->descripcion }}</p>
+                        </div>
+                        <div class="items">
+                            <span class="icono material-symbols-rounded">payments</span>
+                            <p>{{ $uno->costo }}</p>
+                        </div>
+                        <div class="items">
+                            <span class="icono material-symbols-rounded">design_services</span>
+                            <p>{{ $uno->servicios }}</p>
+                        </div>
+                        <div class="items">
+                            <span class="icono material-symbols-rounded">calendar_month</span>
+                            <p>{{ $uno->fecha }}</p>
+                        </div>
+
+                    </div>
                 </div>
             @endforeach
         </div>

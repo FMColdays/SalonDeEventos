@@ -80,55 +80,33 @@
 }
 
 .lista-paquetes .paquete {
-    border-bottom: 1px solid #EEE;
+    display: flex;
+    border-bottom: 1px solid #dbd9d9;
     margin-bottom: 20px;
     padding-bottom: 20px;
 }
 
-.lista-paquetes .paquete:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
+.lista-paquetes .descripcion {
+    width: 100%;
+    padding-left: 30px;
 }
 
-.lista-paquetes h2 {
-    color: #333;
-    margin-top: 0;
+.lista-paquetes .items {
+    display: flex;
 }
 
 .lista-paquetes p {
-    color: #555;
-    margin-bottom: 10px;
+    padding-left: 10px;
 }
 
-.lista-paquetes .fecha {
-    background-color: #008CBA;
-    border-radius: 5px;
-    color: #FFF;
-    display: inline-block;
-    font-size: 14px;
-    padding: 5px 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+.lista-paquetes .opciones {
+    text-align: end;
 }
 
-.lista-paquetes .ubicacion {
-    color: #555;
-    display: inline-block;
-    margin-bottom: 10px;
+.edit {
+    color: rgb(74, 208, 74);
 }
 
-.lista-paquetes .button {
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 5px;
-    color: #FFF;
-    cursor: pointer;
-    font-size: 14px;
-    padding: 5px 10px;
-    text-decoration: none;
-}
-
-.lista-paquetes .button:hover {
-    background-color: #357a38;
+.delete{
+    color: red;
 }

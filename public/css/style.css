@@ -8,7 +8,10 @@
 body::-webkit-scrollbar {
   display: none;
 }
-
+.logo{
+  width: 180px;
+  padding: 10px;
+}
 .presentacion {
   background: url(https://www.vidanta.com/documents/34940/257206/bodas-banner.jpg/e5410766-4f94-1c88-260b-1b4086c59908?t=1562598785991);
 }

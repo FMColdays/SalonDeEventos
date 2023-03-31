@@ -7,8 +7,6 @@
                     <th>Nombre</th>
                     <th>Usuario</th>
                     <th>Nacimiento</th>
-                    <th>Apellidos</th>
-                    <th>Contraseña</th>
                     <th>Rol</th>
                     <th>Imagen</th>
                     <th></th>
@@ -21,8 +19,6 @@
                         <td>{{ $uno->nombre }}</td>
                         <td>{{ $uno->usuario }}</td>
                         <td>{{ $uno->nacimiento }}</td>
-                        <td>{{ $uno->apellidos }}</td>
-                        <td>{{ $uno->contraseña }}</td>
                         <td>{{ $uno->rol }}</td>
                         <td><img src="{{ asset($uno->imagen) }}" alt="" width="80px">
                         <td>

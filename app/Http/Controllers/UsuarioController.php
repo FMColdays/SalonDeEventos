@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use App\Http\Requests\StoreUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
@@ -34,8 +36,7 @@ class UsuarioController extends Controller
         $nuevo->nombre = $request->input('nombre');
         $nuevo->usuario = $request->input('usuario');
         $nuevo->nacimiento = $request->input('nacimiento');
-        $nuevo->apellidos = $request->input('apellidos');
-        $nuevo->contraseña = $request->input('contraseña');
+        $nuevo->contraseña = Hash::make($request->input('contraseña'));
         $nuevo->rol = $request->input('rol');
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
@@ -73,7 +74,6 @@ class UsuarioController extends Controller
         $usuario->nombre = $request->input('nombre');
         $usuario->usuario = $request->input('usuario');
         $usuario->nacimiento = $request->input('nacimiento');
-        $usuario->apellidos = $request->input('apellidos');
         $usuario->contraseña = $request->input('contraseña');
         $usuario->rol = $request->input('rol');
         if ($request->hasFile('imagen')) {
