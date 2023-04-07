@@ -17,9 +17,10 @@
                     <input type="date" id="nacimiento" name="nacimiento" value="{{ $usuario->nacimiento }}" required>
                 </div>
                 <div class="contenedor-items">
-                    <input type="hidden" name="contraseña" value="{{ $usuario->contraseña }}" required>
+                     <label for="contraseña">Contraseña:</label>
+                    <input type="text" name="contraseña" value="{{ $usuario->contraseña }}" id= "contraseña" required>
                     <label for="rol">Rol:</label>
-                    <select name="rol">
+                    <select class="selectores" name="rol">
                         <option name="rol" name="rol">Seleccionar</option>
                         <option id="opcion1" name="rol">Gerente</option>
                         <option id="opcion2" name="rol">Cliente</option>

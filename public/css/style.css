@@ -8,10 +8,12 @@
 body::-webkit-scrollbar {
   display: none;
 }
-.logo{
+
+.logo {
   width: 180px;
   padding: 10px;
 }
+
 .presentacion {
   background: url(https://www.vidanta.com/documents/34940/257206/bodas-banner.jpg/e5410766-4f94-1c88-260b-1b4086c59908?t=1562598785991);
 }
@@ -193,6 +195,183 @@ tr {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.contenedor-agregar .selectores {
+  width: 90%;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+
 .contenedor-agregar .boton {
   width: 100%;
+}
+
+/* Aregar usuario css */
+.titulo-formulario-usuario {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.form-formulario-usuario {
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-formulario-usuario label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.form-formulario-usuario input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #DDD;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+
+.form-formulario-usuario button[type="submit"] {
+  background-color: #4CAF50;
+  margin-right: 0;
+}
+
+.form-formulario-usuario button[type="submit"]:hover {
+  background-color: #357a38;
+}
+
+
+/* Lista de paquetes css */
+
+.lista-paquetes {
+  margin: 0 auto;
+  max-width: 1300px;
+  padding: 20px;
+}
+
+.lista-paquetes .header {
+  background-color: #333;
+  color: #FFF;
+  padding: 20px;
+  text-align: center;
+}
+
+.lista-paquetes .paquetes {
+  background-color: #FFF;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  overflow-y: auto;
+  max-height: 400px;
+  padding: 20px;
+}
+
+.lista-paquetes .paquete {
+  display: flex;
+  border-bottom: 1px solid #dbd9d9;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.lista-paquetes .descripcion {
+  width: 100%;
+  padding-left: 30px;
+}
+
+.lista-paquetes .items {
+  display: flex;
+}
+
+.lista-paquetes p {
+  padding-left: px;
+}
+
+.lista-paquetes .opciones {
+  text-align: end;
+}
+
+.lista-paquetes .opciones a {
+ text-decoration: none;
+}
+
+.edit {
+  color: rgb(74, 208, 74);
+}
+
+.delete {
+  color: red;
+}
+
+/* Agregar evento css */
+.contenedor-evento-cliente {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  background-color: #e0e1e1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor-evento-cliente form {
+  width: 50%;
+  flex-direction: column;
+  background-color: #d0d1d3;
+  margin: 0 auto;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.contenedor-evento-cliente header {
+  background-color: #363434;
+  width: 50%;
+  height: 80px;
+  color: white;
+  text-align: center;
+}
+
+.contenedor-evento-cliente header h1 {
+  display: inline-block;
+  padding: 22px;
+}
+
+.contenedor-evento-cliente div {
+  margin: 20px;
+  width: 90%;
+}
+
+.contenedor-evento-cliente label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.contenedor-evento-cliente input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.contenedor-evento-cliente button {
+  background-color: #393a3b;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.contenedor-evento-cliente button:hover {
+  background-color: #444546;
 }

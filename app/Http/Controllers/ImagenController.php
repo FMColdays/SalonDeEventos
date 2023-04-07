@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Imagen;
+use App\Models\Paquete;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
+
 
 class ImagenController extends Controller
 {
@@ -12,7 +16,7 @@ class ImagenController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -20,7 +24,7 @@ class ImagenController extends Controller
      */
     public function create()
     {
-        //
+        return view('album.create');
     }
 
     /**
@@ -28,7 +32,26 @@ class ImagenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $request->validate([
+            'file' => 'required|image'
+        ]);
+
+        $nombre = Str::random(10) . $request->file('file')->getClientOriginalName();
+        $ruta = storage_path() . '\app\public\album/' . $nombre;
+
+        Image::make($request->file('file'))
+            ->resize(1200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save($ruta);
+
+        $album = new Imagen();
+        $album->paquete_id = 2;
+        $album->imagen = '/storage/album/' . $nombre;
+        $album->save();
+        return redirect()->route('album.index');
     }
 
     /**
@@ -36,7 +59,7 @@ class ImagenController extends Controller
      */
     public function show(Imagen $imagen)
     {
-        //
+        return view('album.show');
     }
 
     /**
@@ -44,7 +67,7 @@ class ImagenController extends Controller
      */
     public function edit(Imagen $imagen)
     {
-        //
+        return view('album.edit');
     }
 
     /**

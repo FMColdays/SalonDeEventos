@@ -33,6 +33,9 @@
                     <span class="icono material-symbols-rounded">lock</span>
                     <input class="cajas" name="contraseña" type="password" placeholder="Contraseña">
                 </div>
+                <div>
+                    <h3 style="text-align: center; color: red">{{ session('mensaje') }}</h3>
+                </div>
                 <div class="items">
                     <input class="boton" type="submit">
                 </div>

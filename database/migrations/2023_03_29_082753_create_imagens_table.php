@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('imagens', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('paquete_id');
+           $table->unsignedBigInteger('paquete_id');
             $table->foreign('paquete_id', 'paquete')
                 ->references('id')
                 ->on('paquetes')

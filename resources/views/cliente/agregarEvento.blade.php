@@ -14,19 +14,23 @@
                     <label for="descripcion">Descripción:</label>
                     <textarea id="descripcion" name="descripcion" required style="width: 90%"></textarea>
                     <label for="evento">Paquete:</label>
-                    <select name="evento" id="evento">
-                        <option value="opcion1">Boda</option>
-                        <option value="opcion2">Cumpleaños</option>
+                    <select class="selectores">
+                        @foreach ($paquetes as $paquete)
+                            <option selected>Opciones</option>
+                            <option value="opcion1">{{ $paquete->nombre }}</option>
+                        @endforeach
+                    </select>
+                    <label for="servicios">Servicios:</label>
+                    <select class="selectores">
+                        @foreach ($paquetes as $paquete)
+                            <option selected>Opciones</option>
+                            <option value="opcion1">{{ $paquete->nombre }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="contenedor-items">
                     <label for="ubicacion">Ubicación:</label>
                     <input type="text" id="ubicacion" name="ubicacion" required>
-                    <label for="servicios">Servicios:</label>
-                    <select name="servicios">
-                        <option value="opcion1">Manteleria</option>
-                        <option value="opcion2">Vinos y licores</option>
-                    </select>
                     <label for="fecha">Fecha:</label>
                     <input type="date" id="fecha" name="fecha" required>
                     <label for="imagen">Imagen:</label>

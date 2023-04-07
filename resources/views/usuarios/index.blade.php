@@ -23,7 +23,8 @@
                         <td><img src="{{ asset($uno->imagen) }}" alt="" width="80px">
                         <td>
                         <td>
-                            <a href="{{route('usuarios.edit',$uno->id)}}" class="icono material-symbols-rounded update">update</a>
+                            <a href="{{ route('usuarios.edit', $uno->id) }}"
+                                class="icono material-symbols-rounded update">update</a>
                             <form action="{{ route('usuarios.destroy', $uno->id) }}" method="post">
                                 @method('DELETE')
                                 @csrf

@@ -53,7 +53,8 @@ class SistemaController extends Controller
         $encontrado = Usuario::where('usuario', $usuario)->first();
 
         if (is_null($encontrado)) {
-            echo "error";
+           return redirect('login')
+           ->with(['mensaje' => 'Error, usuario no encontrado']);
         } else {
             $contraseña_bd = $encontrado->contraseña;
             $conincide = Hash::check($contraseña, $contraseña_bd);
@@ -62,7 +63,8 @@ class SistemaController extends Controller
                 Auth::login($encontrado);
                 return redirect(route('@me'));
             } else {
-                echo "error";
+               return redirect('login')
+                ->with(['mensaje' => 'Error, contraseña incorrecta']);;
             }
         }
     }

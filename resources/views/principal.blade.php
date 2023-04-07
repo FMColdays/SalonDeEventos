@@ -15,16 +15,14 @@
     <div class="contenedor">
         @foreach ($todos as $uno)
             <div class="contenedor_tarjeta">
-                <a href="http://www.youtube.com">
+                <a href="{{ route('album.index') }}">
                     <figure>
-                        @foreach ($imagenes as $dos)
-                            <img src="{{ asset($dos->imagen) }}" @endforeach
-                            class="frontal" alt="">
-                            <figcaption class="trasera">
-                                <h2 class="titulo">{{ $uno->nombre }}</h2>
-                                <hr>
-                                <p>{{ $uno->descripcion }}</p>
-                            </figcaption>
+                        <img src="{{ asset($uno->imagen) }}" class="frontal">
+                        <figcaption class="trasera">
+                            <h2 class="titulo">{{ $uno->nombre }}</h2>
+                            <hr>
+                            <p>{{ $uno->descripcion }}</p>
+                        </figcaption>
                     </figure>
                 </a>
             </div>

@@ -15,9 +15,8 @@ class PaqueteController extends Controller
      */
     public function index()
     {
-        $todos = Paquete::all();
-        $imagenes = Imagen::all();
-        return view("paquetes.index", compact('todos', 'imagenes'));
+        $paquetes = Paquete::all();
+        return view("paquetes.index", compact('paquetes'));
     }
 
     /**
@@ -25,7 +24,7 @@ class PaqueteController extends Controller
      */
     public function create()
     {
-        return view('paquetes.agregarpaquetes');
+        return view('paquetes.agregar');
     }
 
     /**
@@ -34,8 +33,6 @@ class PaqueteController extends Controller
     public function store(StorePaqueteRequest $request)
     {
         $nuevo = new Paquete();
-
-
         $nuevo->nombre = $request->input('nombre');
         $nuevo->fecha = $request->input('fecha');
         $nuevo->ubicacion = $request->input('ubicacion');
@@ -43,21 +40,17 @@ class PaqueteController extends Controller
         $nuevo->costo = $request->input('costo');
         $nuevo->descripcion = $request->input('descripcion');
         $nuevo->servicios = $request->input('servicios');
-        $nuevo->save();
+        
 
         if ($request->hasFile('imagen')) {
-            $imagenesob = $request->file('imagen');
-
-            foreach ($imagenesob as $imagen) {
-                $ruta = 'imagenes/';
-                $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
-                $imagen->storeAs('public/imagenes', $nombreimagen);
-                $imagenes = new Imagen();
-                $imagenes->imagen = $ruta . $nombreimagen;
-                $imagenes->paquete_id  = $nuevo->id;
-                $imagenes->save();
-            }
+            $imageneF = $request->file('imagen');
+            $ruta = 'imagenes/';
+            $nombreimagen = time() . '-' . $imageneF->getClientOriginalName();
+            $mover = $request->file('imagen')->move($ruta, $nombreimagen);
+            $nuevo->imagen = $ruta . $nombreimagen;
         }
+
+        $nuevo->save();
         return redirect(route('paquetes.index'));
     }
 
@@ -66,7 +59,9 @@ class PaqueteController extends Controller
      */
     public function show(Paquete $paquete)
     {
-        //
+        $imagenes = $paquete->imagenes()->paginate(10);
+
+        return view('album.index', compact('imagenes'));
     }
 
     /**
@@ -74,7 +69,7 @@ class PaqueteController extends Controller
      */
     public function edit(Paquete $paquete)
     {
-        //
+        return view('paquetes.editar', compact('paquete'));
     }
 
     /**
@@ -82,7 +77,7 @@ class PaqueteController extends Controller
      */
     public function update(UpdatePaqueteRequest $request, Paquete $paquete)
     {
-        //
+        
     }
 
     /**
@@ -90,6 +85,7 @@ class PaqueteController extends Controller
      */
     public function destroy(Paquete $paquete)
     {
-        //
+        $paquete->delete();
+        return redirect(route('paquetes.index'));
     }
 }

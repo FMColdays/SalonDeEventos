@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
+use App\Models\Paquete;
 use Illuminate\Http\Request;
 
 class EventoController extends Controller
@@ -20,7 +21,8 @@ class EventoController extends Controller
      */
     public function create()
     {
-        return view('cliente.agregarevento');
+        $paquetes = Paquete::all();
+        return view('cliente.agregarevento', compact('paquetes'));
     }
 
     /**

@@ -5,24 +5,28 @@
             <h1>Lista de Paquetes</h1>
         </div>
         <div class="paquetes">
-            @foreach ($todos as $uno)
+            @foreach ($paquetes as $uno)
                 <div class="paquete">
-                    @foreach ($imagenes as $dos)
-                        <img src="{{ asset($dos->imagen) }}" alt="" class="img-fluid" width="400px">
-                    @endforeach
-                    <div class="descripcion">
 
+                    <img src="{{ asset($uno->imagen) }}" alt="" class="img-fluid" width="550px">
+                    <div class="descripcion">
                         <div class="opciones">
-                            <a class="icono material-symbols-rounded edit" href="#">edit</a>
-                            <a class="icono material-symbols-rounded delete" href="#">delete</a>
+                            <a class="icono material-symbols-rounded"
+                                href="{{ route('paquetes.show', $uno->id) }}">Photo_Library</a>
+                            <a class="icono material-symbols-rounded edit"
+                                href="{{ route('paquetes.edit', $uno->id) }}">edit</a>
+
+                            <form action="{{ route('paquetes.destroy', $uno->id) }}" method="POST" style="display: inline-block;">
+                                @method('DELETE')
+                                @csrf
+                                <input class="icono material-symbols-rounded delete" type="submit" value="delete"
+                                    style=" border-width:0">
+                            </form>
                         </div>
 
                         <h2>{{ $uno->nombre }}</h2>
 
-                        <div class="items">
-                            <span class="icono material-symbols-rounded">location_on</span>
-                            <p class="ubicacion">{{ $uno->ubicacion }}</p>
-                        </div>
+
                         <div class="items">
                             <span class="icono material-symbols-rounded">group</span>
                             <p>{{ $uno->capacidad }}</p>
@@ -35,15 +39,6 @@
                             <span class="icono material-symbols-rounded">payments</span>
                             <p>{{ $uno->costo }}</p>
                         </div>
-                        <div class="items">
-                            <span class="icono material-symbols-rounded">design_services</span>
-                            <p>{{ $uno->servicios }}</p>
-                        </div>
-                        <div class="items">
-                            <span class="icono material-symbols-rounded">calendar_month</span>
-                            <p>{{ $uno->fecha }}</p>
-                        </div>
-
                     </div>
                 </div>
             @endforeach
