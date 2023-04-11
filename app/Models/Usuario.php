@@ -8,4 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Usuario extends Authenticatable
 {
     use HasFactory;
+
+    public function imagenMo()
+    {
+        return $this->morphOne(Imagen::class, 'imagenable');
+    }
 }

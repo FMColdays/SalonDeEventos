@@ -1,34 +1,54 @@
 @extends('plantillas.encabezado')
 @section('cuerpo')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <div class="contenedor-agregar">
         <div class="header-agregar">
             <h1>Añadir Paquete de Eventos</h1>
         </div>
         <form action="{{ route('paquetes.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            <div class="div-agregar">
-                <div class="contenedor-items">
+
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
+                    <input class="element-lg" type="text" id="nombre" name="nombre" required>
                     <label for="descripcion">Descripción:</label>
-                    <textarea id="descripcion" name="descripcion" required style="width: 90%"></textarea>
+                    <textarea class="element-lg" id="descripcion" name="descripcion" required></textarea>
                     <label for="costo">Costo:</label>
-                    <input type="number" id="costo" name="costo" required>
+                    <input class="element-lg" type="number" id="costo" name="costo" required>
+
                     <label for="capacidad">Capacidad:</label>
-                    <input type="text" id="capacidad" name="capacidad" required>
-                </div>
-                <div class="contenedor-items">
-                    <label for="ubicacion">Ubicación:</label>
-                    <input type="text" id="ubicacion" name="ubicacion" required>
+                    <input class="element-lg" type="text" id="capacidad" name="capacidad" required>
                     <label for="servicios">Servicios:</label>
-                    <input type="text" id="servicios" name="servicios" required>
-                    <label for="fecha">Fecha:</label>
-                    <input type="date" id="fecha" name="fecha" required>
-                    <label for="imagen">Imagen:</label>
-                    <input type="file" name="imagen" multiple accept="image/*" required>
+                    <select class="element-lg">
+                        <option>Mustard</option>
+                        <option>Ketchup</option>
+                        <option>Barbecue</option>
+                    </select>
+            
+            <div class="contenedor-form-img" >
+                <img id="preview" class="img-media" onchange="mostrarImagen(event)">
+
+                <div class="imagen-file">
+                    <label class="imagen-t">Imagen que se mostrara en el perfil:</label>
+                    <input class="element-lg" type="file" name="imagen" accept="image/*" onchange="mostrarImagen(event)"
+                        required>
                 </div>
             </div>
-            <input class="boton" type="submit" value="Guardar">
+            <input class="element-lg" type="submit" value="Guardar">
         </form>
     </div>
+    <script>
+        function mostrarImagen(event) {
+            var input = event.target;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var preview = document.getElementById('preview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 @endsection

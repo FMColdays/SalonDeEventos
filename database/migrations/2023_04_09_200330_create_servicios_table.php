@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('imagens', function (Blueprint $table) {
-
-            $table->string("imagenMi");
-            $table->unsignedBigInteger('imagenable_id');
-            $table->string('imagenable_type');
-            $table->primary(['imagenable_id', 'imagenable_type']);
+        Schema::create('servicios', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->string('descripcion');
+            $table->string('costo');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('imagens');
+        Schema::dropIfExists('servicios');
     }
 };

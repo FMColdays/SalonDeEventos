@@ -14,9 +14,8 @@ class SistemaController extends Controller
 
     public function inicio()
     {
-        $todos = Paquete::all();
-        $imagenes = Imagen::all();
-        return view('principal', compact('todos', 'imagenes'));
+        $paquetes = Paquete::all();
+        return view('principal', compact('paquetes'));
     }
 
 
@@ -72,13 +71,13 @@ class SistemaController extends Controller
     public function tipoVistaUsuario()
     {
         $tipo_de_usurio = Auth::user()->rol;
-        $todos = Paquete::all();
-        $imagenes = Imagen::all();
+        $paquetes = Paquete::all();
+     
         
         if ($tipo_de_usurio == "Gerente") {
-            return view('gerente.gerentevista', compact('todos', 'imagenes'));
+            return view('gerente.index', compact('paquetes'));
         }else{
-            return view('principal', compact('todos', 'imagenes'));
+            return view('cliente.index', compact('paquetes'));
         }
         
     }
@@ -88,27 +87,4 @@ class SistemaController extends Controller
         return redirect('inicio');
     }
 
-
-
-
- 
-
-    public function gerenteV()
-    {
-        return view('gerente.gerentevista');
-    }
-
-    public function mostrar()
-    {
-        return view("gerente.tabla");
-    }
-    public function agregar()
-    {
-        return view("gerente.añadirserv");
-    }
-
-    public function bono()
-    {
-        return view('gerente.abonar');
-    }
 }

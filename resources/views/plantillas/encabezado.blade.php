@@ -5,19 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     {{-- Librerias boostrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    {{-- Termina libreria boostrap   --}}
 
+    {{-- Libreria de iconos google --}}
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    {{-- Mis css --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/cajas.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="shortcut icon" href="imagenes/logo.png">
+
+    {{-- Titulo de la pagina con yield y section --}}
     <title>@yield('titulo')</title>
 </head>
 
@@ -29,53 +33,42 @@
 
             <ul class="nav col-20 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 @if (Auth::check())
-                    @if (Auth::user()->rol == 'Gerente' && Route::currentRouteName() != 'inicio')
-                        @if (Route::currentRouteName() == '@me')
-                            <div class="dropdown">
-                                <a href="#" class="link-dark dropdown-toggle px-2" data-bs-toggle="dropdown">
-                                    Usuarios
-                                </a>
-                                <ul class="dropdown-menu text-small">
-                                    <li><a class="dropdown-item" href="{{ route('usuarios.index') }}">Mostrar</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('usuarios.create') }}">Agregar</a></li>
-                                </ul>
-                            </div>
-                            <div class="dropdown">
-                                <a href="#" class="link-dark dropdown-toggle  px-2" data-bs-toggle="dropdown">
-                                    Paquetes
-                                </a>
-                                <ul class="dropdown-menu text-small">
-                                    <li><a class="dropdown-item" href="{{ route('paquetes.index') }}">Mostrar</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('paquetes.create') }}">Agregar</a></li>
-                                </ul>
-                            </div>
-                            <div class="dropdown">
-                                <a href="#" class="link-dark dropdown-toggle px-2" data-bs-toggle="dropdown">
-                                    Servicios
-                                </a>
-                                <ul class="dropdown-menu text-small">
-                                    <li><a class="dropdown-item" href="{{ route('tablaserv') }}">Mostrar</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('paquetes.create') }}">Agregar</a></li>
-                                </ul>
-                            </div>
-                        @endif
-                    @elseif (Auth::user()->rol == 'Cliente' && Route::currentRouteName() != 'inicio')
-                        @if (Route::currentRouteName() == '@me')
-                            <li><a class="nav-link px-2 link-secondary" href="{{ route('eventos.index') }}">Eventos</a>
-                            </li>
-                        @endif
-                        @if (Route::currentRouteName() == 'eventos.index')
-                            <li><a class="nav-link px-2 link-secondary" href="{{ route('eventos.create') }}">Agregar</a>
-                            </li>
-                        @endif
-                    @endif
-                    @if (Route::currentRouteName() == 'evento')
+                    @if (Auth::user()->rol == 'Gerente')
+                        <div class="dropdown">
+                            <a href="#" class="link-dark dropdown-toggle px-2" data-bs-toggle="dropdown">
+                                Usuarios
+                            </a>
+                            <ul class="dropdown-menu text-small">
+                                <li><a class="dropdown-item" href="{{ route('usuarios.index') }}">Mostrar</a></li>
+                                <li><a class="dropdown-item" href="{{ route('usuarios.create') }}">Agregar</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <a href="#" class="link-dark dropdown-toggle  px-2" data-bs-toggle="dropdown">
+                                Paquetes
+                            </a>
+                            <ul class="dropdown-menu text-small">
+                                <li><a class="dropdown-item" href="{{ route('paquetes.index') }}">Mostrar</a></li>
+                                <li><a class="dropdown-item" href="{{ route('paquetes.create') }}">Agregar</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <a href="#" class="link-dark dropdown-toggle px-2" data-bs-toggle="dropdown">
+                                Servicios
+                            </a>
+                            <ul class="dropdown-menu text-small">
+                                <li><a class="dropdown-item" href="{{ route('servicios.index') }}">Mostrar</a></li>
+                                <li><a class="dropdown-item" href="{{ route('servicios.create') }}">Agregar</a></li>
+                            </ul>
+                        </div>
+                    @elseif (Auth::user()->rol == 'Cliente')
+                        <li><a class="nav-link px-2 link-secondary" href="{{ route('eventos.index') }}">Eventos</a>
+                        </li>
+
+                        <li><a class="nav-link px-2 link-secondary" href="{{ route('eventos.create') }}">Agregar</a>
+                        </li>
                         <li><a class="nav-link px-2 link-secondary"
                                 href="{{ route('añadirEventC') }}">Agregarevento</a>
-                        </li>
-                    @endif
-                    @if (Route::currentRouteName() == 'paquetes.show')
-                        <li><a class="nav-link px-2 link-secondary" href="{{ route('album.create') }}">Agregar</a>
                         </li>
                     @endif
                 @endif
@@ -110,7 +103,7 @@
     </header>
     @yield('cuerpo')
 
-
+ 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>

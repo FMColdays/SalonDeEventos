@@ -6,25 +6,50 @@
         </div>
         <form action="{{ route('usuarios.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            <div class="div-agregar">
-                <div class="contenedor-items">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                    <label for="usuario">Usuario:</label>
-                    <input id="usuario" id="usuario" name="usuario" required>
-                    <label for="nacimiento">Fecha de nacimiento:</label>
-                    <input type="date" id="nacimiento" name="nacimiento" required>
-                </div>
-                <div class="contenedor-items">
-                    <label for="contraseña">Contraseña:</label>
-                    <input type="text" id="contraseña" name="contraseña" required>
-                    <label for="rol">Rol:</label>
-                    <input type="text" id="rol" name="rol" required>
-                    <label for="imagen">Imagen:</label>
-                    <input type="file" id="imagen" name="imagen" required>
+
+
+            <label for="nombre">Nombre:</label>
+            <input class="element-lg" type="text" id="nombre" name="nombre" required>
+            <label for="usuario">Usuario:</label>
+            <input class="element-lg" id="usuario" id="usuario" name="usuario" required>
+            <label for="nacimiento">Fecha de nacimiento:</label>
+            <input class="element-lg" type="date" id="nacimiento" name="nacimiento" required>
+
+
+            <label for="contraseña">Contraseña:</label>
+            <input class="element-lg" type="text" id="contraseña" name="contraseña" required>
+            <label for="rol">Rol:</label>
+            <select class="element-lg" name="rol">
+                <option name="rol" name="rol">Seleccionar</option>
+                <option id="opcion1" name="rol">Gerente</option>
+                <option id="opcion2" name="rol">Cliente</option>
+            </select>
+            
+            <div class="contenedor-form-img">
+                <img id="preview" class="img-media" onchange="mostrarImagen(event)">
+
+                <div class="imagen-file">
+                    <label class="imagen-t">Imagen que se mostrara en el perfil:</label>
+                    <input class="element-lg" type="file" name="imagen" accept="image/*" onchange="mostrarImagen(event)"
+                        required>
                 </div>
             </div>
-            <input class="boton" type="submit" value="Guardar">
+            <input class="element-lg" type="submit" value="Guardar">
         </form>
     </div>
+
+    <script>
+        function mostrarImagen(event) {
+            var input = event.target;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var preview = document.getElementById('preview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

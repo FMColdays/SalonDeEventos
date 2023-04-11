@@ -7,30 +7,53 @@
         <form action="{{ route('usuarios.update', $usuario->id) }}" method="post" enctype="multipart/form-data">
             @method('PUT')
             @csrf
-            <div class="div-agregar">
-                <div class="contenedor-items">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" value="{{ $usuario->nombre }}" required>
-                    <label for="usuario">Usuario:</label>
-                    <input id="usuario" id="usuario" name="usuario" value="{{ $usuario->usuario }}" required>
-                    <label for="nacimiento">Fecha de nacimiento:</label>
-                    <input type="date" id="nacimiento" name="nacimiento" value="{{ $usuario->nacimiento }}" required>
-                </div>
-                <div class="contenedor-items">
-                     <label for="contraseña">Contraseña:</label>
-                    <input type="text" name="contraseña" value="{{ $usuario->contraseña }}" id= "contraseña" required>
-                    <label for="rol">Rol:</label>
-                    <select class="selectores" name="rol">
-                        <option name="rol" name="rol">Seleccionar</option>
-                        <option id="opcion1" name="rol">Gerente</option>
-                        <option id="opcion2" name="rol">Cliente</option>
-                    </select>
 
-                    <label for="imagen">Imagen:</label>
-                    <input type="file" id="imagen" name="imagen" required>
+            <label for="nombre">Nombre:</label>
+            <input class="element-lg" type="text" id="nombre" name="nombre" value="{{ $usuario->nombre }}" required>
+            <label for="usuario">Usuario:</label>
+            <input class="element-lg" id="usuario" id="usuario" name="usuario" value="{{ $usuario->usuario }}" required>
+            <label for="nacimiento">Fecha de nacimiento:</label>
+            <input class="element-lg" type="date" id="nacimiento" name="nacimiento" value="{{ $usuario->nacimiento }}"
+                required>
+            <label for="contraseña">Contraseña:</label>
+            <input class="element-lg" type="text" name="contraseña" value="{{ $usuario->contraseña }}" id="contraseña"
+                required>
+            <label for="rol">Rol:</label>
+            <select class="element-lg" name="rol">
+                @if ($usuario->rol == 'Gerente')
+                    <option name="rol" selected>Gerente</option>
+                    <option name="rol">Cliente</option>
+                @else
+                    <option name="rol" selected>Cliente</option>
+                    <option name="rol">Gerente</option>
+                @endif
+            </select>
+
+            <div class="contenedor-form-img">
+                <img id="preview" class="img-media" src="{{ asset(optional($usuario->imagenMo)->imagenMi) }}"
+                    onchange="mostrarImagen(event)" class="img-fluid">
+
+                <div class="imagen-file">
+                    <label class="imagen-t">Imagen que se mostrara en el post:</label>
+                    <input type="file" name="imagen" accept="image/*" onchange="mostrarImagen(event)">
                 </div>
             </div>
-            <input class="boton" type="submit" value="Guardar">
+
+            <input class="element-lg" type="submit" value="Guardar">
         </form>
     </div>
+    <script>
+        function mostrarImagen(event) {
+            var input = event.target;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var preview = document.getElementById('preview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

@@ -2,21 +2,22 @@
 @section('cuerpo')
     <div class="lista-paquetes">
         <div class="header">
-            <h1>Lista de Paquetes</h1>
+            <h1>Lista de servicios</h1>
         </div>
         <div class="paquetes">
-            @foreach ($paquetes as $paquete)
+            @foreach ($servicios as $servicio)
                 <div class="paquete">
 
-                    <img src="{{$paquete->imagenMo->imagenMi}}" alt="" class="img-fluid" width="550px">
+                    <img src="{{ $servicio->imagenMo->imagenMi }}" alt="" class="img-fluid" width="550px">
                     <div class="descripcion">
                         <div class="opciones">
                             <a class="icono material-symbols-rounded"
-                                href="{{ route('album.index', $paquete) }}">Photo_Library</a>
+                                href="{{ route('album.index', $servicio->id) }}">Photo_Library</a>
                             <a class="icono material-symbols-rounded edit"
-                                href="{{ route('paquetes.edit', $paquete) }}">edit</a>
+                                href="{{ route('paquetes.edit', $servicio->id) }}">edit</a>
 
-                            <form action="{{ route('paquetes.destroy', $paquete) }}" method="POST" style="display: inline-block;">
+                            <form action="{{ route('paquetes.destroy', $servicio->id) }}" method="POST"
+                                style="display: inline-block;">
                                 @method('DELETE')
                                 @csrf
                                 <input class="icono material-symbols-rounded delete" type="submit" value="delete"
@@ -24,20 +25,14 @@
                             </form>
                         </div>
 
-                        <h2>{{ $paquete->nombre }}</h2>
-
-
-                        <div class="items">
-                            <span class="icono material-symbols-rounded">group</span>
-                            <p>{{ $paquete->capacidad }}</p>
-                        </div>
+                        <h2>{{ $servicio->nombre }}</h2>
                         <div class="items">
                             <span class="icono material-symbols-rounded">description</span>
-                            <p>{{ $paquete->descripcion }}</p>
+                            <p>{{ $servicio->descripcion }}</p>
                         </div>
                         <div class="items">
                             <span class="icono material-symbols-rounded">payments</span>
-                            <p>{{ $paquete->costo }}</p>
+                            <p>{{ $servicio->costo }}</p>
                         </div>
                     </div>
                 </div>

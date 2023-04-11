@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use App\Http\Requests\StoreUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
+use App\Models\Imagen;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,8 +16,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $todos = Usuario::all();
-        return view("usuarios.index", compact('todos'));
+        $usuarios =  Usuario::all();
+        return view("usuarios.index", compact('usuarios'));
     }
 
     /**
@@ -32,21 +33,26 @@ class UsuarioController extends Controller
      */
     public function store(StoreUsuarioRequest $request)
     {
-        $nuevo = new Usuario();
-        $nuevo->nombre = $request->input('nombre');
-        $nuevo->usuario = $request->input('usuario');
-        $nuevo->nacimiento = $request->input('nacimiento');
-        $nuevo->contraseña = Hash::make($request->input('contraseña'));
-        $nuevo->rol = $request->input('rol');
+        $usuario = new Usuario();
+        $usuario->nombre = $request->input('nombre');
+        $usuario->usuario = $request->input('usuario');
+        $usuario->nacimiento = $request->input('nacimiento');
+        $usuario->contraseña = Hash::make($request->input('contraseña'));
+        $usuario->rol = $request->input('rol');
+        $usuario->save();
+
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
             $ruta = 'imagenes/';
             $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
             $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
-            $nuevo->imagen = $ruta . $nombreimagen;
+            $imgenU = new Imagen();
+            $imgenU->imagenMi = $ruta . $nombreimagen;
+            $imgenU->imagenable_id = $usuario->id;
+            $imgenU->imagenable_type = Usuario::class;
+            $imgenU->save();
         }
 
-        $nuevo->save();
         return redirect(route('usuarios.index'));
     }
 
@@ -81,9 +87,20 @@ class UsuarioController extends Controller
             $ruta = 'imagenes/';
             $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
             $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
-            $usuario->imagen = $ruta . $nombreimagen;
+            if ($usuario->imagenMo) {
+                $usuario->imagenMo()->update([
+                    'imagenMi' => $ruta . $nombreimagen,
+                    'imagenable_id'  => $usuario->id,
+                    'imagenable_type'  => Usuario::class,
+                ]);
+            } else {
+                $usuario->imagenMo()->create([
+                    'imagenMi' => $ruta . $nombreimagen,
+                    'imagenable_id'  => $usuario->id,
+                    'imagenable_type'  => Usuario::class,
+                ]);
+            }          
         }
-
         $usuario->save();
         return redirect(route('usuarios.index'));
     }

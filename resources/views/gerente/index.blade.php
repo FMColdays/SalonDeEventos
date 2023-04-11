@@ -3,7 +3,5 @@
     Gerente
 @endsection
 
-
-
 @section('cuerpo')
 @endsection

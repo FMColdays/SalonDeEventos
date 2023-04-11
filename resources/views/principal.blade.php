@@ -13,15 +13,15 @@
 
     {{-- Creo las cajas --}}
     <div class="contenedor">
-        @foreach ($todos as $uno)
+        @foreach ($paquetes as $paquete)
             <div class="contenedor_tarjeta">
-                <a href="{{ route('album.index') }}">
+                <a href="{{ route('album.index', $paquete->id) }}">
                     <figure>
-                        <img src="{{ asset($uno->imagen) }}" class="frontal">
+                        <img src="{{ $paquete->imagenMo->imagenMi }}" class="frontal">
                         <figcaption class="trasera">
-                            <h2 class="titulo">{{ $uno->nombre }}</h2>
+                            <h2 class="titulo">{{ $paquete->nombre }}</h2>
                             <hr>
-                            <p>{{ $uno->descripcion }}</p>
+                            <p>{{ $paquete->descripcion }}</p>
                         </figcaption>
                     </figure>
                 </a>

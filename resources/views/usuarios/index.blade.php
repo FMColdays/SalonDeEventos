@@ -14,18 +14,19 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($todos as $uno)
+                @foreach ($usuarios as $usuario)
                     <tr>
-                        <td>{{ $uno->nombre }}</td>
-                        <td>{{ $uno->usuario }}</td>
-                        <td>{{ $uno->nacimiento }}</td>
-                        <td>{{ $uno->rol }}</td>
-                        <td><img src="{{ asset($uno->imagen) }}" alt="" width="80px">
+                        <td>{{ $usuario->nombre }}</td>
+                        <td>{{ $usuario->usuario }}</td>
+                        <td>{{ $usuario->nacimiento }}</td>
+                        <td>{{ $usuario->rol }}</td>
+                        <td><img src="{{ optional($usuario->imagenMo)->imagenMi }}" alt="" width="80px">
                         <td>
                         <td>
-                            <a href="{{ route('usuarios.edit', $uno->id) }}"
-                                class="icono material-symbols-rounded update">update</a>
-                            <form action="{{ route('usuarios.destroy', $uno->id) }}" method="post">
+                            <a href="{{ route('usuarios.edit', $usuario->id) }}"
+                                class="icono material-symbols-rounded update">edit</a>
+                            <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="post"
+                                style="display: inline-block;">
                                 @method('DELETE')
                                 @csrf
                                 <input class="icono material-symbols-rounded delete" type="submit" value="delete"

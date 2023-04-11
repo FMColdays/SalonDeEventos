@@ -2,38 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Imagen;
+use App\Models\Album;
 use App\Models\Paquete;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
-
-class ImagenController extends Controller
+class AlbumController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-
+        $paquete = Paquete::find($id);
+        $imagenes = $paquete->albumMo()->paginate(10);
+        return view('album.index', compact('imagenes','id'));    
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        return view('album.create');
+        return view('album.create',compact('id'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-
-
         $request->validate([
             'file' => 'required|image'
         ]);
@@ -47,33 +47,32 @@ class ImagenController extends Controller
             })
             ->save($ruta);
 
-        $album = new Imagen();
-        $album->paquete_id = 2;
-        $album->imagen = '/storage/album/' . $nombre;
+        $album = new Album();
+        $album->paquete_id = $id;
+        $album->album = '/storage/album/' . $nombre;
         $album->save();
-        return redirect()->route('album.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Imagen $imagen)
+    public function show(Album $album)
     {
-        return view('album.show');
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Imagen $imagen)
+    public function edit(Album $album)
     {
-        return view('album.edit');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Imagen $imagen)
+    public function update(Request $request, Album $album)
     {
         //
     }
@@ -81,8 +80,14 @@ class ImagenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Imagen $imagen)
+    public function destroy($img)
     {
-        //
+        $imagen = Album::find($img);
+      
+        $url = str_replace('storage', 'public', $imagen->album);
+        Storage::delete($url);
+
+        $imagen->delete();
+        return  redirect()->back()->with('eliminado', 'si');
     }
 }

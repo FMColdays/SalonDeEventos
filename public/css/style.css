@@ -144,11 +144,11 @@ tr {
 }
 
 
-/* Formulario agregar global*/
+/* Formulario global*/
 
 .contenedor-agregar {
   margin: 0 auto;
-  max-width: 960px;
+  max-width: 1260px;
   padding: 20px;
 }
 
@@ -166,44 +166,65 @@ tr {
   padding: 20px;
 }
 
-.contenedor-agregar .div-agregar {
-  display: flex;
-  justify-content: space-around;
-}
-
-.contenedor-agregar .contenedor-items {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-}
-
 .contenedor-agregar label {
   font-size: 16px;
   font-weight: bold;
-  width: 90%;
-  margin-bottom: 10px;
+  margin-top: 15px;
 }
 
-.contenedor-agregar input {
+.contenedor-agregar .element-lg {
   border: none;
   border-radius: 5px;
   font-size: 16px;
   margin-bottom: 10px;
   padding: 10px;
-  width: 90%;
+  width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.contenedor-agregar .selectores {
-  width: 90%;
-  height: 40px;
-  margin-bottom: 10px;
+.radio {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.contenedor-agregar .imagen-file {
+  margin: 0px 20px;
+}
+
+ .contenedor-form-img {
+  display: flex;
+  padding: 20px 0px;
+
+}
+
+@media screen and (max-width: 910px) {
+  .contenedor-agregar .contenedor-form-img {
+    flex-direction: column;
+  }
+
+  .contenedor-agregar .img-media{
+    width: 100%;
+  }
+  
+  .contenedor-agregar .imagen-file {
+    margin: 0px;
+    padding-top: 20px;
+  }
 }
 
 
-.contenedor-agregar .boton {
-  width: 100%;
+
+.contenedor-agregar .imagen-t {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+
+.contenedor-agregar img {
+  width: 500px;
+  height: 500px;
 }
 
 /* Aregar usuario css */
@@ -235,17 +256,6 @@ tr {
   box-sizing: border-box;
   font-size: 16px;
 }
-
-
-.form-formulario-usuario button[type="submit"] {
-  background-color: #4CAF50;
-  margin-right: 0;
-}
-
-.form-formulario-usuario button[type="submit"]:hover {
-  background-color: #357a38;
-}
-
 
 /* Lista de paquetes css */
 
@@ -297,7 +307,7 @@ tr {
 }
 
 .lista-paquetes .opciones a {
- text-decoration: none;
+  text-decoration: none;
 }
 
 .edit {

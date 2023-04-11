@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\EventoController;
-use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\PaqueteController;
+use App\Http\Controllers\ServicioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SistemaController;
 use App\Http\Controllers\UsuarioController;
@@ -30,9 +31,15 @@ Route::get('cerrar_sesion', [SistemaController::class, 'cerrar_sesion'])->name((
 
 
 Route::resource('usuarios', UsuarioController::class)->middleware('auth');
-Route::resource('paquetes', PaqueteController::class)->middleware('auth');
+Route::resource('paquetes', PaqueteController::class);
 Route::resource('eventos', EventoController::class)->middleware('auth');
-Route::resource('album', ImagenController::class);
+
+Route::get('album/{id}', [AlbumController::class, 'index'])->name('album.index');
+Route::delete('eliminar/{id}', [AlbumController::class, 'destroy'])->name('album.destroy');
+Route::get('crear/{id}', [AlbumController::class, 'create'])->name('album.create');
+Route::post('subir/{id}', [AlbumController::class, 'store'])->name('album.store');
+
+Route::resource('servicios', ServicioController::class);
 
 Route::get('agregarPaquete', [SistemaController::class, 'añadirEvento'])->name('añadirEventC');
 Route::get('tabla-servicios', [SistemaController::class, 'mostrar'])->name("tablaserv");
