@@ -32,14 +32,14 @@ Route::get('cerrar_sesion', [SistemaController::class, 'cerrar_sesion'])->name((
 
 Route::resource('usuarios', UsuarioController::class)->middleware('auth');
 Route::resource('paquetes', PaqueteController::class)->middleware('auth');
+Route::resource('servicios', ServicioController::class)->middleware('auth');
 Route::resource('eventos', EventoController::class)->middleware('auth');
 
 Route::get('album/{id}', [AlbumController::class, 'index'])->name('album.index');
 Route::delete('eliminar/{id}', [AlbumController::class, 'destroy'])->name('album.destroy');
-Route::get('crear/{id}', [AlbumController::class, 'create'])->name('album.create')->middleware('auth');
-Route::post('subir/{id}', [AlbumController::class, 'store'])->name('album.store')->middleware('auth');
+Route::get('crear/{id}/{tipo}', [AlbumController::class, 'create'])->name('album.create')->middleware('auth');
+Route::post('subir/{id}/{tipo}', [AlbumController::class, 'store'])->name('album.store')->middleware('auth');
 
-Route::resource('servicios', ServicioController::class);
 
 Route::get('agregarPaquete', [SistemaController::class, 'añadirEvento'])->name('añadirEventC');
 Route::get('tabla-servicios', [SistemaController::class, 'mostrar'])->name("tablaserv");

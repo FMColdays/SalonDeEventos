@@ -17,16 +17,21 @@ class AlbumController extends Controller
     public function index($id)
     {
         $paquete = Paquete::find($id);
-        $imagenes = $paquete->albumMo()->paginate(10);
-        return view('album.index', compact('imagenes','id'));    
+        if (auth()->user()) {
+            $imagenes = $paquete->albumMo()->paginate(10);
+            return view('album.index', compact('imagenes', 'id'));
+        }elseif($paquete->estado == '1'){
+            $imagenes = $paquete->albumMo()->paginate(10);
+            return view('album.index', compact('imagenes', 'id'));
+        }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
+    public function create($id, $tipo)
     {
-        return view('album.create',compact('id'));
+        return view('album.create', compact('id', 'tipo'));
     }
 
     /**
@@ -83,7 +88,7 @@ class AlbumController extends Controller
     public function destroy($img)
     {
         $imagen = Album::find($img);
-      
+
         $url = str_replace('storage', 'public', $imagen->album);
         Storage::delete($url);
 

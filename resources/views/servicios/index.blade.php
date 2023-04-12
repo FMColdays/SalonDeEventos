@@ -13,13 +13,16 @@
 
                     <img src="{{ $servicio->imagenMo->imagenMi }}" alt="" class="img-fluid" width="550px">
                     <div class="descripcion">
+                        <label class="estado-label" style="background: {{ $servicio->estado == 1 ? 'green' : 'red' }}">
+                            {{ $servicio->estado == 1 ? 'Publicado' : 'No Publicado' }}
+                        </label>
                         <div class="opciones">
                             <a class="icono material-symbols-rounded"
-                                href="{{ route('album.index', $servicio) }}">Photo_Library</a>
+                                href="{{ route('servicios.show', $servicio) }}">Photo_Library</a>
                             <a class="icono material-symbols-rounded edit"
-                                href="{{ route('paquetes.edit', $servicio) }}">edit</a>
+                                href="{{ route('servicios.edit', $servicio) }}">edit</a>
 
-                            <form action="{{ route('paquetes.destroy', $servicio) }}" method="POST"
+                            <form action="{{ route('servicios.destroy', $servicio) }}" method="POST"
                                 style="display: inline-block;">
                                 @method('DELETE')
                                 @csrf

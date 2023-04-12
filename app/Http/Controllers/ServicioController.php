@@ -58,7 +58,15 @@ class ServicioController extends Controller
      */
     public function show(Servicio $servicio)
     {
-        //
+        if (auth()->user()) {
+            $tipo = Servicio::class;
+            $id = $servicio->id;
+            $imagenes = $servicio->albumMo()->paginate(10);
+            return view('album.index', compact('imagenes','id', 'tipo'));
+        } elseif ($servicio->estado == '1') {
+            $imagenes = $servicio->albumMo()->paginate(10);
+            return view('album.index', compact('imagenes','id','tipo'));
+        }
     }
 
     /**
@@ -66,7 +74,8 @@ class ServicioController extends Controller
      */
     public function edit(Servicio $servicio)
     {
-        //
+        
+        return view('servicios.edit', compact('servicio'));
     }
 
     /**
@@ -74,7 +83,32 @@ class ServicioController extends Controller
      */
     public function update(UpdateServicioRequest $request, Servicio $servicio)
     {
-        //
+        $servicio->nombre = $request->input('nombre');
+        $servicio->descripcion = $request->input('descripcion');
+        $servicio->costo = $request->input('costo');
+        $servicio->estado = $request->input('estado');
+
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $ruta = 'imagenes/';
+            $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
+            $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
+            if ($servicio->imagenMo) {
+                $servicio->imagenMo()->update([
+                    'imagenMi' => $ruta . $nombreimagen,
+                    'imagenable_id'  => $servicio->id,
+                    'imagenable_type'  => Servicio::class,
+                ]);
+            } else {
+                $servicio->imagenMo()->create([
+                    'imagenMi' => $ruta . $nombreimagen,
+                    'imagenable_id'  => $servicio->id,
+                    'imagenable_type'  => Servicio::class,
+                ]);
+            }
+        }
+        $servicio->save();
+        return redirect(route('servicios.index'));
     }
 
     /**
@@ -82,6 +116,9 @@ class ServicioController extends Controller
      */
     public function destroy(Servicio $servicio)
     {
-        //
+    
+        
+        $servicio->delete();
+        return redirect(route('servicios.index'));
     }
 }

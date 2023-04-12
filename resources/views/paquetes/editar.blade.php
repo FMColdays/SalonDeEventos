@@ -20,8 +20,6 @@
             <label for="capacidad">Capacidad:</label>
             <input class="element-lg" type="text" id="capacidad" name="capacidad" value="{{ $paquete->capacidad }}"
                 required>
-            <label for="servicios">Servicios:</label>
-            <input class="element-lg" type="text" id="servicios" name="servicios" value="a" required>
 
             <div class="form-group">
                 <label class="element-lg" for="radio-group">Estado:</label>

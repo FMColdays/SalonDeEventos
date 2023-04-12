@@ -18,7 +18,7 @@
                         </label>
                         <div class="opciones">
                             <a class="icono material-symbols-rounded"
-                                href="{{ route('album.index', $paquete) }}">Photo_Library</a>
+                                href="{{ route('paquetes.show', $paquete) }}">Photo_Library</a>
                             <a class="icono material-symbols-rounded edit"
                                 href="{{ route('paquetes.edit', $paquete) }}">edit</a>
 

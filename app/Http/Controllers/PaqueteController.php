@@ -7,6 +7,7 @@ use App\Http\Requests\StorePaqueteRequest;
 use App\Http\Requests\UpdatePaqueteRequest;
 use App\Models\Album;
 use App\Models\Imagen;
+use App\Models\Servicio;
 use Illuminate\Support\Facades\Storage;
 
 class PaqueteController extends Controller
@@ -25,7 +26,8 @@ class PaqueteController extends Controller
      */
     public function create()
     {
-        return view('paquetes.agregar');
+        $servicios = Servicio::where('estado', '1')->get();
+        return view('paquetes.agregar', compact('servicios'));
     }
 
     /**
@@ -60,6 +62,15 @@ class PaqueteController extends Controller
      */
     public function show(Paquete $paquete)
     {
+        if (auth()->user()) {
+            $tipo = Paquete::class;
+            $id = $paquete->id;
+            $imagenes = $paquete->albumMo()->paginate(10);
+            return view('album.index', compact('imagenes','id', 'tipo'));
+        } elseif ($paquete->estado == '1') {
+            $imagenes = $paquete->albumMo()->paginate(10);
+            return view('album.index', compact('imagenes','id','tipo'));
+        }
     }
 
     /**
@@ -114,7 +125,7 @@ class PaqueteController extends Controller
             $url = str_replace('storage', 'public', $imagen->album);
             Storage::delete($url);
         }
-        
+
         $paquete->delete();
         return redirect(route('paquetes.index'));
     }

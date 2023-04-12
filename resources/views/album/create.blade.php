@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col">
                 <h1>Subir imagenes</h1>
-                <form action="{{ route('album.store',$id) }}" method="POST" class="dropzone" id="my-Awesome-Dropzone">
+                <form action="{{ route('album.store', ['id' => $id, 'tipo' => $tipo]) }}" method="POST" class="dropzone" id="my-Awesome-Dropzone">
                 </form>
             </div>
         </div>

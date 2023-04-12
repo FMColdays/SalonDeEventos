@@ -20,9 +20,11 @@
             <input class="element-lg" type="text" id="capacidad" name="capacidad" required>
             <label for="servicios">Servicios:</label>
             <select class="element-lg">
-                <option>Mustard</option>
-                <option>Ketchup</option>
-                <option>Barbecue</option>
+
+                @foreach ($servicios as $servicio)
+                <option>{{$servicio->nombre}}</option>
+                @endforeach
+           
             </select>
 
             <div class="contenedor-form-img">

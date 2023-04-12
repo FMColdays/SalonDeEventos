@@ -12,7 +12,7 @@
     @endif
 
     @auth
-        <li><a class="btn btn-success m-2" href="{{ route('album.create', $id) }}">Agregar Imagenes</a>
+        <li><a class="btn btn-success m-2" href="{{ route('album.create',  ['id' => $id, 'tipo' => $tipo]) }}">Agregar Imagenes</a>
         </li>
     @endauth
     <div class="container mt-5">
