@@ -191,7 +191,7 @@ tr {
   margin: 0px 20px;
 }
 
- .contenedor-form-img {
+.contenedor-form-img {
   display: flex;
   padding: 20px 0px;
 
@@ -202,10 +202,10 @@ tr {
     flex-direction: column;
   }
 
-  .contenedor-agregar .img-media{
+  .contenedor-agregar .img-media {
     width: 100%;
   }
-  
+
   .contenedor-agregar .imagen-file {
     margin: 0px;
     padding-top: 20px;
@@ -298,8 +298,12 @@ tr {
   display: flex;
 }
 
-.lista-paquetes p {
-  padding-left: px;
+.estado-label {
+  color: white;
+  margin: 0px;
+  padding: 5px;
+  border: 1px dotted black;
+  border-radius: 90px;
 }
 
 .lista-paquetes .opciones {
@@ -315,6 +319,8 @@ tr {
 }
 
 .delete {
+  background: white;
+  border-width: 0;
   color: red;
 }
 

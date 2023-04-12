@@ -14,7 +14,7 @@ class SistemaController extends Controller
 
     public function inicio()
     {
-        $paquetes = Paquete::all();
+        $paquetes = Paquete::where('estado', '1')->get();
         return view('principal', compact('paquetes'));
     }
 

@@ -1,4 +1,7 @@
 @extends('plantillas.encabezado')
+@section('titulo')
+    Editar Usuario
+@endsection
 @section('cuerpo')
     <div class="lista-paquetes">
         <div class="header">
@@ -8,19 +11,22 @@
             @foreach ($paquetes as $paquete)
                 <div class="paquete">
 
-                    <img src="{{$paquete->imagenMo->imagenMi}}" alt="" class="img-fluid" width="550px">
+                    <img src="{{ $paquete->imagenMo->imagenMi }}" alt="" class="img-fluid" width="550px">
                     <div class="descripcion">
+                        <label class="estado-label" style="background: {{ $paquete->estado == 1 ? 'green' : 'red' }}">
+                            {{ $paquete->estado == 1 ? 'Publicado' : 'No Publicado' }}
+                        </label>
                         <div class="opciones">
                             <a class="icono material-symbols-rounded"
                                 href="{{ route('album.index', $paquete) }}">Photo_Library</a>
                             <a class="icono material-symbols-rounded edit"
                                 href="{{ route('paquetes.edit', $paquete) }}">edit</a>
 
-                            <form action="{{ route('paquetes.destroy', $paquete) }}" method="POST" style="display: inline-block;">
+                            <form class="eliminar-alert" action="{{ route('paquetes.destroy', $paquete) }}" method="POST"
+                                style="display: inline-block;">
                                 @method('DELETE')
                                 @csrf
-                                <input class="icono material-symbols-rounded delete" type="submit" value="delete"
-                                    style=" border-width:0">
+                                <input class="icono material-symbols-rounded delete" type="submit" value="delete">
                             </form>
                         </div>
 

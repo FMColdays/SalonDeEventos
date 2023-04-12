@@ -1,5 +1,7 @@
 @extends('plantillas.encabezado')
-
+@section('titulo')
+    Editar Paquete
+@endsection
 @section('cuerpo')
     <div class="contenedor-agregar">
         <div class="header-agregar">
@@ -23,14 +25,14 @@
 
             <div class="form-group">
                 <label class="element-lg" for="radio-group">Estado:</label>
-
                 <div class="radio">
-                    <label>Borrador</label>
-                    <input style="display: inline" type="radio" name="radio-group" value="borrador" checked>
+                    <label>{{ $paquete->estado == 1 ? 'Publicado' : 'No Publicado' }}</label>
+                    <input style="display: inline" type="radio" name="estado"
+                        value="{{ $paquete->estado == 1 ? '1' : '0' }}" checked>
                 </div>
                 <div class="radio">
-                    <label>Publicado</label>
-                    <input type="radio" name="radio-group" value="publicado">
+                    <label>{{ $paquete->estado == 1 ? 'No Publicado' : 'Publicado' }}</label>
+                    <input type="radio" name="estado" value="{{ $paquete->estado == 1 ? '0' : '1' }}">
                 </div>
             </div>
 
@@ -46,19 +48,4 @@
             <input class="element-lg" type="submit" value="Guardar">
         </form>
     </div>
-
-    <script>
-        function mostrarImagen(event) {
-            var input = event.target;
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var preview = document.getElementById('preview');
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 @endsection

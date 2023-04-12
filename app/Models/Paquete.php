@@ -14,6 +14,6 @@ class Paquete extends Model
     }
 
     public function albumMo(){
-        return $this->hasMany(Album::class);
+        return $this->morphMany(Album::class, 'albumable');
     }
 }

@@ -79,6 +79,7 @@ class PaqueteController extends Controller
         $paquete->descripcion = $request->input('descripcion');
         $paquete->costo = $request->input('costo');
         $paquete->capacidad = $request->input('capacidad');
+        $paquete->estado = $request->input('estado');
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
             $ruta = 'imagenes/';
@@ -113,8 +114,7 @@ class PaqueteController extends Controller
             $url = str_replace('storage', 'public', $imagen->album);
             Storage::delete($url);
         }
-
-
+        
         $paquete->delete();
         return redirect(route('paquetes.index'));
     }

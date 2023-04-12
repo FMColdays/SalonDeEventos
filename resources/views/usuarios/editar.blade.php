@@ -1,4 +1,7 @@
 @extends('plantillas.encabezado')
+@section('titulo')
+    Editar Usuario
+@endsection
 @section('cuerpo')
     <div class="contenedor-agregar">
         <div class="header-agregar">
@@ -42,18 +45,4 @@
             <input class="element-lg" type="submit" value="Guardar">
         </form>
     </div>
-    <script>
-        function mostrarImagen(event) {
-            var input = event.target;
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var preview = document.getElementById('preview');
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 @endsection

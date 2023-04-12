@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Paquete;
+use App\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -14,25 +15,33 @@ class AlbumController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index(Paquete $paquete)
     {
-        $paquete = Paquete::find($id);
-        $imagenes = $paquete->albumMo()->paginate(10);
-        return view('album.index', compact('imagenes','id'));    
+        if ($paquete::class == Paquete::class) {
+            $p = Paquete::find($paquete->id);
+            $imagenes = $p->albumMo()->paginate(10); 
+            return view('album.index', compact('imagenes', 'id'));  
+        }else{
+            $servicio = Servicio::find($paquete->id);
+            $imagenes = $servicio->albumMo()->paginate(10);  
+            return view('album.index', compact('imagenes', 'id'));
+        }
+
+      
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
+    public function create($id, $mo)
     {
-        return view('album.create',compact('id'));
+        return view('album.create', compact('id'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, $id, $mo)
     {
         $request->validate([
             'file' => 'required|image'
@@ -48,8 +57,11 @@ class AlbumController extends Controller
             ->save($ruta);
 
         $album = new Album();
-        $album->paquete_id = $id;
-        $album->album = '/storage/album/' . $nombre;
+        
+    
+        $album->album_img = '/storage/album/' . $nombre;
+        $album->albumi_id = $id;
+        $album->albumi_type = $id;
         $album->save();
     }
 
@@ -83,7 +95,7 @@ class AlbumController extends Controller
     public function destroy($img)
     {
         $imagen = Album::find($img);
-      
+
         $url = str_replace('storage', 'public', $imagen->album);
         Storage::delete($url);
 

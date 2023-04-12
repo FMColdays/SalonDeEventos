@@ -1,4 +1,7 @@
 @extends('plantillas.encabezado')
+@section('titulo')
+    Servicios
+@endsection
 @section('cuerpo')
     <div class="lista-paquetes">
         <div class="header">
@@ -12,16 +15,15 @@
                     <div class="descripcion">
                         <div class="opciones">
                             <a class="icono material-symbols-rounded"
-                                href="{{ route('album.index', $servicio->id) }}">Photo_Library</a>
+                                href="{{ route('album.index', $servicio) }}">Photo_Library</a>
                             <a class="icono material-symbols-rounded edit"
-                                href="{{ route('paquetes.edit', $servicio->id) }}">edit</a>
+                                href="{{ route('paquetes.edit', $servicio) }}">edit</a>
 
-                            <form action="{{ route('paquetes.destroy', $servicio->id) }}" method="POST"
+                            <form action="{{ route('paquetes.destroy', $servicio) }}" method="POST"
                                 style="display: inline-block;">
                                 @method('DELETE')
                                 @csrf
-                                <input class="icono material-symbols-rounded delete" type="submit" value="delete"
-                                    style=" border-width:0">
+                                <input class="icono material-symbols-rounded delete" type="submit" value="delete">
                             </form>
                         </div>
 

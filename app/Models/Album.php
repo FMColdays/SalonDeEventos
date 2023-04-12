@@ -9,8 +9,10 @@ class Album extends Model
 {
     use HasFactory;
 
-    public function Paquete()
+    public function albumable()
     {
-        return $this->belongsTo(Paquete::class);
+        return $this->morphTo();
     }
+
+  
 }

@@ -1,4 +1,7 @@
 @extends('plantillas.encabezado')
+@section('titulo')
+    Usuarios
+@endsection
 @section('cuerpo')
     <div class="contenedor-tabla-usuarios">
         <table class="tabla-usuarios">
@@ -25,7 +28,7 @@
                         <td>
                             <a href="{{ route('usuarios.edit', $usuario->id) }}"
                                 class="icono material-symbols-rounded update">edit</a>
-                            <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="post"
+                            <form class="eliminar-alert" action="{{ route('usuarios.destroy', $usuario->id) }}" method="post"
                                 style="display: inline-block;">
                                 @method('DELETE')
                                 @csrf

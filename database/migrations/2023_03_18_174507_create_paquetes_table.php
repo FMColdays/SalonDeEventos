@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("nombre");
             $table->string("descripcion");
             $table->string("costo");
+            $table->enum('estado', ['0','1'])->default('0');
             $table->string("capacidad");
             $table->timestamps();
         });

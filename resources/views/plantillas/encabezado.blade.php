@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/cajas.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-
     {{-- Titulo de la pagina con yield y section --}}
     <title>@yield('titulo')</title>
 </head>
@@ -28,11 +27,12 @@
 <body>
     <header class="p-3 border-bottom">
         <div class="d-flex flex-wrap align-items-center justify-content-center">
-            <a class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none"><img
-                    class="logo"src="/imagenes/logo.png"> </a>
+            <a href="{{ route('@me') }}" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                <img class="logo" src="/imagenes/logo.png">
+            </a>
 
             <ul class="nav col-20 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                @if (Auth::check())
+                @auth
                     @if (Auth::user()->rol == 'Gerente')
                         <div class="dropdown">
                             <a href="#" class="link-dark dropdown-toggle px-2" data-bs-toggle="dropdown">
@@ -67,20 +67,22 @@
 
                         <li><a class="nav-link px-2 link-secondary" href="{{ route('eventos.create') }}">Agregar</a>
                         </li>
-                        <li><a class="nav-link px-2 link-secondary"
-                                href="{{ route('añadirEventC') }}">Agregarevento</a>
+                        <li><a class="nav-link px-2 link-secondary" href="{{ route('añadirEventC') }}">Agregarevento</a>
                         </li>
                     @endif
-                @endif
+                @endauth
             </ul>
 
             {{-- Botón de sesión --}}
-            @if (Auth::check())
+            @auth
                 <div class="dropdown text-end">
+
                     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
                         data-bs-toggle="dropdown">
-                        <img src="https://media.tenor.com/Hp-lSg-ebmAAAAAM/legion-dbd.gif" width="32" height="32"
-                            class="rounded-circle">
+                        <h6 style="display: inline; margin-right: 10px"> {{ Auth::user()->nombre }}</h6>
+
+                        <img src="{{ optional(Auth::user()->imagenMo)->imagenMi ? '/' . Auth::user()->imagenMo->imagenMi : 'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png' }}"
+                            width="42" height="42" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small">
                         <li><a class="dropdown-item" href="#">Nuevo proyecto</a></li>
@@ -93,17 +95,15 @@
                     </ul>
                 </div>
             @else
-                <li><a class="nav-link px-2 link-secondary" href="{{ route('login') }}">Iniciar sesión</a>
-                </li>
-                <li><a class="nav-link px-2 link-dark" href="{{ route('registrarse') }}">Registrarse</a>
-                </li>
-            @endif
+                <li><a class="nav-link px-2 link-secondary" href="{{ route('login') }}">Iniciar sesión</a></li>
+                <li><a class="nav-link px-2 link-dark" href="{{ route('registrarse') }}">Registrarse</a></li>
+            @endauth
         </div>
 
     </header>
     @yield('cuerpo')
-
- 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/code.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>

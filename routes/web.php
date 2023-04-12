@@ -23,7 +23,7 @@ Route::post('validar', [SistemaController::class, 'validar'])->name('sesion');
 Route::get('registrarse', [SistemaController::class, 'registro'])->name(('registrarse'))->middleware('no.auth');
 Route::post('registrar', [SistemaController::class, 'registrar'])->name('registrar')->middleware('no.auth');
 
- //Validar que rol tiene el usuario
+//Validar que rol tiene el usuario
 Route::get('@me', [SistemaController::class, 'tipoVistaUsuario'])->name(("@me"))->middleware('auth');
 
 //Cerrar sesión
@@ -31,13 +31,20 @@ Route::get('cerrar_sesion', [SistemaController::class, 'cerrar_sesion'])->name((
 
 
 Route::resource('usuarios', UsuarioController::class)->middleware('auth');
-Route::resource('paquetes', PaqueteController::class);
+Route::resource('paquetes', PaqueteController::class)->middleware('auth');
 Route::resource('eventos', EventoController::class)->middleware('auth');
 
 Route::get('album/{id}', [AlbumController::class, 'index'])->name('album.index');
 Route::delete('eliminar/{id}', [AlbumController::class, 'destroy'])->name('album.destroy');
-Route::get('crear/{id}', [AlbumController::class, 'create'])->name('album.create');
-Route::post('subir/{id}', [AlbumController::class, 'store'])->name('album.store');
+Route::get('crear/{id}/{mo}', [AlbumController::class, 'create'])->name('album.create')->middleware('auth');
+Route::post('subir/{id}/{mo}', [AlbumController::class, 'store'])->name('album.store')->middleware('auth');
+
+
+
+
+
+
+
 
 Route::resource('servicios', ServicioController::class);
 

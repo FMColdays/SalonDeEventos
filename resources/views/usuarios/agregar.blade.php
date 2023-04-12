@@ -1,4 +1,7 @@
 @extends('plantillas.encabezado')
+@section('titulo')
+    Agregar Usuario
+@endsection
 @section('cuerpo')
     <div class="contenedor-agregar">
         <div class="header-agregar">
@@ -7,14 +10,12 @@
         <form action="{{ route('usuarios.store') }}" method="post" enctype="multipart/form-data">
             @csrf
 
-
             <label for="nombre">Nombre:</label>
             <input class="element-lg" type="text" id="nombre" name="nombre" required>
             <label for="usuario">Usuario:</label>
             <input class="element-lg" id="usuario" id="usuario" name="usuario" required>
             <label for="nacimiento">Fecha de nacimiento:</label>
             <input class="element-lg" type="date" id="nacimiento" name="nacimiento" required>
-
 
             <label for="contraseña">Contraseña:</label>
             <input class="element-lg" type="text" id="contraseña" name="contraseña" required>
@@ -37,19 +38,4 @@
             <input class="element-lg" type="submit" value="Guardar">
         </form>
     </div>
-
-    <script>
-        function mostrarImagen(event) {
-            var input = event.target;
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var preview = document.getElementById('preview');
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 @endsection
