@@ -36,15 +36,8 @@ Route::resource('eventos', EventoController::class)->middleware('auth');
 
 Route::get('album/{id}', [AlbumController::class, 'index'])->name('album.index');
 Route::delete('eliminar/{id}', [AlbumController::class, 'destroy'])->name('album.destroy');
-Route::get('crear/{id}/{mo}', [AlbumController::class, 'create'])->name('album.create')->middleware('auth');
-Route::post('subir/{id}/{mo}', [AlbumController::class, 'store'])->name('album.store')->middleware('auth');
-
-
-
-
-
-
-
+Route::get('crear/{id}', [AlbumController::class, 'create'])->name('album.create')->middleware('auth');
+Route::post('subir/{id}', [AlbumController::class, 'store'])->name('album.store')->middleware('auth');
 
 Route::resource('servicios', ServicioController::class);
 

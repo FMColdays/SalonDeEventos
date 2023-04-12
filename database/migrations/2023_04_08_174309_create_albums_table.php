@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
-            $table->morphs('albumable');
-            $table->unsignedBigInteger('albumi_id');
-      
+            $table->unsignedBigInteger('paquete_id');
+            $table->foreign('paquete_id', 'paquete')
+                ->references('id')
+                ->on('paquetes')
+                ->onDelete('cascade');
+            $table->string("album");
             $table->timestamps();
         });
     }
