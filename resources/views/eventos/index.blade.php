@@ -17,19 +17,24 @@
                         <label class="estado-label" style="background: {{ $evento->estado == 1 ? 'green' : 'red' }}">
                             {{ $evento->estado == 1 ? 'Publicado' : 'No Publicado' }}
                         </label>
-                        
+
                         <div class="opciones">
                             <a class="icono material-symbols-rounded"
                                 href="{{ route('eventos.show', $evento) }}">Photo_Library</a>
-                            <a class="icono material-symbols-rounded edit"
-                                href="{{ route('eventos.edit', $evento) }}">edit</a>
+                            @if ($evento->estado == 0)
+                                <a class="icono material-symbols-rounded edit"
+                                    href="{{ route('eventos.edit', $evento) }}">edit</a>
 
-                            <form class="eliminar-alert" action="{{ route('eventos.destroy', $evento) }}" method="POST"
-                                style="display: inline-block;">
-                                @method('DELETE')
-                                @csrf
-                                <input class="icono material-symbols-rounded delete" type="submit" value="delete">
-                            </form>
+                                <form class="eliminar-alert" action="{{ route('eventos.destroy', $evento) }}" method="POST"
+                                    style="display: inline-block;">
+                                    @method('DELETE')
+                                    @csrf
+                                    <input class="icono material-symbols-rounded delete" type="submit" value="delete">
+                                </form>
+                            @endif
+
+
+
                         </div>
 
                         <h2>{{ $evento->nombre }}</h2>

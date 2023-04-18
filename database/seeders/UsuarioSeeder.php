@@ -18,7 +18,7 @@ class UsuarioSeeder extends Seeder
         $usuario->nombre = 'Erick González Pérez';
         $usuario->usuario='FMColdays';
         $usuario->contraseña = Hash::make('a'); //a
-        $usuario->nacimiento = '14-01-2001';
+        $usuario->nacimiento = '2001-01-14';
         $usuario->rol = 'Gerente';
         $usuario->save();
 
@@ -26,7 +26,7 @@ class UsuarioSeeder extends Seeder
         $usuario->nombre = 'Emma';
         $usuario->usuario='EmmaXD';
         $usuario->contraseña = Hash::make('b'); //b
-        $usuario->nacimiento = '18-08-2001';
+        $usuario->nacimiento = '2001-08-18';
         $usuario->rol = 'Empleado';
         $usuario->save();
 
@@ -34,7 +34,7 @@ class UsuarioSeeder extends Seeder
         $usuario->nombre = 'Angel';
         $usuario->usuario='Angel18';
         $usuario->contraseña = Hash::make('c'); //c
-        $usuario->nacimiento = '12-05-2001';
+        $usuario->nacimiento = '2001-05-12';
         $usuario->save();
     }
     

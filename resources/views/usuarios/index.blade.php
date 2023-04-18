@@ -28,6 +28,7 @@
                         <td>
                             <a href="{{ route('usuarios.edit', $usuario->id) }}"
                                 class="icono material-symbols-rounded update">edit</a>
+                            
                             <form class="eliminar-alert" action="{{ route('usuarios.destroy', $usuario->id) }}" method="post"
                                 style="display: inline-block;">
                                 @method('DELETE')
@@ -35,6 +36,7 @@
                                 <input class="icono material-symbols-rounded delete" type="submit" value="delete"
                                     style=" border-width:0">
                             </form>
+
                         </td>
                     </tr>
                 @endforeach
