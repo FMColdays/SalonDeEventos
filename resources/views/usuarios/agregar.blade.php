@@ -23,7 +23,8 @@
             <select class="element-lg" name="rol">
                 <option name="rol" name="rol">Seleccionar</option>
                 <option id="opcion1" name="rol">Gerente</option>
-                <option id="opcion2" name="rol">Cliente</option>
+                <option id="opcion2" name="rol">Empleado</option>
+                <option id="opcion3" name="rol">Cliente</option>
             </select>
             
             <div class="contenedor-form-img">

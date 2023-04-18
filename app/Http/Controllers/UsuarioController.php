@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use App\Http\Requests\StoreUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
-use App\Models\Imagen;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+
 
 class UsuarioController extends Controller
 {
@@ -41,18 +40,6 @@ class UsuarioController extends Controller
         $usuario->rol = $request->input('rol');
         $usuario->save();
 
-        if ($request->hasFile('imagen')) {
-            $imagen = $request->file('imagen');
-            $ruta = 'imagenes/';
-            $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
-            $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
-            $imgenU = new Imagen();
-            $imgenU->imagenMi = $ruta . $nombreimagen;
-            $imgenU->imagenable_id = $usuario->id;
-            $imgenU->imagenable_type = Usuario::class;
-            $imgenU->save();
-        }
-
         return redirect(route('usuarios.index'));
     }
 
@@ -82,25 +69,7 @@ class UsuarioController extends Controller
         $usuario->nacimiento = $request->input('nacimiento');
         $usuario->contraseña = $request->input('contraseña');
         $usuario->rol = $request->input('rol');
-        if ($request->hasFile('imagen')) {
-            $imagen = $request->file('imagen');
-            $ruta = 'imagenes/';
-            $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
-            $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
-            if ($usuario->imagenMo) {
-                $usuario->imagenMo()->update([
-                    'imagenMi' => $ruta . $nombreimagen,
-                    'imagenable_id'  => $usuario->id,
-                    'imagenable_type'  => Usuario::class,
-                ]);
-            } else {
-                $usuario->imagenMo()->create([
-                    'imagenMi' => $ruta . $nombreimagen,
-                    'imagenable_id'  => $usuario->id,
-                    'imagenable_type'  => Usuario::class,
-                ]);
-            }          
-        }
+      
         $usuario->save();
         return redirect(route('usuarios.index'));
     }

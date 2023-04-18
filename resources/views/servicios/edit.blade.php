@@ -7,7 +7,7 @@
         <div class="header-agregar">
             <h1>Editar Paquete de Eventos</h1>
         </div>
-        <form action="{{ route('servicios.update', $servicio->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('servicios.update', $servicio) }}" method="post" enctype="multipart/form-data">
             @method('PUT')
             @csrf
 
@@ -33,7 +33,7 @@
             </div>
 
             <div class="contenedor-form-img">
-                <img id="preview" class="img-media" src="{{ asset($servicio->imagenMo->imagenMi) }}"
+                <img id="preview" class="img-media" src="{{ asset('imagenes/meseros.jpg') }}"
                     onchange="mostrarImagen(event)">
 
                 <div class="imagen-file">

@@ -15,9 +15,9 @@
     <div class="contenedor">
         @foreach ($paquetes as $paquete)
             <div class="contenedor_tarjeta">
-                <a href="{{ route('album.index', $paquete->id) }}">
+                <a href="{{ route('paquetes.show', $paquete->id) }}">
                     <figure>
-                        <img src="{{ $paquete->imagenMo->imagenMi }}" class="frontal">
+                        <img src="{{ asset('imagenes/boda7.png') }}" class="frontal">
                         <figcaption class="trasera">
                             <h2 class="titulo">{{ $paquete->nombre }}</h2>
                             <hr>
@@ -29,6 +29,4 @@
         @endforeach
     </div>
 
-
-    <footer class="footer-principal"></footer>
 @endsection

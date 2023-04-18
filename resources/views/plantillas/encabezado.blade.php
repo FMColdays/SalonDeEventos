@@ -62,13 +62,16 @@
                             </ul>
                         </div>
                     @elseif (Auth::user()->rol == 'Cliente')
-                        <li><a class="nav-link px-2 link-secondary" href="{{ route('eventos.index') }}">Eventos</a>
-                        </li>
-
-                        <li><a class="nav-link px-2 link-secondary" href="{{ route('eventos.create') }}">Agregar</a>
-                        </li>
-                        <li><a class="nav-link px-2 link-secondary" href="{{ route('añadirEventC') }}">Agregarevento</a>
-                        </li>
+                        <div class="dropdown">
+                            <a href="#" class="link-dark dropdown-toggle px-2" data-bs-toggle="dropdown">
+                                Eventos
+                            </a>
+                            <ul class="dropdown-menu text-small">
+                            
+                                <li><a class="dropdown-item" href="{{ route('eventos.index') }}">Mostrar</a></li>
+                                <li><a class="dropdown-item" href="{{ route('eventos.create') }}">Agregar</a></li>
+                            </ul>
+                        </div>
                     @endif
                 @endauth
             </ul>

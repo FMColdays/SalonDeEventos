@@ -11,11 +11,13 @@
             @foreach ($servicios as $servicio)
                 <div class="paquete">
 
-                    <img src="{{ $servicio->imagenMo->imagenMi }}" alt="" class="img-fluid" width="550px">
+                    <img src="{{ asset('imagenes/meseros.jpg') }}" alt="" class="img-fluid" width="550px">
+
                     <div class="descripcion">
                         <label class="estado-label" style="background: {{ $servicio->estado == 1 ? 'green' : 'red' }}">
                             {{ $servicio->estado == 1 ? 'Publicado' : 'No Publicado' }}
                         </label>
+                        
                         <div class="opciones">
                             <a class="icono material-symbols-rounded"
                                 href="{{ route('servicios.show', $servicio) }}">Photo_Library</a>

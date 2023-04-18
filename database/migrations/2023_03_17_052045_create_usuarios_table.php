@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('usuario');
             $table->string('contraseña');
-            $table->string("nacimiento")->default('00-00-00');
-            $table->enum('rol', ['Gerente', 'Cliente'])->default('Cliente');
+            $table->string("nacimiento")->default('00-00-0000');
+            $table->enum('rol', ['Gerente', 'Cliente', 'Empleado'])->default('Cliente');
             $table->timestamps();
         });
     }

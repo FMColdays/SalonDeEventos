@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
+use App\Http\Requests\StoreEventoRequest;
+use App\Http\Requests\UpdateEventoRequest;
 use App\Models\Paquete;
-use Illuminate\Http\Request;
+use App\Models\Servicio;
 
 class EventoController extends Controller
 {
@@ -13,7 +15,8 @@ class EventoController extends Controller
      */
     public function index()
     {
-        return view('cliente.index');
+        $eventos = Evento::all();
+        return view('eventos.index', compact('eventos'));
     }
 
     /**
@@ -21,16 +24,26 @@ class EventoController extends Controller
      */
     public function create()
     {
+        $servicios = Servicio::all();
         $paquetes = Paquete::all();
-        return view('cliente.agregarevento', compact('paquetes'));
+        return view('eventos.create', compact('paquetes', 'servicios'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEventoRequest $request)
     {
-        //
+        $evento = new Evento();
+        $evento->nombre = $request->input('nombre');
+        $evento->descripcion = $request->input('descripcion');
+        $evento->fecha = $request->input('fecha');
+        $evento->horaI = $request->input('horaI');
+        $evento->horaF = $request->input('horaF');
+        $evento->capacidad = $request->input('capacidad');
+        $evento->save();
+
+        return redirect(route('eventos.index'));
     }
 
     /**
@@ -38,7 +51,13 @@ class EventoController extends Controller
      */
     public function show(Evento $evento)
     {
-        //
+        if (auth()->user()) {
+
+            return view('eventos.show');
+        } elseif ($evento->estado == '1') {
+
+            return view('eventos.show');
+        }
     }
 
     /**
@@ -46,15 +65,24 @@ class EventoController extends Controller
      */
     public function edit(Evento $evento)
     {
-        //
+        return view('eventos.edit', compact('evento'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Evento $evento)
+    public function update(UpdateEventoRequest $request, Evento $evento)
     {
-        //
+        $evento->nombre = $request->input('nombre');
+        $evento->descripcion = $request->input('descripcion');
+        $evento->fecha = $request->input('fecha');
+        $evento->horaI = $request->input('horaI');
+        $evento->horaF = $request->input('horaF');
+        $evento->capacidad = $request->input('capacidad');
+        $evento->estado = $request->input('estado');
+        $evento->save();
+
+        return redirect(route('eventos.index'));
     }
 
     /**
@@ -62,6 +90,7 @@ class EventoController extends Controller
      */
     public function destroy(Evento $evento)
     {
-        //
+        $evento->delete();
+        return redirect(route('eventos.index'));
     }
 }

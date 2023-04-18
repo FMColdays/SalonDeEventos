@@ -23,7 +23,7 @@
                         <td>{{ $usuario->usuario }}</td>
                         <td>{{ $usuario->nacimiento }}</td>
                         <td>{{ $usuario->rol }}</td>
-                        <td><img src="{{ optional($usuario->imagenMo)->imagenMi }}" alt="" width="80px">
+                        <td><img src="{{ asset('imagenes/1681247200-yo.jpg')}}" alt="" width="80px">
                         <td>
                         <td>
                             <a href="{{ route('usuarios.edit', $usuario->id) }}"

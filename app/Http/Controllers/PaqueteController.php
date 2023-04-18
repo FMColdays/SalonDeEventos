@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Paquete;
 use App\Http\Requests\StorePaqueteRequest;
 use App\Http\Requests\UpdatePaqueteRequest;
-use App\Models\Album;
-use App\Models\Imagen;
 use App\Models\Servicio;
-use Illuminate\Support\Facades\Storage;
 
 class PaqueteController extends Controller
 {
@@ -42,18 +39,6 @@ class PaqueteController extends Controller
         $paquete->descripcion = $request->input('descripcion');
         $paquete->save();
 
-        if ($request->hasFile('imagen')) {
-            $imageneF = $request->file('imagen');
-            $ruta = 'imagenes/';
-            $nombreimagen = time() . '-' . $imageneF->getClientOriginalName();
-            $carga = $request->file('imagen')->move($ruta, $nombreimagen);
-            $imgenP = new Imagen();
-            $imgenP->imagenMi = $ruta . $nombreimagen;
-            $imgenP->imagenable_id = $paquete->id;
-            $imgenP->imagenable_type = Paquete::class;
-            $imgenP->save();
-        }
-
         return redirect(route('paquetes.index'));
     }
 
@@ -63,13 +48,11 @@ class PaqueteController extends Controller
     public function show(Paquete $paquete)
     {
         if (auth()->user()) {
-            $tipo = Paquete::class;
-            $id = $paquete->id;
-            $imagenes = $paquete->albumMo()->paginate(10);
-            return view('album.index', compact('imagenes','id', 'tipo'));
+
+           return view('paquetes.show');
         } elseif ($paquete->estado == '1') {
-            $imagenes = $paquete->albumMo()->paginate(10);
-            return view('album.index', compact('imagenes','id','tipo'));
+        
+            return view('paquetes.show');
         }
     }
 
@@ -91,25 +74,7 @@ class PaqueteController extends Controller
         $paquete->costo = $request->input('costo');
         $paquete->capacidad = $request->input('capacidad');
         $paquete->estado = $request->input('estado');
-        if ($request->hasFile('imagen')) {
-            $imagen = $request->file('imagen');
-            $ruta = 'imagenes/';
-            $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
-            $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
-            if ($paquete->imagenMo) {
-                $paquete->imagenMo()->update([
-                    'imagenMi' => $ruta . $nombreimagen,
-                    'imagenable_id'  => $paquete->id,
-                    'imagenable_type'  => Paquete::class,
-                ]);
-            } else {
-                $paquete->imagenMo()->create([
-                    'imagenMi' => $ruta . $nombreimagen,
-                    'imagenable_id'  => $paquete->id,
-                    'imagenable_type'  => Paquete::class,
-                ]);
-            }
-        }
+      
         $paquete->save();
         return redirect(route('paquetes.index'));
     }
@@ -119,13 +84,6 @@ class PaqueteController extends Controller
      */
     public function destroy(Paquete $paquete)
     {
-        $paqueteimg  = Album::where('paquete_id', $paquete->id)->get();
-
-        foreach ($paqueteimg as $imagen) {
-            $url = str_replace('storage', 'public', $imagen->album);
-            Storage::delete($url);
-        }
-
         $paquete->delete();
         return redirect(route('paquetes.index'));
     }

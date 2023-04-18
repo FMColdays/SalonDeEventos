@@ -5,9 +5,9 @@
 @section('cuerpo')
     <div class="contenedor-agregar">
         <div class="header-agregar">
-            <h1>Añadir Paquete de Eventos</h1>
+            <h1>Editar Usuario</h1>
         </div>
-        <form action="{{ route('usuarios.update', $usuario->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('usuarios.update', $usuario) }}" method="post" enctype="multipart/form-data">
             @method('PUT')
             @csrf
 
@@ -21,19 +21,26 @@
             <label for="contraseña">Contraseña:</label>
             <input class="element-lg" type="text" name="contraseña" value="{{ $usuario->contraseña }}" id="contraseña"
                 required>
+                
             <label for="rol">Rol:</label>
             <select class="element-lg" name="rol">
                 @if ($usuario->rol == 'Gerente')
                     <option name="rol" selected>Gerente</option>
+                    <option name="rol">Empleado</option>
+                    <option name="rol">Cliente</option>
+                @elseif ($usuario->rol == 'Empleado')
+                    <option name="rol" selected>Empleado</option>
+                    <option name="rol">Gerente</option>
                     <option name="rol">Cliente</option>
                 @else
                     <option name="rol" selected>Cliente</option>
                     <option name="rol">Gerente</option>
+                    <option name="rol">Empleado</option>
                 @endif
             </select>
 
             <div class="contenedor-form-img">
-                <img id="preview" class="img-media" src="{{ asset(optional($usuario->imagenMo)->imagenMi) }}"
+                <img id="preview" class="img-media" src="{{ asset('imagenes/1681247200-yo.jpg') }}"
                     onchange="mostrarImagen(event)" class="img-fluid">
 
                 <div class="imagen-file">

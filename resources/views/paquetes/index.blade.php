@@ -11,11 +11,14 @@
             @foreach ($paquetes as $paquete)
                 <div class="paquete">
 
-                    <img src="{{ $paquete->imagenMo->imagenMi }}" alt="" class="img-fluid" width="550px">
+                    <img src="{{ asset('imagenes/boda7.png') }}" alt="" class="img-fluid" width="550px">
+
                     <div class="descripcion">
+
                         <label class="estado-label" style="background: {{ $paquete->estado == 1 ? 'green' : 'red' }}">
                             {{ $paquete->estado == 1 ? 'Publicado' : 'No Publicado' }}
                         </label>
+
                         <div class="opciones">
                             <a class="icono material-symbols-rounded"
                                 href="{{ route('paquetes.show', $paquete) }}">Photo_Library</a>
@@ -31,8 +34,6 @@
                         </div>
 
                         <h2>{{ $paquete->nombre }}</h2>
-
-
                         <div class="items">
                             <span class="icono material-symbols-rounded">group</span>
                             <p>{{ $paquete->capacidad }}</p>

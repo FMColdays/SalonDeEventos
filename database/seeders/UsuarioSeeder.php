@@ -21,5 +21,21 @@ class UsuarioSeeder extends Seeder
         $usuario->nacimiento = '14-01-2001';
         $usuario->rol = 'Gerente';
         $usuario->save();
+
+        $usuario = new Usuario();
+        $usuario->nombre = 'Emma';
+        $usuario->usuario='EmmaXD';
+        $usuario->contraseña = Hash::make('b'); //b
+        $usuario->nacimiento = '18-08-2001';
+        $usuario->rol = 'Empleado';
+        $usuario->save();
+
+        $usuario = new Usuario();
+        $usuario->nombre = 'Angel';
+        $usuario->usuario='Angel18';
+        $usuario->contraseña = Hash::make('c'); //c
+        $usuario->nacimiento = '12-05-2001';
+        $usuario->save();
     }
+    
 }

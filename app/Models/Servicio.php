@@ -8,14 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Servicio extends Model
 {
     use HasFactory;
-
-    public function imagenMo()
-    {
-        return $this->morphOne(Imagen::class, 'imagenable');
-    }
-
-    public function albumMo()
-    {
-        return $this->morphMany(Album::class, 'albumable');
-    }
 }

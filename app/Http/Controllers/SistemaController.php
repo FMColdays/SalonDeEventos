@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Imagen;
 use App\Models\Paquete;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
@@ -52,8 +51,8 @@ class SistemaController extends Controller
         $encontrado = Usuario::where('usuario', $usuario)->first();
 
         if (is_null($encontrado)) {
-           return redirect('login')
-           ->with(['mensaje' => 'Error, usuario no encontrado']);
+            return redirect('login')
+                ->with(['mensaje' => 'Error, usuario no encontrado']);
         } else {
             $contraseña_bd = $encontrado->contraseña;
             $conincide = Hash::check($contraseña, $contraseña_bd);
@@ -62,8 +61,8 @@ class SistemaController extends Controller
                 Auth::login($encontrado);
                 return redirect(route('@me'));
             } else {
-               return redirect('login')
-                ->with(['mensaje' => 'Error, contraseña incorrecta']);;
+                return redirect('login')
+                    ->with(['mensaje' => 'Error, contraseña incorrecta']);;
             }
         }
     }
@@ -71,20 +70,20 @@ class SistemaController extends Controller
     public function tipoVistaUsuario()
     {
         $tipo_de_usurio = Auth::user()->rol;
-        $paquetes = Paquete::all();
-     
-        
-        if ($tipo_de_usurio == "Gerente") {
-            return view('gerente.index', compact('paquetes'));
-        }else{
-            return view('cliente.index', compact('paquetes'));
+
+        if ($tipo_de_usurio == "Gerente" || $tipo_de_usurio == "Empleado") {
+            $paquetes = Paquete::all();
+            return view('principal', compact('paquetes'));
+        } else {
+
+            $paquetes = Paquete::where('estado', '1')->get();
+            return view('principal', compact('paquetes'));
         }
-        
     }
 
-    public function cerrar_sesion(){
+    public function cerrar_sesion()
+    {
         Auth::logout();
         return redirect('inicio');
     }
-
 }
