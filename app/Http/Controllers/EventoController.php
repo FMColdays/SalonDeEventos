@@ -94,6 +94,7 @@ class EventoController extends Controller
         $evento->fecha = $request->input('fecha');
         $evento->horaI = $request->input('horaI');
         $evento->horaF = $request->input('horaF');
+        $evento->estado = $request->input('estado');
         $evento->capacidad = $request->input('capacidad');
         $evento->costo = $request->input('costo');
         $evento->usuario_id = $usuario->id;
