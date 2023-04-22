@@ -11,45 +11,72 @@
         <form action="{{ route('eventos.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <label for="nombre">Nombre:</label>
-            <input class="element-lg" type="text" id="nombre" name="nombre" required>
+            <input class="element-lg  validar" type="text" id="nombre" name="nombre">
+            <h6 class="validarLabel" class="text-danger"></h6>
+
             <label for="descripcion">Descripción:</label>
-            <textarea class="element-lg" id="descripcion" name="descripcion" required></textarea>
+            <textarea class="element-lg validar" id="descripcion" name="descripcion"></textarea>
+            <h6 class="validarLabel" class="text-danger"></h6>
+
             <label for="fecha">Fecha:</label>
-            <input class="element-lg" type="date" id="fecha" name="fecha" required>
+            <input class="element-lg validar" type="date" id="fecha" name="fecha">
+            <h6 class="validarLabel" class="text-danger"></h6>
+
             <label for="horaI">Hora Inicio:</label>
-            <input class="element-lg" type="time" id="horaI" name="horaI" required>
+            <input class="element-lg validar" type="time" id="horaI" name="horaI">
+            <h6 class="validarLabel" class="text-danger"></h6>
+
             <label for="horaF">Hora Fin:</label>
-            <input class="element-lg" type="time" id="horaF" name="horaF" required>
+            <input class="element-lg validar" type="time" id="horaF" name="horaF">
+            <h6 class="validarLabel" class="text-danger"></h6>
+
             <label for="capacidad">Capacidad:</label>
-            <input class="element-lg" type="number" id="capacidad" name="capacidad" required>
-            <label for="servicio">Servicios:</label>
-            <select class="element-lg" name="" id="">
-                @foreach ($servicios as $servicio)
-                    <option class="servicio" value="paquete">
-                        {{ $servicio->nombre }}
-                    </option>
-                @endforeach
-            </select>
-            <label for="paquete">Paquetes:</label>
-            <select class="element-lg" name="" id="">
+            <input class="element-lg validar" type="number" id="capacidad" name="capacidad">
+            <h6 class="validarLabel" class="text-danger"></h6>
+
+            <label>Servicios:</label>
+            @foreach ($servicios as $servicio)
+                <div>
+                    <input type="checkbox" name="servicios[]" value="{{ $servicio->id }}" class="servicio"
+                        onchange="actualizarCosto()" data-costo="{{ $servicio->costo }}">
+                    <label>{{ $servicio->nombre }}</label>
+                </div>
+            @endforeach
+
+            <label for="paquete" style="display: block">Paquetes:</label>
+
+            <select class="element-lg" name="paquete_id" id="opcion" onchange="actualizarCosto()">
+                <option class="paquete" value="Seleccionar">
+                    Seleccionar
+                </option>
                 @foreach ($paquetes as $paquete)
-                    <option class="paquete" value="paquete">
-                        {{ $paquete->nombre }}
+                    <option class="paquete" value="{{ $paquete->id }}" data-costo="{{ $paquete->costo }}">
+                        {{ $paquete->id }} -> {{ $paquete->nombre }}
                     </option>
                 @endforeach
             </select>
+            <h6 id="selecSome" class="text-danger"></h6>
 
             <div class="contenedor-form-img">
                 <img id="preview" class="img-media" onchange="mostrarImagen(event)">
 
                 <div class="imagen-file">
                     <label class="imagen-t">Imagen que se mostrara en el perfil:</label>
-                    <input class="element-lg" type="file" name="imagen" accept="image/*" onchange="mostrarImagen(event)"
-                        required>
+                    <input class="element-lg validar" type="file" name="imagen" accept="image/*"
+                        onchange="mostrarImagen(event)">
+                    <h6 class="validarLabel" class="text-danger"></h6>
                 </div>
             </div>
-            <input class="element-lg" type="submit" value="Guardar">
+
+            <div class="costo-evento">
+                <input type="hidden" name="costo" id="costo" value="">
+                <span>Costo:</span>
+                <span name="costo" id="costo-total">0</span>
+            </div>
+
+            <input class="element-lg" id="botonGE" type="submit" value="Guardar">
         </form>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 @endsection

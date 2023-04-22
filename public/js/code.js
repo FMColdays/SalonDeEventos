@@ -37,3 +37,71 @@ enviarBtns.forEach(function(enviarBtn) {
     });
 });
 
+
+ function actualizarCosto() {
+    
+            var costoPaquete = 0;
+            var paqueteSeleccionado = document.querySelector('select[name="paquete_id"] option:checked');
+            console.log(paqueteSeleccionado);
+            if (paqueteSeleccionado && paqueteSeleccionado.value!="Seleccionar") {
+                costoPaquete = parseFloat(paqueteSeleccionado.dataset.costo);
+            }else{
+                costoPaquete = 0;
+            }
+
+            var costoServicios = 0;
+            var serviciosSeleccionados = document.querySelectorAll('input.servicio:checked');
+            serviciosSeleccionados.forEach(function(servicioSeleccionado) {
+                costoServicios += parseFloat(servicioSeleccionado.dataset.costo);
+            });
+
+            var costoTotal = costoPaquete + costoServicios;
+            var costo = document.getElementById("costo-total").innerText;
+            document.getElementById("costo").value = costoTotal;
+           
+            document.getElementById('costo-total').textContent = costoTotal;            
+        }
+
+//Si no selecciona ningun paquete manda error 
+document.getElementById("botonGE").onclick = function (event){
+
+    var opcion = document.getElementById("opcion").value;
+    var todoInput = document.querySelectorAll('.validar');
+    var todolabel = document.querySelectorAll('.validarLabel');
+
+  
+    for (let i = 0; i < todoInput.length; i++) {
+
+       
+        todoInput[i].addEventListener('blur', function(){
+            if(todoInput[i].value == ""){
+                event.preventDefault();
+                todoInput[i].style.borderColor = "red";
+                todolabel[i].classList.add("text-danger")
+                todolabel[i].innerHTML = "Ingrese datos por favor"
+            }else{
+                todoInput[i].style.borderColor = "black";
+                todolabel[i].classList.remove("text-danger")
+                todolabel[i].innerHTML = ""
+            }
+        })
+
+        if(todoInput[i].value == ""){
+            event.preventDefault();
+            todoInput[i].style.borderColor = "red";
+            todolabel[i].innerHTML = "Ingrese datos por favor"
+        }else{
+            todoInput[i].style.borderColor = "black";
+            todolabel[i].innerHTML = ""
+        }
+    }
+
+    if(opcion == "Seleccionar"){
+        event.preventDefault();
+        document.getElementById("selecSome").innerHTML = "Selecciona un paquete por favor"
+    }else{
+        document.getElementById("selecSome").innerHTML = ""
+    }
+}
+
+

@@ -6,6 +6,7 @@ use App\Models\Paquete;
 use App\Http\Requests\StorePaqueteRequest;
 use App\Http\Requests\UpdatePaqueteRequest;
 use App\Models\Servicio;
+use Illuminate\Support\Facades\Auth;
 
 class PaqueteController extends Controller
 {
@@ -14,7 +15,7 @@ class PaqueteController extends Controller
      */
     public function index()
     {
-        $paquetes = Paquete::all();
+        $paquetes = Paquete::where('usuario_id', Auth::user()->id)->get();
         return view("paquetes.index", compact('paquetes'));
     }
 
@@ -23,8 +24,7 @@ class PaqueteController extends Controller
      */
     public function create()
     {
-        $servicios = Servicio::where('estado', '1')->get();
-        return view('paquetes.agregar', compact('servicios'));
+        return view('paquetes.create');
     }
 
     /**
@@ -37,6 +37,7 @@ class PaqueteController extends Controller
         $paquete->capacidad = $request->input('capacidad');
         $paquete->costo = $request->input('costo');
         $paquete->descripcion = $request->input('descripcion');
+        $paquete->usuario_id = auth()->user()->id;
         $paquete->save();
 
         return redirect(route('paquetes.index'));
@@ -61,7 +62,7 @@ class PaqueteController extends Controller
      */
     public function edit(Paquete $paquete)
     {
-        return view('paquetes.editar', compact('paquete'));
+        return view('paquetes.edit', compact('paquete'));
     }
 
     /**
@@ -74,7 +75,7 @@ class PaqueteController extends Controller
         $paquete->costo = $request->input('costo');
         $paquete->capacidad = $request->input('capacidad');
         $paquete->estado = $request->input('estado');
-      
+        $paquete->usuario_id = auth()->user()->id;
         $paquete->save();
         return redirect(route('paquetes.index'));
     }

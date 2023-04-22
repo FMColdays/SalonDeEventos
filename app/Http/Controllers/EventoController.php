@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEventoRequest;
 use App\Http\Requests\UpdateEventoRequest;
 use App\Models\Paquete;
 use App\Models\Servicio;
+use Illuminate\Support\Facades\Auth;
 
 class EventoController extends Controller
 {
@@ -15,8 +16,9 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $eventos = Evento::all();
-        return view('eventos.index', compact('eventos'));
+        $eventos = Evento::where('usuario_id', Auth::user()->id)->get();
+        $servicios = Servicio::all();
+        return view('eventos.index', compact('eventos', 'servicios'));
     }
 
     /**
@@ -24,8 +26,8 @@ class EventoController extends Controller
      */
     public function create()
     {
-        $servicios = Servicio::all();
-        $paquetes = Paquete::all();
+        $servicios = Servicio::where('estado', '1')->get();
+        $paquetes = Paquete::where('estado', '1')->get();
         return view('eventos.create', compact('paquetes', 'servicios'));
     }
 
@@ -34,6 +36,9 @@ class EventoController extends Controller
      */
     public function store(StoreEventoRequest $request)
     {
+
+        $usuario = Auth::user();
+        $paquete = Paquete::find($request->input('paquete_id'));
         $evento = new Evento();
         $evento->nombre = $request->input('nombre');
         $evento->descripcion = $request->input('descripcion');
@@ -41,7 +46,14 @@ class EventoController extends Controller
         $evento->horaI = $request->input('horaI');
         $evento->horaF = $request->input('horaF');
         $evento->capacidad = $request->input('capacidad');
+        $evento->costo = $request->input('costo');
+        $evento->usuario_id = $usuario->id;
+        $evento->paquete_id = $paquete->id;
+
         $evento->save();
+
+
+        $evento->servicios()->sync($request->input('servicios'));
 
         return redirect(route('eventos.index'));
     }
@@ -65,7 +77,9 @@ class EventoController extends Controller
      */
     public function edit(Evento $evento)
     {
-        return view('eventos.edit', compact('evento'));
+        $servicios = Servicio::where('estado', '1')->get();
+        $paquetes = Paquete::where('estado', '1')->get();
+        return view('eventos.edit', compact('evento', 'servicios', 'paquetes'));
     }
 
     /**
@@ -73,17 +87,23 @@ class EventoController extends Controller
      */
     public function update(UpdateEventoRequest $request, Evento $evento)
     {
+        $usuario = Auth::user();
+        $paquete = Paquete::find($request->input('paquete_id'));
         $evento->nombre = $request->input('nombre');
         $evento->descripcion = $request->input('descripcion');
         $evento->fecha = $request->input('fecha');
         $evento->horaI = $request->input('horaI');
         $evento->horaF = $request->input('horaF');
         $evento->capacidad = $request->input('capacidad');
-        $evento->estado = $request->input('estado');
+        $evento->costo = $request->input('costo');
+        $evento->usuario_id = $usuario->id;
+        $evento->paquete_id = $paquete->id;
         $evento->save();
+        $evento->servicios()->sync($request->input('servicios'));
 
         return redirect(route('eventos.index'));
     }
+
 
     /**
      * Remove the specified resource from storage.

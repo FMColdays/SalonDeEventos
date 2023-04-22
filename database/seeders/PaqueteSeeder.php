@@ -17,14 +17,36 @@ class PaqueteSeeder extends Seeder
         $paquete->nombre = 'Bodas';
         $paquete->descripcion='Para bodas';
         $paquete->costo = '20000';
+        $paquete->estado = '1';
         $paquete->capacidad = '400';
+        $paquete->usuario_id = '1';
         $paquete->save();
 
         $paquete = new Paquete();
-        $paquete->nombre = 'Fiestas';
-        $paquete->descripcion='Para fiestas';
+        $paquete->nombre = 'XV años';
+        $paquete->descripcion='Para XV años';
         $paquete->costo = '10000';
+        $paquete->estado = '1';
         $paquete->capacidad = '200';
+        $paquete->usuario_id = '1';
+        $paquete->save();
+
+        $paquete = new Paquete();
+        $paquete->nombre = 'Fiesta infantil';
+        $paquete->descripcion='Para fiesta infantil';
+        $paquete->costo = '5000';
+        $paquete->estado = '1';
+        $paquete->capacidad = '400';
+        $paquete->usuario_id = '1';
+        $paquete->save();
+
+        $paquete = new Paquete();
+        $paquete->nombre = 'Bautizos';
+        $paquete->descripcion='Para bautizos';
+        $paquete->costo = '8000';
+        $paquete->estado = '1';
+        $paquete->capacidad = '200';
+        $paquete->usuario_id = '1';
         $paquete->save();
 
     }

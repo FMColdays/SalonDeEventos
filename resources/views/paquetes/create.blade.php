@@ -18,14 +18,7 @@
             <input class="element-lg" type="number" id="costo" name="costo" required>
             <label for="capacidad">Capacidad:</label>
             <input class="element-lg" type="text" id="capacidad" name="capacidad" required>
-            <label for="servicios">Servicios:</label>
-            <select class="element-lg">
 
-                @foreach ($servicios as $servicio)
-                <option>{{$servicio->nombre}}</option>
-                @endforeach
-           
-            </select>
 
             <div class="contenedor-form-img">
                 <img id="preview" class="img-media" onchange="mostrarImagen(event)">

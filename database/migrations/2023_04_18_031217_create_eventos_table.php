@@ -19,7 +19,12 @@ return new class extends Migration
             $table->string('horaI');
             $table->string('horaF');
             $table->string('capacidad');
+            $table->string('costo');
             $table->enum('estado',['0','1'])->default('0');
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->unsignedBigInteger('paquete_id');
+            $table->foreign('paquete_id')->references('id')->on('paquetes')->onDelete('cascade');
             $table->timestamps();
         });
     }

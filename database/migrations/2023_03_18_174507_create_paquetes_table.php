@@ -16,8 +16,11 @@ return new class extends Migration
             $table->string("nombre");
             $table->string("descripcion");
             $table->string("costo");
-            $table->enum('estado', ['0','1'])->default('0');
+            $table->enum('estado', ['0', '1'])->default('0');
             $table->string("capacidad");
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

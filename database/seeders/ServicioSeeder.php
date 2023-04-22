@@ -13,16 +13,26 @@ class ServicioSeeder extends Seeder
      */
     public function run(): void
     {
-        $paquete = new Servicio();
-        $paquete->nombre = 'Mantelería';
-        $paquete->descripcion = 'Para las mesas';
-        $paquete->costo = '1000';
-        $paquete->save();
+        $servicio = new Servicio();
+        $servicio->nombre = 'Mantelería';
+        $servicio->descripcion = 'Para las mesas';
+        $servicio->estado = '1';
+        $servicio->costo = '1000';
+        $servicio->save();
 
-        $paquete = new Servicio();
-        $paquete->nombre = 'Meseros';
-        $paquete->descripcion = 'Para el evento';
-        $paquete->costo = '1500';
-        $paquete->save();
+        $servicio = new Servicio();
+        $servicio->nombre = 'Meseros';
+        $servicio->descripcion = 'Los mejores meseros';
+        $servicio->estado = '1';
+        $servicio->costo = '2500';
+        $servicio->save();
+
+        $servicio = new Servicio();
+        $servicio->nombre = 'Aire acondicionado';
+        $servicio->descripcion = 'Para no morir de calor';
+        $servicio->estado = '1';
+        $servicio->costo = '3000';
+        $servicio->save();
+
     }
 }

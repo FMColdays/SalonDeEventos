@@ -1,4 +1,5 @@
-/* contenedor movil */
+
+
 a {
     text-decoration: none;
 }
@@ -67,7 +68,8 @@ figure .trasera .titulo {
     color: #fff;
     font-weight: normal;
     margin-bottom: 20px;
-    font-family: 'Roboto', sans-serif;
+    text-shadow: 0.1em 0.1em #000000;
+    font-family: 'Archivo', sans-serif;
     font-size: 24px;
 }
 
@@ -80,14 +82,14 @@ figure .trasera hr {
 }
 
 figure .trasera p {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Archivo', sans-serif;
+    text-shadow: 0.1em 0.1em #000000;
     line-height: 22px;
     font-size: 14px;
 }
 
 @media screen and (max-width: 992px) {
     figure .trasera {
-        /*position: relative;*/
         -webkit-backface-visibility: visible;
         backface-visibility: visible;
         transform: perspective(600px) rotateY(0deg);

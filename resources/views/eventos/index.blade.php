@@ -15,44 +15,73 @@
 
                     <div class="descripcion">
                         <label class="estado-label" style="background: {{ $evento->estado == 1 ? 'green' : 'red' }}">
-                            {{ $evento->estado == 1 ? 'Publicado' : 'No Publicado' }}
+                            {{ $evento->estado == 1 ? 'Confirmado' : 'No Confirmado' }}
                         </label>
 
                         <div class="opciones">
                             <a class="icono material-symbols-rounded"
                                 href="{{ route('eventos.show', $evento) }}">Photo_Library</a>
-                            @if ($evento->estado == 0)
-                                <a class="icono material-symbols-rounded edit"
-                                    href="{{ route('eventos.edit', $evento) }}">edit</a>
 
-                                <form class="eliminar-alert" action="{{ route('eventos.destroy', $evento) }}" method="POST"
-                                    style="display: inline-block;">
-                                    @method('DELETE')
-                                    @csrf
-                                    <input class="icono material-symbols-rounded delete" type="submit" value="delete">
-                                </form>
-                            @endif
+                            <a class="icono material-symbols-rounded edit"
+                                href="{{ route('eventos.edit', $evento) }}">edit</a>
 
-
-
+                            <form class="eliminar-alert" action="{{ route('eventos.destroy', $evento) }}" method="POST"
+                                style="display: inline-block;">
+                                @method('DELETE')
+                                @csrf
+                                <input class="icono material-symbols-rounded delete" type="submit" value="delete">
+                            </form>
                         </div>
 
                         <h2>{{ $evento->nombre }}</h2>
 
-
-                        <div class="items">
-                            <span class="icono material-symbols-rounded">group</span>
-                            <p>{{ $evento->capacidad }}</p>
-                        </div>
                         <div class="items">
                             <span class="icono material-symbols-rounded">description</span>
                             <p>{{ $evento->descripcion }}</p>
                         </div>
-                        <div class="items">
-                            <span class="icono material-symbols-rounded">payments</span>
-                            <p>{{ $evento->costo }}</p>
+
+                        <button class="contrato-icon" type="button" class="btn" data-bs-toggle="modal"
+                            data-bs-target="#miVentanaEmergente-{{ $evento->id }}">
+                            Ver Contrato
+                        </button>
+
+                        <div class="modal" id="miVentanaEmergente-{{ $evento->id }}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Evento: {{ $evento->id }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Paquete seleccionao: {{ $evento->paquete->nombre }}</p>
+                                        <p>Costo: {{ $evento->costo }}</p>
+                                        <p>Descripción evento: {{ $evento->descripcion }}</p>
+                                        <div class="horas-c">
+                                            <p>Hora de inicio : {{ $evento->horaI }}</p>
+                                            <p>Hora de final: {{ $evento->horaF }}</p>
+                                        </div>
+                                        <p>Invitados: {{ $evento->capacidad }}</p>
+                                        <p>Servicios: </p>
+                                        <div class="horas-c">
+                                            @foreach ($servicios as $servicio)
+                                                @if (in_array($servicio->id, $evento->servicios->pluck('id')->toArray()))
+                                                    <p>{{ $servicio->nombre }}</p>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary">Guardar cambios</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+
                     </div>
+
                 </div>
             @endforeach
         </div>

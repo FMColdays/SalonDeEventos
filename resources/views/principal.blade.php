@@ -11,6 +11,8 @@
         </div>
     </div>
 
+    <h1 class="titulo-paquetes">Paquetes</h1>
+
     {{-- Creo las cajas --}}
     <div class="contenedor">
         @foreach ($paquetes as $paquete)
@@ -29,4 +31,7 @@
         @endforeach
     </div>
 
+    <footer>
+        <p class="footer-text">Copyright© Arbore</p>
+    </footer>
 @endsection

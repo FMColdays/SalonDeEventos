@@ -24,7 +24,7 @@
                             <a class="icono material-symbols-rounded edit"
                                 href="{{ route('servicios.edit', $servicio) }}">edit</a>
 
-                            <form action="{{ route('servicios.destroy', $servicio) }}" method="POST"
+                            <form class="eliminar-alert" action="{{ route('servicios.destroy', $servicio) }}" method="POST"
                                 style="display: inline-block;">
                                 @method('DELETE')
                                 @csrf
