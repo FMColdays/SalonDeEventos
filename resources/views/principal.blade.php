@@ -13,13 +13,19 @@
 
     <h1 class="titulo-paquetes">Paquetes</h1>
 
+    @php
+        $rutas = ['imagenes/boda7.png', 'imagenes/xv años.jpg', 'imagenes/fiesta infantil.jpg', 'imagenes/bautizo.webp'];
+        $i = 0;
+    @endphp
+
+
     {{-- Creo las cajas --}}
     <div class="contenedor">
         @foreach ($paquetes as $paquete)
             <div class="contenedor_tarjeta">
                 <a href="{{ route('paquetes.show', $paquete->id) }}">
                     <figure>
-                        <img src="{{ asset('imagenes/boda7.png') }}" class="frontal">
+                        <img src="{{ asset($rutas[$i]) }}" class="frontal">
                         <figcaption class="trasera">
                             <h2 class="titulo">{{ $paquete->nombre }}</h2>
                             <hr>
@@ -28,6 +34,10 @@
                     </figure>
                 </a>
             </div>
+
+            @php
+                $i++;
+            @endphp
         @endforeach
     </div>
 

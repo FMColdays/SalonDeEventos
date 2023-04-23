@@ -3,6 +3,10 @@
     Servicios
 @endsection
 @section('cuerpo')
+    @php
+        $rutas = ['imagenes/manteleria.jpg', 'imagenes/meseros.jpg', 'imagenes/aire.jpeg'];
+        $i = 0;
+    @endphp
     <div class="lista-paquetes">
         <div class="header">
             <h1>Lista de servicios</h1>
@@ -11,13 +15,13 @@
             @foreach ($servicios as $servicio)
                 <div class="paquete">
 
-                    <img src="{{ asset('imagenes/meseros.jpg') }}" alt="" class="img-fluid" width="550px">
+                    <img src="{{ asset($rutas[$i]) }}" alt="" class="img-fluid" width="550px">
 
                     <div class="descripcion">
                         <label class="estado-label" style="background: {{ $servicio->estado == 1 ? 'green' : 'red' }}">
                             {{ $servicio->estado == 1 ? 'Publicado' : 'No Publicado' }}
                         </label>
-                        
+
                         <div class="opciones">
                             <a class="icono material-symbols-rounded"
                                 href="{{ route('servicios.show', $servicio) }}">Photo_Library</a>
@@ -43,6 +47,9 @@
                         </div>
                     </div>
                 </div>
+                @php
+                    $i++;
+                @endphp
             @endforeach
         </div>
     </div>

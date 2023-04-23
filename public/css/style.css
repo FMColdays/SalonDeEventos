@@ -54,15 +54,11 @@ footer {
   border: 2px solid white;
   width: 180px;
   color: white;
+  transition-duration: 0.8s; 
 }
-
-.presentacion .btn:hover {
-  width: 190px;
-  font-size: 17px;
-}
-
-.presentacion h1, .presentacion a, .presentacion p {
-  text-shadow: 0.1em 0.1em #000000;
+.btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 /*Tabla usuario*/
