@@ -5,7 +5,7 @@
 @section('cuerpo')
     <div class="contenedor-agregar">
         <div class="header-agregar">
-            <h1>Añadir Paquete de Eventos</h1>
+            <h1>Añadir nuevo usuario</h1>
         </div>
         <form action="{{ route('usuarios.store') }}" method="post" enctype="multipart/form-data">
             @csrf

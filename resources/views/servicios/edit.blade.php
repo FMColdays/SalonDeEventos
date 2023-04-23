@@ -5,7 +5,7 @@
 @section('cuerpo')
     <div class="contenedor-agregar">
         <div class="header-agregar">
-            <h1>Editar Paquete de Eventos</h1>
+            <h1>Editar servicio</h1>
         </div>
         <form action="{{ route('servicios.update', $servicio) }}" method="post" enctype="multipart/form-data">
             @method('PUT')
