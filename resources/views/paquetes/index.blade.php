@@ -3,10 +3,6 @@
     Editar Usuario
 @endsection
 @section('cuerpo')
-    @php
-        $rutas = ['imagenes/boda7.png', 'imagenes/xv años.jpg', 'imagenes/fiesta infantil.jpg', 'imagenes/bautizo.webp'];
-        $i = 0;
-    @endphp
 
     <div class="lista-paquetes">
         <div class="header">
@@ -16,7 +12,7 @@
             @foreach ($paquetes as $paquete)
                 <div class="paquete">
 
-                    <img src="{{ asset($rutas[$i]) }}" alt="" class="img-fluid" width="550px">
+                    <img src="{{ asset('/imagenes/boda7.png') }}" alt="" class="img-fluid" width="550px">
 
                     <div class="descripcion">
 
@@ -53,9 +49,6 @@
                         </div>
                     </div>
                 </div>
-                @php
-                    $i++;
-                @endphp
             @endforeach
         </div>
     </div>
