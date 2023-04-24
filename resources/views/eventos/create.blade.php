@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <div class="contenedor-agregar">
         <div class="header-agregar">
-            <h1>Añadir Paquete de Eventos</h1>
+            <h1>Crear evento</h1>
         </div>
         <form action="{{ route('eventos.store') }}" method="post" enctype="multipart/form-data">
             @csrf
