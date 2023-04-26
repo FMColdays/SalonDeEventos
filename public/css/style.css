@@ -6,7 +6,8 @@
   list-style: none;
   text-decoration: none;
 }
-body{
+
+body {
   font-family: 'Archivo', sans-serif;
 }
 
@@ -17,7 +18,7 @@ body::-webkit-scrollbar {
 .titulo-paquetes {
   text-align: center;
   background-color: #efddac;
-  border-radius:  0 0 50px 50px ;
+  border-radius: 0 0 50px 50px;
   width: 100%;
   height: 50px;
 
@@ -54,8 +55,9 @@ footer {
   border: 2px solid white;
   width: 180px;
   color: white;
-  transition-duration: 0.8s; 
+  transition-duration: 0.8s;
 }
+
 .btn:hover {
   transform: translateY(2px);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -64,11 +66,22 @@ footer {
 /*Tabla usuario*/
 
 .contenedor-tabla-usuarios {
-  display: flex;
-  margin: 0px auto;
-  max-width: 1300px;
-  padding: 40px;
+  padding: 20px;
 }
+
+.card-body {
+  margin: 20px auto;
+  max-width: 1300px;
+  padding: 10px;
+  box-shadow:
+    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  justify-content: center;
+}
+
+
+
 
 .contenedor-tabla-usuarios a {
   text-decoration: none;
@@ -93,11 +106,12 @@ tr {
   text-align: center;
 }
 
-.tabla-usuarios .update {
+.table .update {
   color: blue;
 }
 
-.tabla-usuarios .delete {
+.table .delete {
+  background: none;
   color: red;
 }
 
@@ -428,22 +442,24 @@ tr {
   font-size: 25px;
   margin-bottom: 20px;
 }
-.contenedor-radio1{
+
+.contenedor-radio1 {
   display: flex;
 }
-.contenedor-radio2{
+
+.contenedor-radio2 {
   padding: 20px;
 }
 
-.contrato-icon{
+.contrato-icon {
   padding: 5px;
   border-radius: 20px;
 }
 
-.horas-c{
+.horas-c {
   display: flex;
 }
 
-.horas-c p{
+.horas-c p {
   margin-right: 80px;
 }
