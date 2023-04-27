@@ -6,8 +6,13 @@
   list-style: none;
   text-decoration: none;
 }
+html, body {
+  height: 100%;
+}
 
 body {
+  display: flex;
+  flex-direction: column;
   font-family: 'Archivo', sans-serif;
 }
 
@@ -16,6 +21,7 @@ body::-webkit-scrollbar {
 }
 
 .titulo-paquetes {
+  margin: 0;
   text-align: center;
   background-color: #efddac;
   border-radius: 0 0 50px 50px;
@@ -29,20 +35,22 @@ body::-webkit-scrollbar {
   padding: 10px;
 }
 
+.contenido {
+  flex: 1 0 auto;
+}
 
 footer {
-  width: 100%;
-  position: relative;
-  color: white;
+  flex-shrink: 0;
   height: 60px;
   border: 2px solid #707170;
   background-color: #000000;
+  color: white;
+  text-align: center;
+  padding-top: 20px;
 }
-
-.footer-text {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+footer p.footer-text {
+  text-align: right;
+  padding-right: 10px;
 }
 
 
@@ -69,7 +77,7 @@ footer {
   padding: 20px;
 }
 
-.card-body {
+.card-cuerpo {
   margin: 20px auto;
   max-width: 1300px;
   padding: 10px;
@@ -79,8 +87,6 @@ footer {
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   justify-content: center;
 }
-
-
 
 
 .contenedor-tabla-usuarios a {
@@ -306,53 +312,16 @@ tr {
   padding: 20px;
 }
 
-.lista-paquetes .header {
-  background-color: #333;
-  color: #FFF;
-  padding: 20px;
+.header {
+  margin-top: 20px;
   text-align: center;
 }
 
-.lista-paquetes .paquetes {
-  background-color: #FFF;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  margin-top: 20px;
-  overflow-y: auto;
-  max-height: 400px;
-  padding: 20px;
-}
 
-.lista-paquetes .paquete {
-  display: flex;
-  border-bottom: 1px solid #dbd9d9;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-}
-
-.lista-paquetes .descripcion {
-  width: 100%;
-  padding-left: 30px;
-}
-
-.lista-paquetes .items {
-  display: flex;
-}
 
 .estado-label {
-  color: white;
-  margin: 0px;
-  padding: 5px;
   border: 1px dotted black;
   border-radius: 90px;
-}
-
-.lista-paquetes .opciones {
-  text-align: end;
-}
-
-.lista-paquetes .opciones a {
-  text-decoration: none;
 }
 
 .edit {
@@ -360,8 +329,8 @@ tr {
 }
 
 .delete {
-  background: white;
-  border-width: 0;
+  background: none;
+  border: none;
   color: red;
 }
 

@@ -4,7 +4,7 @@
 @endsection
 @section('cuerpo')
     <div class="contenedor-tabla-usuarios">
-       <div class="card-body">
+       <div class="card-cuerpo">
          <table id="usuarios" class="table table-striped">
              <thead>
                  <tr>

@@ -11,6 +11,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
     {{-- Libreria de iconos google --}}
     <link rel="stylesheet"
@@ -104,7 +105,13 @@
         </div>
 
     </header>
-    @yield('cuerpo')
+    <div class="contenido">
+        @yield('cuerpo')
+    </div>
+    <footer>
+        <p class="footer-text">© Copyright Arbore</p>
+    </footer>
+
 
 
     {{-- Scripts DataTables --}}

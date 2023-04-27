@@ -1,7 +1,8 @@
 @extends('plantillas.encabezado')
+
 @section('cuerpo')
     <div class="presentacion">
-        <div class="container py-5 text-center text-white shadow-sm">
+        <div class="container py-5 text-center text-white ">
             <h1 class="display-4">Salon de eventos</h1>
             <p class="font-italic mb-0">Para todo evento, hay un momento.</p>
             <p class="font-italic">Hecho por
@@ -12,8 +13,6 @@
     </div>
 
     <h1 class="titulo-paquetes">Paquetes</h1>
-
-
 
     {{-- Creo las cajas --}}
     <div class="contenedor">
@@ -30,12 +29,6 @@
                     </figure>
                 </a>
             </div>
-
-            
         @endforeach
     </div>
-
-    <footer>
-        <p class="footer-text">Copyright© Arbore</p>
-    </footer>
 @endsection

@@ -1,4 +1,5 @@
 @extends('plantillas.encabezado')
+
 @section('titulo')
     Album
 @endsection
@@ -11,6 +12,15 @@
                     @for ($i = 1; $i <= 10; $i++)
                         <div class="card">
                             <img src="{{ asset('imagenes/boda7.png') }}" class="card-img-top" alt="">
+                            @auth
+                                <div class="card-footer">
+                                    <form class="eliminar-alert">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </div>
+                            @endauth
                         </div>
                     @endfor
                 </div>
