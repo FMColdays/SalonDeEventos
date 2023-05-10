@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string("costo");
             $table->enum('estado', ['0', '1'])->default('0');
             $table->string("capacidad");
-            $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->unsignedBigInteger('gerente_id');
+            $table->foreign('gerente_id')->references('id')->on('gerentes')->onDelete('cascade');
 
             $table->timestamps();
         });

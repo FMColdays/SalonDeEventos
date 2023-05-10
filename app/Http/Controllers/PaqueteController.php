@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Paquete;
 use App\Http\Requests\StorePaqueteRequest;
 use App\Http\Requests\UpdatePaqueteRequest;
-use App\Models\Servicio;
-use Illuminate\Support\Facades\Auth;
 
 class PaqueteController extends Controller
 {
@@ -15,7 +13,8 @@ class PaqueteController extends Controller
      */
     public function index()
     {
-        $paquetes = Paquete::where('usuario_id', Auth::user()->id)->get();
+        $this->authorize('viewAny', App\Models\Paquete::class);
+        $paquetes = Paquete::all();
         return view("paquetes.index", compact('paquetes'));
     }
 
@@ -24,6 +23,7 @@ class PaqueteController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', App\Models\Paquete::class);
         return view('paquetes.create');
     }
 
@@ -32,12 +32,13 @@ class PaqueteController extends Controller
      */
     public function store(StorePaqueteRequest $request)
     {
+        $this->authorize('create', App\Models\Paquete::class);
         $paquete = new Paquete();
         $paquete->nombre = $request->input('nombre');
         $paquete->capacidad = $request->input('capacidad');
         $paquete->costo = $request->input('costo');
         $paquete->descripcion = $request->input('descripcion');
-        $paquete->usuario_id = auth()->user()->id;
+        $paquete->gerente_id = auth()->user()->id;
         $paquete->save();
 
         return redirect(route('paquetes.index'));
@@ -48,13 +49,8 @@ class PaqueteController extends Controller
      */
     public function show(Paquete $paquete)
     {
-        if (auth()->user()) {
-
-           return view('paquetes.show');
-        } elseif ($paquete->estado == '1') {
-        
-            return view('paquetes.show');
-        }
+        $this->authorize('publicado', $paquete);
+        return view('paquetes.show', compact('paquete'));
     }
 
     /**
@@ -62,6 +58,7 @@ class PaqueteController extends Controller
      */
     public function edit(Paquete $paquete)
     {
+        $this->authorize('update', $paquete);
         return view('paquetes.edit', compact('paquete'));
     }
 
@@ -70,12 +67,13 @@ class PaqueteController extends Controller
      */
     public function update(UpdatePaqueteRequest $request, Paquete $paquete)
     {
+        $this->authorize('update', $paquete);
         $paquete->nombre = $request->input('nombre');
         $paquete->descripcion = $request->input('descripcion');
         $paquete->costo = $request->input('costo');
         $paquete->capacidad = $request->input('capacidad');
         $paquete->estado = $request->input('estado');
-        $paquete->usuario_id = auth()->user()->id;
+        $paquete->gerente_id = auth()->user()->id;
         $paquete->save();
         return redirect(route('paquetes.index'));
     }
@@ -85,6 +83,7 @@ class PaqueteController extends Controller
      */
     public function destroy(Paquete $paquete)
     {
+        $this->authorize('delete', $paquete);
         $paquete->delete();
         return redirect(route('paquetes.index'));
     }

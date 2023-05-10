@@ -14,6 +14,7 @@ class ServicioController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', App\Models\Servicio::class);
         $servicios = Servicio::all();
         return view('servicios.index', compact('servicios'));
     }
@@ -34,6 +35,7 @@ class ServicioController extends Controller
         $servicio = new Servicio();
         $servicio->nombre = $request->input('nombre');
         $servicio->descripcion = $request->input('descripcion');
+        $servicio->gerente_id = auth()->user()->id;
         $servicio->costo = $request->input('costo');
         $servicio->save();
 
@@ -79,6 +81,7 @@ class ServicioController extends Controller
      */
     public function destroy(Servicio $servicio)
     {
+        $this->authorize('delete', $servicio);
         $servicio->delete();
         return redirect(route('servicios.index'));
     }

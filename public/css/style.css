@@ -432,3 +432,15 @@ tr {
 .horas-c p {
   margin-right: 80px;
 }
+
+
+.cuerpo-errores{
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mensajes-error{
+  font-size: 40px;
+}

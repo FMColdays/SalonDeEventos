@@ -24,17 +24,23 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <label class="estado-label bg-{{ $servicio->estado == 1 ? 'success' : 'danger' }} text-white p-2">
+                            <label
+                                class="estado-label bg-{{ $servicio->estado == 1 ? 'success' : 'danger' }} text-white p-2">
                                 {{ $servicio->estado == 1 ? 'Publicado' : 'No Publicado' }}
                             </label>
                             <div class="opciones">
-                                <a class="icono material-symbols-rounded me-2" href="{{ route('servicios.show', $servicio) }}">Photo_Library</a>
-                                <a class="icono material-symbols-rounded edit me-2" href="{{ route('servicios.edit', $servicio) }}">edit</a>
-                                <form class="eliminar-alert d-inline-block" action="{{ route('servicios.destroy', $servicio) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <input class="icono material-symbols-rounded delete" type="submit" value="delete">
-                                </form>
+                                <a class="icono material-symbols-rounded me-2"
+                                    href="{{ route('servicios.show', $servicio) }}">Photo_Library</a>
+                                <a class="icono material-symbols-rounded edit me-2"
+                                    href="{{ route('servicios.edit', $servicio) }}">edit</a>
+                                @can('delete', $servicio)
+                                    <form class="eliminar-alert d-inline-block"
+                                        action="{{ route('servicios.destroy', $servicio) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input class="icono material-symbols-rounded delete" type="submit" value="delete">
+                                    </form>
+                                @endcan
                             </div>
                         </div>
                     </div>

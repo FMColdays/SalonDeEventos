@@ -16,16 +16,16 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $eventos = Evento::where('usuario_id', Auth::user()->id)->get();
-        $servicios = Servicio::all();
-        return view('eventos.index', compact('eventos', 'servicios'));
+        $this->authorize('viewAny', App\Models\Evento::class);
+        $eventos = Evento::with('paquete', 'servicios')->get();
+        return view('eventos.index', compact('eventos'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
+        $this->authorize('create', App\Models\Evento::class);
         $servicios = Servicio::where('estado', '1')->get();
         $paquetes = Paquete::where('estado', '1')->get();
         return view('eventos.create', compact('paquetes', 'servicios'));
@@ -47,12 +47,9 @@ class EventoController extends Controller
         $evento->horaF = $request->input('horaF');
         $evento->capacidad = $request->input('capacidad');
         $evento->costo = $request->input('costo');
-        $evento->usuario_id = $usuario->id;
+        $evento->cliente_id = $usuario->id;
         $evento->paquete_id = $paquete->id;
-
         $evento->save();
-
-
         $evento->servicios()->sync($request->input('servicios'));
 
         return redirect(route('eventos.index'));
@@ -77,6 +74,8 @@ class EventoController extends Controller
      */
     public function edit(Evento $evento)
     {
+        $this->authorize('update', $evento);
+        $evento->load('servicios');
         $servicios = Servicio::where('estado', '1')->get();
         $paquetes = Paquete::where('estado', '1')->get();
         return view('eventos.edit', compact('evento', 'servicios', 'paquetes'));
@@ -87,7 +86,8 @@ class EventoController extends Controller
      */
     public function update(UpdateEventoRequest $request, Evento $evento)
     {
-        $usuario = Auth::user();
+        $this->authorize('update', $evento);
+        $cliente = Auth::user();
         $paquete = Paquete::find($request->input('paquete_id'));
         $evento->nombre = $request->input('nombre');
         $evento->descripcion = $request->input('descripcion');
@@ -97,7 +97,7 @@ class EventoController extends Controller
         $evento->estado = $request->input('estado');
         $evento->capacidad = $request->input('capacidad');
         $evento->costo = $request->input('costo');
-        $evento->usuario_id = $usuario->id;
+        $evento->cliente_id = $cliente->id;
         $evento->paquete_id = $paquete->id;
         $evento->save();
         $evento->servicios()->sync($request->input('servicios'));
@@ -111,6 +111,7 @@ class EventoController extends Controller
      */
     public function destroy(Evento $evento)
     {
+        $this->authorize('delete', $evento);
         $evento->delete();
         return redirect(route('eventos.index'));
     }

@@ -7,37 +7,56 @@
         <div class="header-agregar">
             <h1>Editar Usuario</h1>
         </div>
-        <form action="{{ route('usuarios.update', $usuario) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('usuarios.update', ['tipoUsuario' => $tipoUsuario, 'id' => $usuario->id]) }}" method="post"
+            enctype="multipart/form-data">
+
             @method('PUT')
             @csrf
 
             <label for="nombre">Nombre:</label>
-            <input class="element-lg" type="text" id="nombre" name="nombre" value="{{ $usuario->nombre }}" required>
+            <input class="element-lg" type="text" id="nombre" name="nombre"
+                value="{{ old('nombre', $usuario->nombre) }}">
+            @error('nombre')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
+
             <label for="usuario">Usuario:</label>
-            <input class="element-lg" id="usuario" id="usuario" name="usuario" value="{{ $usuario->usuario }}" required>
+            <input class="element-lg" id="usuario" id="usuario" name="usuario"
+                value="{{ old('usuario', $usuario->usuario) }}">
+            @error('usuario')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
+
             <label for="nacimiento">Fecha de nacimiento:</label>
-            <input class="element-lg" type="date" id="nacimiento" name="nacimiento" value="{{ $usuario->nacimiento }}"
-                required>
+            <input class="element-lg" type="date" id="nacimiento" name="nacimiento"
+                value="{{ old('nacimiento', $usuario->nacimiento) }}">
+            @error('nacimiento')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
+
             <label for="contraseña">Contraseña:</label>
-            <input class="element-lg" type="text" name="contraseña" value="{{ $usuario->contraseña }}" id="contraseña"
-                required>
-                
+            <input class="element-lg" type="password" name="contraseña"
+                value="{{ old('contraseña', $usuario->contraseña) }}">
+            @error('contraseña')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
+
             <label for="rol">Rol:</label>
-            <select class="element-lg" name="rol">
-                @if ($usuario->rol == 'Gerente')
-                    <option name="rol" selected>Gerente</option>
-                    <option name="rol">Empleado</option>
-                    <option name="rol">Cliente</option>
-                @elseif ($usuario->rol == 'Empleado')
-                    <option name="rol" selected>Empleado</option>
-                    <option name="rol">Gerente</option>
-                    <option name="rol">Cliente</option>
+            <div class="element-lg" name="rol">
+                @if ($usuario instanceof App\Models\Gerente)
+                    <a>Gerente</a>
                 @else
-                    <option name="rol" selected>Cliente</option>
-                    <option name="rol">Gerente</option>
-                    <option name="rol">Empleado</option>
+                    <a>Cliente</a>
                 @endif
-            </select>
+            </div>
 
             <div class="contenedor-form-img">
                 <img id="preview" class="img-media" src="{{ asset('imagenes/1681247200-yo.jpg') }}"

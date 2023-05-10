@@ -25,24 +25,22 @@
         <div class="contenedorItems">
             <form action="validar" method="post">
                 @csrf
-                <div class="items">
+                <div class="items" id="err-usuario">
                     <span class="icono material-symbols-rounded">person</span>
-                    <input class="cajas" name="usuario" type="text" placeholder="Usuario">
+                    <input class="cajas" name="usuario" id="usuario" value="" type="text" autofocus placeholder="Usuario">
                 </div>
-                <div class="items">
+                <div class="items" id="err-contraseña">
                     <span class="icono material-symbols-rounded">lock</span>
-                    <input class="cajas" name="contraseña" type="password" placeholder="Contraseña">
-                </div>
-                <div>
-                    <h3 style="text-align: center; color: red">{{ session('mensaje') }}</h3>
+                    <input class="cajas" name="contraseña" id="contraseña" type="password" placeholder="Contraseña">
                 </div>
                 <div class="items">
-                    <input class="boton" type="submit">
+                    <input class="boton" id="boton" type="submit">
                 </div>
             </form>
         </div>
     </div>
-
+  
+    <script src="{{ asset('js/code.js') }}" defer></script>
 </body>
 
 </html>

@@ -11,22 +11,46 @@
             @csrf
 
             <label for="nombre">Nombre:</label>
-            <input class="element-lg" type="text" id="nombre" name="nombre" required>
+            <input class="element-lg" name="nombre" value="{{ old('nombre') }}">
+            @error('nombre')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
+
             <label for="usuario">Usuario:</label>
-            <input class="element-lg" id="usuario" id="usuario" name="usuario" required>
+            <input class="element-lg" name="usuario" value="{{ old('usuario') }}">
+            @error('usuario')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
+
             <label for="nacimiento">Fecha de nacimiento:</label>
-            <input class="element-lg" type="date" id="nacimiento" name="nacimiento" required>
+            <input class="element-lg" type="date" name="nacimiento" value="{{ old('nacimiento') }}">
+            @error('nacimiento')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
 
             <label for="contraseña">Contraseña:</label>
-            <input class="element-lg" type="text" id="contraseña" name="contraseña" required>
+            <input class="element-lg" name="contraseña" value="{{ old('contraseña') }}">
+            @error('contraseña')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
+
             <label for="rol">Rol:</label>
             <select class="element-lg" name="rol">
-                <option name="rol" name="rol">Seleccionar</option>
-                <option id="opcion1" name="rol">Gerente</option>
-                <option id="opcion2" name="rol">Empleado</option>
-                <option id="opcion3" name="rol">Cliente</option>
+                <option value="">Seleccionar</option>
+                <option id="opcion1" value="Gerente" {{ old('rol') == 'Gerente' ? 'selected' : '' }}>Gerente</option>
+                <option id="opcion2" value="Empleado" {{ old('rol') == 'Empleado' ? 'selected' : '' }}>Empleado</option>
+                <option id="opcion3" value="Cliente" {{ old('rol') == 'Cliente' ? 'selected' : '' }}>Cliente</option>
             </select>
-            
+
+
             <div class="contenedor-form-img">
                 <img id="preview" class="img-media" onchange="mostrarImagen(event)">
 

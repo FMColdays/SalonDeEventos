@@ -34,7 +34,7 @@
 
             <ul class="nav col-20 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 @auth
-                    @if (Auth::user()->rol == 'Gerente')
+                    @if (Auth::user() instanceof App\Models\Gerente)
                         <div class="dropdown">
                             <a href="#" class="link-dark dropdown-toggle px-2" data-bs-toggle="dropdown">
                                 Usuarios
@@ -62,7 +62,7 @@
                                 <li><a class="dropdown-item" href="{{ route('servicios.create') }}">Agregar</a></li>
                             </ul>
                         </div>
-                    @elseif (Auth::user()->rol == 'Cliente')
+                    @elseif (Auth::user() instanceof App\Models\Cliente)
                         <div class="dropdown">
                             <a href="#" class="link-dark dropdown-toggle px-2" data-bs-toggle="dropdown">
                                 Eventos
@@ -105,9 +105,11 @@
         </div>
 
     </header>
+
     <div class="contenido">
         @yield('cuerpo')
     </div>
+
     <footer>
         <p class="footer-text">© Copyright Arbore</p>
     </footer>
@@ -122,6 +124,7 @@
     <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap5.min.js"></script>
 
     {{-- Mis Scripts --}}
+    <script src="{{ asset('js/datatable.js') }}" defer></script>
     <script src="{{ asset('js/code.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

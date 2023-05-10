@@ -13,4 +13,8 @@ class Servicio extends Model
     {
         return $this->belongsToMany(Evento::class);
     }
+
+    public function gerente(){
+        return $this->belongsTo(Gerente::class);
+    }
 }

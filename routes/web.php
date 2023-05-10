@@ -13,27 +13,32 @@ Route::get('/', function () {
 });
 
 
-Route::get('inicio', [SistemaController::class, 'inicio'])->name(('inicio'))->middleware('no.auth');
+Route::get('inicio', [SistemaController::class, 'inicio'])->name(('inicio'))->middleware('guest');
 
 //Sistem de logeo y validación
-Route::get('login', [SistemaController::class, 'login'])->name(('login'))->middleware('no.auth');
+Route::get('login', [SistemaController::class, 'login'])->name(('login'))->middleware('guest');
 Route::post('validar', [SistemaController::class, 'validar'])->name('sesion');
 
 //Sistema de registro
-Route::get('registrarse', [SistemaController::class, 'registro'])->name(('registrarse'))->middleware('no.auth');
-Route::post('registrar', [SistemaController::class, 'registrar'])->name('registrar')->middleware('no.auth');
+Route::get('registrarse', [SistemaController::class, 'registro'])->name(('registrarse'))->middleware('guest');
+Route::post('registrar', [SistemaController::class, 'registrar'])->name('registrar')->middleware('guest');
 
 //Validar que rol tiene el usuario
-Route::get('@me', [SistemaController::class, 'tipoVistaUsuario'])->name(("@me"))->middleware('auth');
+Route::get('@me', [SistemaController::class, 'vista'])->name(("@me"));
 
 //Cerrar sesión
 Route::get('cerrar_sesion', [SistemaController::class, 'cerrar_sesion'])->name(("cerrar_sesion"));
 
 
-Route::resource('usuarios', UsuarioController::class)->middleware('auth');
-Route::resource('paquetes', PaqueteController::class)->middleware('auth')->except('show');
+Route::resource('usuarios', UsuarioController::class)->except(['edit', 'update', 'destroy']);
+Route::get('/edit/{tipoUsuario}/{id}', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+Route::put('/update/{tipoUsuario}/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
+Route::delete('/destroy/{tipoUsuario}/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+
+
+Route::resource('paquetes', PaqueteController::class)->except('show');
 Route::get('/album/{paquete}', [PaqueteController::class, 'show'])->name('paquetes.show');
-Route::resource('servicios', ServicioController::class)->middleware('auth');
-Route::resource('eventos', EventoController::class)->middleware('auth');
+Route::resource('servicios', ServicioController::class);
+Route::resource('eventos', EventoController::class);
 
 Route::get('abonar', [SistemaController::class, 'bono'])->name(("abonarserv"));

@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Paquete extends Model
+class Paquete extends Authenticatable
 {
     use HasFactory;
     
@@ -13,7 +13,7 @@ class Paquete extends Model
         return $this->hasMany(Evento::class);
     }
 
-    public function usuario(){
-        return $this->belongsTo(Usuario::class);
+    public function gerente(){
+        return $this->belongsTo(Gerente::class);
     }
 }

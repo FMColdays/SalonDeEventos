@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('capacidad');
             $table->string('costo');
             $table->enum('estado',['0','1'])->default('0');
-            $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->unsignedBigInteger('cliente_id');
+            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
             $table->unsignedBigInteger('paquete_id');
             $table->foreign('paquete_id')->references('id')->on('paquetes')->onDelete('cascade');
             $table->timestamps();

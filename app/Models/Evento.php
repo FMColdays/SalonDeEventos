@@ -9,9 +9,9 @@ class Evento extends Model
 {
     use HasFactory;
 
-    public function usuario()
+    public function cliente()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(Cliente::class);
     }
 
     public function paquete()
