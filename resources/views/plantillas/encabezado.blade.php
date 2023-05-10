@@ -85,8 +85,8 @@
                         data-bs-toggle="dropdown">
                         <h6 style="display: inline; margin-right: 10px"> {{ Auth::user()->nombre }}</h6>
 
-                        <img src="{{ optional(Auth::user()->imagenMo)->imagenMi ? '/' . Auth::user()->imagenMo->imagenMi : 'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png' }}"
-                            width="42" height="42" class="rounded-circle">
+                        <img src="{{ Auth::user()->imagen ? 'imagenes/' . Auth::user()->imagen : 'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png' }}"
+                            width="42" height="42" class="rounded-circle"/>
                     </a>
                     <ul class="dropdown-menu text-small">
                         <li><a class="dropdown-item" href="#">Nuevo proyecto</a></li>

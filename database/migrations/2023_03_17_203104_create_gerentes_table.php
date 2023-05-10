@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('usuario')->unique();
             $table->string('contraseña');
             $table->string("nacimiento")->default('00-00-0000');
+            $table->string('imagen');
             $table->timestamps();
         });
     }

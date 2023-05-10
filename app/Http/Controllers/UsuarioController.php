@@ -9,7 +9,7 @@ use App\Models\Cliente;
 use App\Models\Gerente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Storage;
 
 class UsuarioController extends Controller
 {
@@ -31,10 +31,13 @@ class UsuarioController extends Controller
         if ($request->input('rol') == 'Gerente') $usuario = new Gerente();
         else  $usuario = new Cliente();
 
-        $usuario->nombre = $request->input('nombre');
-        $usuario->usuario = $request->input('usuario');
-        $usuario->nacimiento = $request->input('nacimiento');
+        $archivo = $request->file('imagen');
+        $nombreArchivo = $archivo->getClientOriginalName();
+        $imagenU = Storage::disk('publico')->putFileAs('', $archivo, $nombreArchivo);
+
+        $usuario->fill($request->all());
         $usuario->contraseña = Hash::make($request->input('contraseña'));
+        $usuario->imagen = $imagenU;
         $usuario->save();
 
         return redirect(route('usuarios.index'));

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Gerente extends  Authenticatable
 {
     use HasFactory;
+    protected $fillable=['nombre','usuario','nacimiento'];
 
     public function paquetes(){
         return $this->hasMany(Paquete::class);
