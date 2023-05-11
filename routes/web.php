@@ -41,4 +41,9 @@ Route::get('/album/{paquete}', [PaqueteController::class, 'show'])->name('paquet
 Route::resource('servicios', ServicioController::class);
 Route::resource('eventos', EventoController::class);
 
+Route::get('crear/{id}/{tipo}', [AlbumController::class, 'create'])->name('album.create')->middleware('auth');
+Route::post('subir/{id}/{tipo}', [AlbumController::class, 'store'])->name('album.store')->middleware('auth');
+Route::delete('eliminar/{id}', [AlbumController::class, 'destroy'])->name('album.destroy');
+
+
 Route::get('abonar', [SistemaController::class, 'bono'])->name(("abonarserv"));

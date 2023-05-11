@@ -59,7 +59,7 @@
             </div>
 
             <div class="contenedor-form-img">
-                <img id="preview" class="img-media" src="{{ asset('imagenes/1681247200-yo.jpg') }}"
+                <img id="preview" class="img-media" src="{{ asset(optional($usuario->imagenMo)->imagenMi) }}"
                     onchange="mostrarImagen(event)" class="img-fluid">
 
                 <div class="imagen-file">

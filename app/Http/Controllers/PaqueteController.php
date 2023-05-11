@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Paquete;
 use App\Http\Requests\StorePaqueteRequest;
 use App\Http\Requests\UpdatePaqueteRequest;
+use App\Models\imagen;
 
 class PaqueteController extends Controller
 {
@@ -34,12 +35,21 @@ class PaqueteController extends Controller
     {
         $this->authorize('create', App\Models\Paquete::class);
         $paquete = new Paquete();
-        $paquete->nombre = $request->input('nombre');
-        $paquete->capacidad = $request->input('capacidad');
-        $paquete->costo = $request->input('costo');
-        $paquete->descripcion = $request->input('descripcion');
+        $paquete->fill($request->all());
         $paquete->gerente_id = auth()->user()->id;
         $paquete->save();
+
+        if ($request->hasFile('imagen')) {
+            $imageneF = $request->file('imagen');
+            $ruta = 'imagenes/';
+            $nombreimagen = time() . '-' . $imageneF->getClientOriginalName();
+            $carga = $request->file('imagen')->move($ruta, $nombreimagen);
+            $imgenP = new imagen();
+            $imgenP->imagenMi = $ruta . $nombreimagen;
+            $imgenP->imagenable_id = $paquete->id;
+            $imgenP->imagenable_type = Paquete::class;
+            $imgenP->save();
+        }
 
         return redirect(route('paquetes.index'));
     }
@@ -49,8 +59,18 @@ class PaqueteController extends Controller
      */
     public function show(Paquete $paquete)
     {
-        $this->authorize('publicado', $paquete);
-        return view('paquetes.show', compact('paquete'));
+  
+        $imagenes = $paquete->albumMo()->with('albumable')->paginate(5);
+    
+        if (auth()->user()) {
+            $tipo = Paquete::class;
+            $id = $paquete->id;
+            return view('album.index', compact('imagenes','id', 'tipo'));
+        } elseif ($paquete->estado == 1) {
+            $tipo = Paquete::class;
+            $id = $paquete->id;
+            return view('album.index', compact('imagenes','id','tipo'));
+        }
     }
 
     /**
@@ -68,13 +88,30 @@ class PaqueteController extends Controller
     public function update(UpdatePaqueteRequest $request, Paquete $paquete)
     {
         $this->authorize('update', $paquete);
-        $paquete->nombre = $request->input('nombre');
-        $paquete->descripcion = $request->input('descripcion');
-        $paquete->costo = $request->input('costo');
-        $paquete->capacidad = $request->input('capacidad');
+        $paquete->fill($request->all());
         $paquete->estado = $request->input('estado');
         $paquete->gerente_id = auth()->user()->id;
         $paquete->save();
+
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $ruta = 'imagenes/';
+            $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
+            $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
+            if ($paquete->imagenMo) {
+                $paquete->imagenMo()->update([
+                    'imagenMi' => $ruta . $nombreimagen,
+                    'imagenable_id'  => $paquete->id,
+                    'imagenable_type'  => Paquete::class,
+                ]);
+            } else {
+                $paquete->imagenMo()->create([
+                    'imagenMi' => $ruta . $nombreimagen,
+                    'imagenable_id'  => $paquete->id,
+                    'imagenable_type'  => Paquete::class,
+                ]);
+            }
+        }
         return redirect(route('paquetes.index'));
     }
 

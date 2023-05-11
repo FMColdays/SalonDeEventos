@@ -13,7 +13,7 @@
             @foreach ($servicios as $servicio)
                 <div class="col">
                     <div class="card h-100">
-                        <img src="{{ asset('/imagenes/manteleria.jpg') }}" class="card-img-top" alt="Imagen del servicio">
+                        <img src="{{ $servicio->imagenMo->imagenMi }}" alt="" class="img-fluid" width="550px">
                         <div class="card-body">
                             <h2 class="card-title">{{ $servicio->nombre }}</h2>
                             <div class="card-text">
@@ -30,7 +30,7 @@
                             </label>
                             <div class="opciones">
                                 <a class="icono material-symbols-rounded me-2"
-                                    href="{{ route('servicios.show', $servicio) }}">Photo_Library</a>
+                                    href="{{ route('servicios.show', $servicio->id) }}">Photo_Library</a>
                                 <a class="icono material-symbols-rounded edit me-2"
                                     href="{{ route('servicios.edit', $servicio) }}">edit</a>
                                 @can('delete', $servicio)

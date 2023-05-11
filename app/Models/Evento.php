@@ -23,4 +23,12 @@ class Evento extends Model
     {
         return $this->belongsToMany(Servicio::class)->withTimestamps();;
     }
+
+    public function imagenMo(){
+        return $this->morphOne(Imagen::class, 'imagenable');
+    }
+    
+    public function albumMo(){
+        return $this->morphMany(Album::class, 'albumable');
+    }
 }

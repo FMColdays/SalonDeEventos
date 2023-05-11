@@ -17,7 +17,7 @@
             <textarea id="descripcion" name="descripcion" required style="width: 100%; padding: 10px">{{ $servicio->descripcion }}</textarea>
             <label for="costo">Costo:</label>
             <input class="element-lg" type="number" id="costo" name="costo" value="{{ $servicio->costo }}" required>
-      
+
 
             <div class="form-group">
                 <label class="element-lg" for="radio-group">Estado:</label>
@@ -33,7 +33,7 @@
             </div>
 
             <div class="contenedor-form-img">
-                <img id="preview" class="img-media" src="{{ asset('imagenes/meseros.jpg') }}"
+                <img id="preview" class="img-media" src="{{ asset($servicio->imagenMo->imagenMi) }}"
                     onchange="mostrarImagen(event)">
 
                 <div class="imagen-file">

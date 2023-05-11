@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-
     {{-- Libreria de iconos google --}}
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -85,8 +84,8 @@
                         data-bs-toggle="dropdown">
                         <h6 style="display: inline; margin-right: 10px"> {{ Auth::user()->nombre }}</h6>
 
-                        <img src="{{ Auth::user()->imagen ? 'imagenes/' . Auth::user()->imagen : 'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png' }}"
-                            width="42" height="42" class="rounded-circle"/>
+                        <img src="{{ optional(Auth::user()->imagenMo)->imagenMi ? '/' . Auth::user()->imagenMo->imagenMi : 'https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png' }}"
+                            width="42" height="42" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small">
                         <li><a class="dropdown-item" href="#">Nuevo proyecto</a></li>
@@ -127,6 +126,7 @@
     <script src="{{ asset('js/datatable.js') }}" defer></script>
     <script src="{{ asset('js/code.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     {{-- Scripts Bootstrap --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

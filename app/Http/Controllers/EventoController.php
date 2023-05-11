@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use App\Http\Requests\StoreEventoRequest;
 use App\Http\Requests\UpdateEventoRequest;
+use App\Models\Imagen;
 use App\Models\Paquete;
 use App\Models\Servicio;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class EventoController extends Controller
     public function index()
     {
         $this->authorize('viewAny', App\Models\Evento::class);
-        $eventos = Evento::with('paquete', 'servicios')->get();
+        $eventos = Evento::with('paquete', 'servicios', 'imagenMo')->get();
         return view('eventos.index', compact('eventos'));
     }
     /**
@@ -52,6 +53,18 @@ class EventoController extends Controller
         $evento->save();
         $evento->servicios()->sync($request->input('servicios'));
 
+        if ($request->hasFile('imagen')) {
+            $imageneF = $request->file('imagen');
+            $ruta = 'imagenes/';
+            $nombreimagen = time() . '-' . $imageneF->getClientOriginalName();
+            $carga = $request->file('imagen')->move($ruta, $nombreimagen);
+            $imgenP = new Imagen();
+            $imgenP->imagenMi = $ruta . $nombreimagen;
+            $imgenP->imagenable_id = $evento->id;
+            $imgenP->imagenable_type = Evento::class;
+            $imgenP->save();
+        }
+
         return redirect(route('eventos.index'));
     }
 
@@ -61,11 +74,15 @@ class EventoController extends Controller
     public function show(Evento $evento)
     {
         if (auth()->user()) {
-
-            return view('eventos.show');
+            $tipo = Evento::class;
+            $id = $evento->id;
+            $imagenes = $evento->albumMo()->paginate(10);
+            return view('album.index', compact('imagenes', 'id', 'tipo'));
         } elseif ($evento->estado == '1') {
-
-            return view('eventos.show');
+            $tipo = Evento::class;
+            $id = $evento->id;
+            $imagenes = $evento->albumMo()->paginate(10);
+            return view('album.index', compact('imagenes', 'id', 'tipo'));
         }
     }
 
@@ -100,6 +117,27 @@ class EventoController extends Controller
         $evento->cliente_id = $cliente->id;
         $evento->paquete_id = $paquete->id;
         $evento->save();
+
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $ruta = 'imagenes/';
+            $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
+            $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
+            if ($evento->imagenMo) {
+                $evento->imagenMo()->update([
+                    'imagenMi' => $ruta . $nombreimagen,
+                    'imagenable_id'  => $evento->id,
+                    'imagenable_type'  => Evento::class,
+                ]);
+            } else {
+                $evento->imagenMo()->create([
+                    'imagenMi' => $ruta . $nombreimagen,
+                    'imagenable_id'  => $evento->id,
+                    'imagenable_type'  => Evento::class,
+                ]);
+            }
+        }
+
         $evento->servicios()->sync($request->input('servicios'));
 
         return redirect(route('eventos.index'));

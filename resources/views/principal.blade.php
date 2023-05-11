@@ -24,7 +24,7 @@
                 <div class="contenedor_tarjeta">
                     <a href="{{ route('paquetes.show', $paquete->id) }}">
                         <figure>
-                            <img src="{{ asset('imagenes/boda7.png') }}" class="frontal">
+                            <img src="{{ $paquete->imagenMo->imagenMi }}" class="frontal">
                             <figcaption class="trasera">
                                 <h2 class="titulo">{{ $paquete->nombre }}</h2>
                                 <hr>

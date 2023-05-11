@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
 use App\Models\Cliente;
 use App\Models\Gerente;
+use App\Models\imagen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -15,8 +16,8 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $gerentes =  Gerente::all();
-        $clientes = Cliente::all();
+        $gerentes =  Gerente::with('imagenMo')->get();
+        $clientes = Cliente::with('imagenMo')->get();
         $usuarios = $gerentes->concat($clientes);
         return view("usuarios.index", compact('usuarios'));
     }
@@ -28,17 +29,29 @@ class UsuarioController extends Controller
 
     public function store(StoreUsuarioRequest $request)
     {
-        if ($request->input('rol') == 'Gerente') $usuario = new Gerente();
-        else  $usuario = new Cliente();
-
-        $archivo = $request->file('imagen');
-        $nombreArchivo = $archivo->getClientOriginalName();
-        $imagenU = Storage::disk('publico')->putFileAs('', $archivo, $nombreArchivo);
+        if ($request->input('rol') == 'Gerente') {
+            $usuario = new Gerente();
+            $tipo =  Gerente::class;
+        } else {
+            $usuario = new Cliente();
+            $tipo = Cliente::class;
+        }
 
         $usuario->fill($request->all());
         $usuario->contraseña = Hash::make($request->input('contraseña'));
-        $usuario->imagen = $imagenU;
         $usuario->save();
+
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $ruta = 'imagenes/';
+            $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
+            $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
+            $imgenU = new imagen();
+            $imgenU->imagenMi = $ruta . $nombreimagen;
+            $imgenU->imagenable_id = $usuario->id;
+            $imgenU->imagenable_type = $tipo;
+            $imgenU->save();
+        }
 
         return redirect(route('usuarios.index'));
     }
@@ -65,16 +78,35 @@ class UsuarioController extends Controller
     {
         if ($tipoUsuario == 'Gerente') {
             $usuario = Gerente::where('id', $id)->first();
+            $tipo =  Gerente::class;
         } else {
             $usuario = Cliente::where('id', $id)->first();
+            $tipo =  Cliente::class;
         }
 
-        $usuario->nombre = $request->input('nombre');
-        $usuario->usuario = $request->input('usuario');
-        $usuario->nacimiento = $request->input('nacimiento');
-        $usuario->contraseña = $request->input('contraseña');
-
+        $usuario->fill($request->all());
+        $usuario->contraseña = Hash::make($request->input('contraseña'));
         $usuario->save();
+        
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $ruta = 'imagenes/';
+            $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
+            $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
+            if ($usuario->imagenMo) {
+                $usuario->imagenMo()->update([
+                    'imagenMi' => $ruta . $nombreimagen,
+                    'imagenable_id'  => $usuario->id,
+                    'imagenable_type'  => $tipo,
+                ]);
+            } else {
+                $usuario->imagenMo()->create([
+                    'imagenMi' => $ruta . $nombreimagen,
+                    'imagenable_id'  => $usuario->id,
+                    'imagenable_type'  => $tipo,
+                ]);
+            }
+        }
         return redirect(route('usuarios.index'));
     }
 

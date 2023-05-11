@@ -35,7 +35,7 @@
             </div>
 
             <div class="contenedor-form-img">
-                <img id="preview" class="img-media" src="{{ asset('imagenes/boda7.png') }}"
+                <img id="preview" class="img-media" src="{{ asset($paquete->imagenMo->imagenMi) }}"
                     onchange="mostrarImagen(event)">
 
                 <div class="imagen-file">
