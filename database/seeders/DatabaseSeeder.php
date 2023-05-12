@@ -13,9 +13,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(UsuarioSeeder::class);
-        $this->call(PaqueteSeeder::class);
-        $this->call(ServicioSeeder::class);
-        $this->call(EventoSeeder::class);
+
+    
 
 
         // \App\Models\User::factory(10)->create();

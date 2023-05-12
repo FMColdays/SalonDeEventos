@@ -14,8 +14,8 @@ class PaqueteController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', App\Models\Paquete::class);
         $paquetes = Paquete::all();
+        $this->authorize('viewAny', App\Models\Paquete::class);
         return view("paquetes.index", compact('paquetes'));
     }
 
@@ -59,17 +59,17 @@ class PaqueteController extends Controller
      */
     public function show(Paquete $paquete)
     {
-  
+
         $imagenes = $paquete->albumMo()->with('albumable')->paginate(5);
-    
+
         if (auth()->user()) {
             $tipo = Paquete::class;
             $id = $paquete->id;
-            return view('album.index', compact('imagenes','id', 'tipo'));
+            return view('album.index', compact('imagenes', 'id', 'tipo'));
         } elseif ($paquete->estado == 1) {
             $tipo = Paquete::class;
             $id = $paquete->id;
-            return view('album.index', compact('imagenes','id','tipo'));
+            return view('album.index', compact('imagenes', 'id', 'tipo'));
         }
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/usuario', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware('auth:sanctum')->post('/logout', function (Request $request) {
+    $request->user()->currentAccessToken()->revoke();
+
+    return [
+        'message' => 'Token revocado correctamente'
+    ];
+});
+
+Route::post('login', [ApiController::class, 'login']);
+Route::post('store', [ApiController::class, 'store']);
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('paquetes', [ApiController::class, 'paquetes']);
+    Route::get('usuarios', [ApiController::class, 'usuarios']);
 });

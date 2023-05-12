@@ -8,9 +8,8 @@ use App\Http\Requests\UpdateUsuarioRequest;
 use App\Models\Cliente;
 use App\Models\Gerente;
 use App\Models\imagen;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+
 
 class UsuarioController extends Controller
 {
