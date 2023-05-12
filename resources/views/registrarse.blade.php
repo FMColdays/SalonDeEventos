@@ -23,7 +23,7 @@
             <div>Por favor inserta tus datos</div>
         </div>
         <div class="contenedorItems">
-            <form action="{{ route('registrar')}}" method="post">
+            <form action="{{ route('registrar') }}" method="post">
                 @csrf
                 <div class="items">
                     <span class="icono material-symbols-rounded">person</span>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="items">
                     <span class="icono material-symbols-rounded">account_circle</span>
-                    <input class="cajas" name="usuario" type="text" placeholder="Usuario">
+                    <input class="cajas" name="usuario" type="text" id="usuario" placeholder="Usuario">
                 </div>
                 <div class="items">
                     <span class="icono material-symbols-rounded">lock</span>
@@ -47,7 +47,7 @@
             </form>
         </div>
     </div>
-
+    <script src="{{ asset('js/code.js') }}" defer></script>
 </body>
 
 </html>

@@ -63,6 +63,38 @@ enviarBtns.forEach(function(enviarBtn) {
 }
 
 
+let inputUsuario = document.querySelector('input[name="usuario"]');
+let inputU = document.getElementById('usuario');
+
+inputUsuario.addEventListener('input', function(event) {
+  let usuarioExiste = false;   
+  if(inputUsuario.value != "") {
+    fetch('http://127.0.0.1:8000/api/usuarios',{
+      headers:{
+        'Accept': 'application/json',
+        'Authorization': 'Bearer 6|0ZpD95GnVNvUXnq8rGYIScxzxeqpstpHOBZLgqQs'
+      }
+    })
+    .then(res => res.json())
+    .then(respuesta => {
+      respuesta.forEach(persona => {
+        if(inputUsuario.value == persona.usuario) {
+          inputU.style.border = '1px solid red';
+          console.log("Este usuario ya existe");
+          usuarioExiste = true;
+        }
+      });
+      if (!usuarioExiste) {
+        inputU.style.border = '0px solid red';
+      }
+    })
+    .catch(error => console.log(error.message));
+  } else {
+    inputU.style.border = '0px solid red';
+  }
+});
+
+
 
 
 
