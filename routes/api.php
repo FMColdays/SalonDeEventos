@@ -35,4 +35,5 @@ Route::post('store', [ApiController::class, 'store']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('paquetes', [ApiController::class, 'paquetes']);
     Route::get('usuarios', [ApiController::class, 'usuarios']);
+    Route::get('logout', [ApiController::class, 'logout']);
 });

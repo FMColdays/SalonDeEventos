@@ -72,7 +72,7 @@ inputUsuario.addEventListener('input', function(event) {
     fetch('http://127.0.0.1:8000/api/usuarios',{
       headers:{
         'Accept': 'application/json',
-        'Authorization': 'Bearer 6|0ZpD95GnVNvUXnq8rGYIScxzxeqpstpHOBZLgqQs'
+        'Authorization': 'Bearer 1|ztjkjsF4rMZZfheEjno6PgfpYrlT1rOPIfweEI9h'
       }
     })
     .then(res => res.json())
