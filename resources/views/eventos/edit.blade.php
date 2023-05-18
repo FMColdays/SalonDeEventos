@@ -78,7 +78,7 @@
             </div>
 
             <div class="contenedor-form-img">
-                <img id="preview" class="img-media" src="{{ asset('imagenes/meseros.jpg') }}"
+                <img id="preview" class="img-media" src="{{ asset($evento->imagenMo->imagenMi) }}"
                     onchange="mostrarImagen(event)">
 
                 <div class="imagen-file">
