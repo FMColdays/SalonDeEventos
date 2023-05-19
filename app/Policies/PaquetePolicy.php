@@ -6,7 +6,6 @@ use App\Models\Cliente;
 use App\Models\Paquete;
 use App\Models\Gerente;
 use Illuminate\Foundation\Auth\User as Usuario;
-
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PaquetePolicy

@@ -11,7 +11,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 class ApiController extends Controller
 {
-    public function paquetes(Request $request)
+    public function paquetes()
     {
         $paquetes = Paquete::all();
         return response()->json($paquetes);
@@ -22,6 +22,13 @@ class ApiController extends Controller
         $cliente = Cliente::all();
         $usuarios = $gerentes->concat($cliente);
         return response()->json($usuarios);
+    }
+
+
+    public function BuscarPaquete(Request $request)
+    {
+        $paquete = Paquete::find($request->id);
+        return response()->json($paquete);
     }
 
     public function store(Request $request)
@@ -41,18 +48,19 @@ class ApiController extends Controller
     {
         $usuario = Gerente::where('usuario', $request->usuario)->first();
         if (!is_null($usuario) && Hash::check($request->contraseña, $usuario->contraseña)) {
-            
+
             $token = $usuario->createToken('token_api');
             $accessToken = $token->plainTextToken;
             $expiresAt = now()->addMinutes(10);
             $personalAccessToken = PersonalAccessToken::findToken($accessToken);
             $personalAccessToken->forceFill([
                 'expires_at' => $expiresAt,
+                'abilities' => ['create']
             ])->save();
 
             $usuario->api_token =  $accessToken;
             $usuario->save();
-     
+
             return response()->json([
                 'res' => true,
                 'token' =>  $accessToken,
@@ -67,13 +75,12 @@ class ApiController extends Controller
         }
     }
 
-    public function logout(){
-       auth()->user()->tokens()->delete();
-       return response()->json([
-           'res' => true,
-           'message' => 'Se cerro sesión correctamente'
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+        return response()->json([
+            'res' => true,
+            'message' => 'Se cerro sesión correctamente'
         ], 200);
     }
 }
-
-
