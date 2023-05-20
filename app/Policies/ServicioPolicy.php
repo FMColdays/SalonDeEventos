@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Cliente;
 use App\Models\Gerente;
 use App\Models\Servicio;
 use Illuminate\Foundation\Auth\User as Usuario;
@@ -36,7 +37,8 @@ class ServicioPolicy
      */
     public function create(Usuario $usuario): bool
     {
-        //
+        if ($usuario instanceof Gerente) return true;
+        if ($usuario instanceof Cliente) return false;
     }
 
     /**
@@ -44,7 +46,16 @@ class ServicioPolicy
      */
     public function update(Usuario $usuario, Servicio $servicio): bool
     {
-        //
+        if ($usuario instanceof Gerente) {
+            if ($usuario->id == $servicio->gerente_id) {
+                if ($servicio->eventos()->exists()) return false;
+                else return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     /**

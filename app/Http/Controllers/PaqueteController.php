@@ -14,8 +14,8 @@ class PaqueteController extends Controller
      */
     public function index()
     {
-        $paquetes = Paquete::all();
         $this->authorize('viewAny', App\Models\Paquete::class);
+        $paquetes = Paquete::all();
         return view("paquetes.index", compact('paquetes'));
     }
 

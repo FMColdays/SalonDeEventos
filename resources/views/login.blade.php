@@ -24,7 +24,7 @@
         </div>
         <div class="contenedorItems">
             <form action="validar" method="post">
-                @csrf
+                @csrf   
                 <div class="items" id="err-usuario">
                     <span class="icono material-symbols-rounded">person</span>
                     <input class="cajas" name="usuario" id="usuario" value="" type="text" autofocus placeholder="Usuario">

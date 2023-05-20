@@ -35,29 +35,27 @@ class SistemaController extends Controller
         $nombre = $solicitud->input('nombre');
         $usuario = $solicitud->input('usuario');
         $contraseña = $solicitud->input('contraseña');
-        $cliente = new Cliente();
-        $cliente->nombre = $nombre;
-        $cliente->usuario = $usuario;
-        $cliente->contraseña = Hash::make($contraseña);
-        $cliente->save();
-        return redirect('inicio');
+        $gerente = Gerente::where('usuario', $nombre)->first();
+        $cliente = Cliente::where('usuario', $nombre)->first();
+
+        if (!is_null($cliente)  || !is_null($gerente)) {
+            return redirect('registrarse')->with([
+                'res' => false,
+                'message' => 'Usuario ya registrado'
+            ], 200);
+        } else {
+            $cliente = new Cliente();
+            $cliente->nombre = $nombre;
+            $cliente->usuario = $usuario;
+            $cliente->contraseña = Hash::make($contraseña);
+            $cliente->save();
+            return redirect('inicio');
+        }
     }
 
     //Sistema de validación de usuario
     public function validar(Request $solicitud)
     {
-        $rules = [
-            'usuario' => 'required',
-            'contraseña' => 'required',
-        ];
-
-        $messages = [
-            'usuario.required' => 'El campo usuario es obligatorio',
-            'contraseña.required' => 'El campo contraseña es obligatorio',
-        ];
-
-        $this->validate($solicitud, $rules, $messages);
-
         $usuario = $solicitud->input('usuario');
         $contraseña = $solicitud->input('contraseña');
         $encontrado = Gerente::where('usuario', $usuario)->first();
