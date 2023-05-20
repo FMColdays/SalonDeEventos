@@ -12,15 +12,33 @@
             @csrf
 
             <label for="nombre">Nombre:</label>
-            <input class="element-lg" type="text" id="nombre" name="nombre" value="{{ $paquete->nombre }}" required>
+            <input class="element-lg" type="text" id="nombre" name="nombre" value="{{ old('nombre', $paquete->nombre) }}" >
+            @error('nombre')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
             <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" required style="width: 100%; padding: 10px">{{ $paquete->descripcion }}</textarea>
+            <textarea id="descripcion" name="descripcion"  style="width: 100%; padding: 10px">{{ old('descripcion', $paquete->descripcion) }}</textarea>
+            @error('descripcion')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
             <label for="costo">Costo:</label>
-            <input class="element-lg" type="number" id="costo" name="costo" value="{{ $paquete->costo }}" required>
+            <input class="element-lg" type="number" id="costo" name="costo" value="{{ old('costo', $paquete->costo) }}">
+            @error('costo')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
             <label for="capacidad">Capacidad:</label>
-            <input class="element-lg" type="text" id="capacidad" name="capacidad" value="{{ $paquete->capacidad }}"
-                required>
-
+            <input class="element-lg" type="text" id="capacidad" name="capacidad" value="{{ old('capacidad', $paquete->capacidad) }}">
+            @error('capacidad')
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+        @enderror
             <div class="form-group">
                 <label class="element-lg" for="radio-group">Estado:</label>
                 <div class="radio">

@@ -12,11 +12,26 @@
             @csrf
 
             <label for="nombre">Nombre:</label>
-            <input class="element-lg" type="text" id="nombre" name="nombre" value="{{ $servicio->nombre }}" required>
+            <input class="element-lg" type="text" id="nombre" name="nombre"  value="{{ old('nombre', $servicio->nombre) }}" >
+            @error('nombre')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
             <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" required style="width: 100%; padding: 10px">{{ $servicio->descripcion }}</textarea>
+            <textarea id="descripcion" name="descripcion" style="width: 100%; padding: 10px">{{ old('descripcion', $servicio->descripcion) }}</textarea>
+            @error('descripcion')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
             <label for="costo">Costo:</label>
-            <input class="element-lg" type="number" id="costo" name="costo" value="{{ $servicio->costo }}" required>
+            <input class="element-lg" type="number" id="costo" name="costo" value="{{ old('costo', $servicio->costo) }}" >
+            @error('costo')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
 
 
             <div class="form-group">

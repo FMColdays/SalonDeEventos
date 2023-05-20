@@ -62,7 +62,22 @@ enviarBtns.forEach(function(enviarBtn) {
             document.getElementById('costo-total').textContent = costoTotal;            
 }
 
+function paquete_required(e){
 
+    let paquete = document.getElementById('opcion').value;
+    let error = document.getElementById('error');
+    if(paquete == "Seleccionar"){ 
+        e.preventDefault();
+        error.textContent = "Necesitas seleccionar un paquete"
+
+    }else{
+        error.textContent = ""
+    }
+    
+
+
+
+}
 
 
 

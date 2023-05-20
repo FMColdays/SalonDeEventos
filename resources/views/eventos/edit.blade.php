@@ -12,29 +12,53 @@
             @csrf
 
             <label for="nombre">Nombre:</label>
-            <input class="element-lg  validar" type="text" id="nombre" name="nombre" value="{{ $evento->nombre }}">
-            <h6 class="validarLabel" class="text-danger"></h6>
+            <input class="element-lg  validar" type="text" id="nombre" name="nombre" value="{{ old('nombre', $evento->nombre) }}">
+            @error('nombre')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
 
             <label for="descripcion">Descripción:</label>
-            <textarea class="element-lg validar" id="descripcion" name="descripcion">{{ $evento->descripcion }}</textarea>
-            <h6 class="validarLabel" class="text-danger"></h6>
+            <textarea class="element-lg validar" id="descripcion" name="descripcion">{{ old('descripcion', $evento->descripcion) }}</textarea>
+            @error('descripcion')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
 
             <label for="fecha">fecha:</label>
-            <input class="element-lg validar" type="date" id="fecha" name="fecha" value="{{ $evento->fecha }}">
-            <h6 class="validarLabel" class="text-danger"></h6>
+            <input class="element-lg validar" type="date" id="fecha" name="fecha" value="{{ old('fecha', $evento->fecha) }}">
+            @error('fecha')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
 
             <label for="horaI">Hora Inicio:</label>
-            <input class="element-lg validar" type="time" id="horaI" name="horaI" value="{{ $evento->horaI }}">
-            <h6 class="validarLabel" class="text-danger"></h6>
+            <input class="element-lg validar" type="time" id="horaI" name="horaI" value="{{ old('horaI', $evento->horaI) }}">
+            @error('horaI')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
 
             <label for="horaF">Hora Final:</label>
-            <input class="element-lg validar" type="time" id="horaF" name="horaF" value="{{ $evento->horaF }}">
-            <h6 class="validarLabel" class="text-danger"></h6>
+            <input class="element-lg validar" type="time" id="horaF" name="horaF" value="{{ old('horaF', $evento->horaF) }}">
+            @error('horaF')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
 
             <label for="capacidad">Capacidad:</label>
             <input class="element-lg validar" type="text" id="capacidad" name="capacidad"
-                value="{{ $evento->capacidad }}">
-            <h6 class="validarLabel" class="text-danger"></h6>
+            value="{{ old('capacidad', $evento->capacidad) }}">
+                @error('capacidad')
+                <div class="alert alert-danger">
+                    {{ $message }}
+                </div>
+            @enderror
 
             <label>Servicios:</label>
             <div class="contenedor-radio1">
@@ -46,6 +70,7 @@
                         <label>{{ $servicio->nombre }}</label>
                     </div>
                 @endforeach
+               
             </div>
 
             <label for="capacidad">Paquete:</label>
@@ -62,6 +87,7 @@
                         </option>
                     @endif
                 @endforeach
+                
             </select>
 
             <div class="form-group">
@@ -78,7 +104,7 @@
             </div>
 
             <div class="contenedor-form-img">
-                <img id="preview" class="img-media" src="{{ asset('imagenes/meseros.jpg') }}"
+                <img id="preview" class="img-media" src="{{ asset($evento->imagenMo->imgenMi) }}"
                     onchange="mostrarImagen(event)">
 
                 <div class="imagen-file">

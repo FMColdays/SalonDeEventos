@@ -22,7 +22,28 @@ class UpdatePaqueteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' =>  ['required', 'min:5', 'max:40', 'regex:/^[a-zA-ZÀ-ÿ\s]+$/u'],
+            'descripcion' =>  ['required', 'min:10', 'max:20'],
+            'costo' => 'required|regex:/^[0-9]+(?:\.[0-9]+)?$/',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'nombre.required' => 'El campo nombre es requerido',
+            'nombre.min' => 'El campo nombre debe tener un minimo de :min caracteres',
+            'nombre.max' => 'El campo nombre solo puede tener un maximo de :max caracteres',
+            'nombre.regex' => 'El campo nombre solo puede contener letras.',
+
+            'descripcion.required' => 'El campo descripcion es requerido',
+            'descripcion.min' => 'El campo descripcion debe tener un minimo de :min caracteres',
+            'descripcion.max' => 'El campo descripcion solo puede tener un maximo de :max caracteres',
+            
+		    'costo.required' => 'El campo costo es requerido',
+            'costo.regex' => 'El campo número debe ser un número válido',
+            
+
         ];
     }
 }

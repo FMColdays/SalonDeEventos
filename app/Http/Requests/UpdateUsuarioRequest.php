@@ -25,6 +25,7 @@ class UpdateUsuarioRequest extends FormRequest
             'nombre' =>  ['required', 'min:5', 'max:40', 'regex:/^[a-zA-ZÀ-ÿ\s]+$/u'],
             'usuario' => 'required|min:5|max:40',
             'nacimiento' => 'required|date|before:today',
+            'contraseña' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
         ];
     }
 
@@ -43,6 +44,10 @@ class UpdateUsuarioRequest extends FormRequest
             'nacimiento.required' => 'El campo fecha de nacimiento es obligatorio.',
             'nacimiento.date' => 'El campo fecha de nacimiento debe ser una fecha válida.',
             'nacimiento.before' => 'El campo fecha de nacimiento debe ser anterior a la fecha actual.',
+
+            'contraseña.required' => 'El campo contraseña es requerido',
+            'contraseña.regex' => 'El campo contraseña debe tener una mayuscula y un numero',
+            'contraseña.min' => 'El campo contraseña debe tener un minimo de :min caracteres',
 
         ];
     }
