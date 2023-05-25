@@ -61,6 +61,15 @@
                                 <li><a class="dropdown-item" href="{{ route('servicios.create') }}">Agregar</a></li>
                             </ul>
                         </div>
+
+                        <div class="dropdown">
+                            <a href="#" class="link-dark dropdown-toggle px-2" data-bs-toggle="dropdown">
+                                Eventos
+                            </a>
+                            <ul class="dropdown-menu text-small">
+                                <li><a class="dropdown-item" href="{{ route('eventos.index') }}">Mostrar</a></li>
+                            </ul>
+                        </div>
                     @elseif (Auth::user() instanceof App\Models\Cliente)
                         <div class="dropdown">
                             <a href="#" class="link-dark dropdown-toggle px-2" data-bs-toggle="dropdown">
@@ -123,6 +132,7 @@
     <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap5.min.js"></script>
 
     {{-- Mis Scripts --}}
+    
     <script src="{{ asset('js/datatable.js') }}" defer></script>
     <script src="{{ asset('js/code.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

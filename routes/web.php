@@ -7,6 +7,8 @@ use App\Http\Controllers\ServicioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SistemaController;
 use App\Http\Controllers\UsuarioController;
+use App\Mail\PaqueteMail;
+use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
     return redirect('inicio');
@@ -46,4 +48,8 @@ Route::post('subir/{id}/{tipo}', [AlbumController::class, 'store'])->name('album
 Route::delete('eliminar/{id}', [AlbumController::class, 'destroy'])->name('album.destroy');
 
 
-Route::get('abonar', [SistemaController::class, 'bono'])->name(("abonarserv"));
+Route::get('abono/{id}', [SistemaController::class, 'abonar'])->name(("abono"));
+Route::put('abonando/{id}', [SistemaController::class, 'abonando'])->name(("abonando"));
+
+
+    

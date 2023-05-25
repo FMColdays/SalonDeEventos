@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Cliente;
 use App\Models\Evento;
+use App\Models\Gerente;
 use Illuminate\Foundation\Auth\User as Usuario;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -17,7 +18,7 @@ class EventoPolicy
     public function viewAny(Usuario $usuario): bool
     {
         if ($usuario instanceof Cliente) return true;
-        else return false;
+        if ($usuario instanceof Gerente) return true;
     }
 
     /**
@@ -26,6 +27,7 @@ class EventoPolicy
     public function view(Usuario $usuario, Evento $evento): bool
     {
         if ($usuario->id == $evento->cliente_id) return true;
+        if ($usuario instanceof Gerente) return true;
         else return false;
     }
 
@@ -34,8 +36,8 @@ class EventoPolicy
      */
     public function create(Usuario $usuario): bool
     {
-       if ($usuario instanceof Cliente) return true;
-       else return false;
+        if ($usuario instanceof Cliente) return true;
+        else return false;
     }
 
     /**
@@ -43,10 +45,17 @@ class EventoPolicy
      */
     public function update(Usuario $usuario, Evento $evento): bool
     {
-        if ($usuario->id == $evento->cliente_id) {
-            if ($evento->estado == '0'){
+        if ($usuario instanceof Gerente) {
+            if ($evento->estado == '0') {
                 return true;
-            }else{
+            } else {
+                return false;
+            }
+        };
+        if ($usuario->id == $evento->cliente_id) {
+            if ($evento->estado == '0') {
+                return true;
+            } else {
                 return false;
             }
         } else {
@@ -59,16 +68,22 @@ class EventoPolicy
      */
     public function delete(Usuario $usuario, Evento $evento): bool
     {
-        if ($usuario->id == $evento->cliente_id) {
-            if ($evento->estado == '0'){
+        if ($usuario instanceof Gerente) {
+            if ($evento->estado == '0') {
                 return true;
-            }else{
+            } else {
+                return false;
+            }
+        };
+        if ($usuario->id == $evento->cliente_id) {
+            if ($evento->estado == '0') {
+
+                return true;
+            } else {
                 return false;
             }
         } else {
             return false;
         }
     }
-
-
 }

@@ -63,26 +63,33 @@ function actualizarCosto() {
 
     document.getElementById("costo-total").textContent = costoTotal;
 }
-<<<<<<< HEAD
 
-function paquete_required(e){
-
-    let paquete = document.getElementById('opcion').value;
-    let error = document.getElementById('error');
-    if(paquete == "Seleccionar"){ 
+function paquete_required(e) {
+    let paquete = document.getElementById("opcion").value;
+    let contenedor = document.getElementById("contenedor-msg");
+    let error = document.getElementById("error");
+    if (paquete == "Seleccionar") {
         e.preventDefault();
-        error.textContent = "Necesitas seleccionar un paquete"
-
-    }else{
-        error.textContent = ""
+        contenedor.classList.add("alert", "alert-danger");
+        error.textContent = "Necesitas seleccionar un paquete";
+    } else {
+        error.textContent = "";
+        contenedor.classList.remove("alert", "alert-danger");
     }
-    
-
-
-
 }
 
+const formulario = document.getElementById("formAbono");
+
+formulario.addEventListener("submit", (e) => {
 
 
-=======
->>>>>>> 80a6cf0aa75449036c1a7f71b7e63c120976fdce
+    const datos = {
+        abono: formulario.abono.value,
+    };
+
+    if (datos.abono < 100) {
+        e.preventDefault();
+        console.log("abono invalido");
+    }
+
+});

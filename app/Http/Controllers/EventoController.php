@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\EventoEvent;
 use App\Models\Evento;
 use App\Http\Requests\StoreEventoRequest;
 use App\Http\Requests\UpdateEventoRequest;
 use App\Models\Imagen;
 use App\Models\Paquete;
 use App\Models\Servicio;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Auth;
 
 class EventoController extends Controller
@@ -104,42 +106,48 @@ class EventoController extends Controller
     public function update(UpdateEventoRequest $request, Evento $evento)
     {
         $this->authorize('update', $evento);
-        $cliente = Auth::user();
-        $paquete = Paquete::find($request->input('paquete_id'));
-        $evento->nombre = $request->input('nombre');
-        $evento->descripcion = $request->input('descripcion');
-        $evento->fecha = $request->input('fecha');
-        $evento->horaI = $request->input('horaI');
-        $evento->horaF = $request->input('horaF');
-        $evento->estado = $request->input('estado');
-        $evento->capacidad = $request->input('capacidad');
-        $evento->costo = $request->input('costo');
-        $evento->cliente_id = $cliente->id;
-        $evento->paquete_id = $paquete->id;
-        $evento->save();
 
-        if ($request->hasFile('imagen')) {
-            $imagen = $request->file('imagen');
-            $ruta = 'imagenes/';
-            $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
-            $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
-            if ($evento->imagenMo) {
-                $evento->imagenMo()->update([
-                    'imagenMi' => $ruta . $nombreimagen,
-                    'imagenable_id'  => $evento->id,
-                    'imagenable_type'  => Evento::class,
-                ]);
-            } else {
-                $evento->imagenMo()->create([
-                    'imagenMi' => $ruta . $nombreimagen,
-                    'imagenable_id'  => $evento->id,
-                    'imagenable_type'  => Evento::class,
-                ]);
+        if ($request->input('estado') == 1) {
+            $evento->estado = $request->input('estado');
+            Event::dispatch(new EventoEvent($evento->nombre, $evento->id));
+            $evento->save();
+        } else {
+            $cliente = Auth::user();
+            $paquete = Paquete::find($request->input('paquete_id'));
+            $evento->nombre = $request->input('nombre');
+            $evento->descripcion = $request->input('descripcion');
+            $evento->fecha = $request->input('fecha');
+            $evento->horaI = $request->input('horaI');
+            $evento->horaF = $request->input('horaF');
+
+            $evento->capacidad = $request->input('capacidad');
+            $evento->costo = $request->input('costo');
+            $evento->cliente_id = $cliente->id;
+            $evento->paquete_id = $paquete->id;
+            $evento->save();
+
+            if ($request->hasFile('imagen')) {
+                $imagen = $request->file('imagen');
+                $ruta = 'imagenes/';
+                $nombreimagen = time() . '-' . $imagen->getClientOriginalName();
+                $carga =  $request->file('imagen')->move($ruta, $nombreimagen);
+                if ($evento->imagenMo) {
+                    $evento->imagenMo()->update([
+                        'imagenMi' => $ruta . $nombreimagen,
+                        'imagenable_id'  => $evento->id,
+                        'imagenable_type'  => Evento::class,
+                    ]);
+                } else {
+                    $evento->imagenMo()->create([
+                        'imagenMi' => $ruta . $nombreimagen,
+                        'imagenable_id'  => $evento->id,
+                        'imagenable_type'  => Evento::class,
+                    ]);
+                }
             }
+
+            $evento->servicios()->sync($request->input('servicios'));
         }
-
-        $evento->servicios()->sync($request->input('servicios'));
-
         return redirect(route('eventos.index'));
     }
 

@@ -42,7 +42,7 @@
 
             <label for="contraseña">Contraseña:</label>
             <input class="element-lg" type="password" name="contraseña"
-                value="{{ old('contraseña', $usuario->contraseña) }}">
+                value="{{ old('contraseña') }}">
             @error('contraseña')
                 <div class="alert alert-danger">
                     {{ $message }}

@@ -54,7 +54,7 @@ class ApiController extends Controller
             $expiresAt = now()->addMinutes(10);
             $personalAccessToken = PersonalAccessToken::findToken($accessToken);
             $personalAccessToken->forceFill([
-                'expires_at' => $expiresAt,
+                //'expires_at' => $expiresAt,
                 'abilities' => ['create']
             ])->save();
 

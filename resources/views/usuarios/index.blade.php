@@ -37,16 +37,16 @@
                                 <a href="{{ route('usuarios.edit', ['tipoUsuario' => $tipoUsuario, 'id' => $usuario->id]) }}"
                                     class="icono material-symbols-rounded update">edit</a>
 
-
-                                <form class="eliminar-alert"
-                                    action="{{ route('usuarios.destroy', ['tipoUsuario' => $tipoUsuario, 'id' => $usuario->id]) }}"
-                                    method="post" style="display: inline-block;">
-                                    @method('DELETE')
-                                    @csrf
-                                    <input class="icono material-symbols-rounded delete" type="submit" value="delete"
-                                        style=" border-width:0">
-                                </form>
-
+                                @can('delete', $usuario)
+                                    <form class="eliminar-alert"
+                                        action="{{ route('usuarios.destroy', ['tipoUsuario' => $tipoUsuario, 'id' => $usuario->id]) }}"
+                                        method="post" style="display: inline-block;">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input class="icono material-symbols-rounded delete" type="submit" value="delete"
+                                            style=" border-width:0">
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

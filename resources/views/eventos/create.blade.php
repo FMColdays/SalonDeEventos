@@ -50,7 +50,8 @@
             @enderror
 
             <label for="capacidad">Capacidad:</label>
-            <input class="element-lg validar" type="number" id="capacidad" name="capacidad" value="{{ old('capacidad') }}">
+            <input class="element-lg validar" type="number" id="capacidad" name="capacidad"
+                value="{{ old('capacidad') }}">
             @error('capacidad')
                 <div class="alert alert-danger">
                     {{ $message }}
@@ -64,9 +65,8 @@
                         onchange="actualizarCosto()" data-costo="{{ $servicio->costo }}">
                     <label>{{ $servicio->nombre }}</label>
                 </div>
-                
             @endforeach
-            
+
 
             <label for="paquete" style="display: block">Paquetes:</label>
 
@@ -80,9 +80,10 @@
                     </option>
                 @endforeach
             </select>
-                <h1 id="error"> </h1>
-           
-           
+            <div id="contenedor-msg">
+                <h6 id="error"> </h6>
+            </div>
+
 
             <div class="contenedor-form-img">
                 <img id="preview" class="img-media" onchange="mostrarImagen(event)">
@@ -91,12 +92,12 @@
                     <label class="imagen-t">Imagen que se mostrara en el perfil:</label>
                     <input class="element-lg validar" type="file" name="imagen" accept="image/*"
                         onchange="mostrarImagen(event)">
-                        @error('imagen')
-                            <div class="alert alert-danger">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    
+                    @error('imagen')
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
                 </div>
             </div>
 
@@ -107,9 +108,9 @@
                 <span name="costo" id="costo-total">0</span>
             </div>
 
-            <input class="element-lg" id="botonGE" type="submit" value="Guardar" onclick="paquete_required()">
+            <input class="element-lg" id="botonGE" type="submit" value="Guardar" onclick="paquete_required(event)">
         </form>
     </div>
-    <script src= "{{asset('js/code.js')}}"></script>
+    <script src="{{ asset('js/code.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 @endsection

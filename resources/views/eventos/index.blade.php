@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <p>Paquete seleccionao: {{ $evento->paquete->nombre }}</p>
-                                        <p>Costo: {{ $evento->costo }}</p>
+                                        <p>Costo: {{ $evento->costo > 0 ? $evento->costo : '0' }}</p>
                                         <p>Descripción evento: {{ $evento->descripcion }}</p>
                                         <div class="horas-c">
                                             <p>Hora de inicio : {{ $evento->horaI }}</p>
@@ -77,7 +77,10 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary">Guardar cambios</button>
+                                        @if ($evento->costo > 0 && $evento->estado == 1)
+                                            <a class="abono-boton" href="{{ route('abono', $evento->id) }}"
+                                                style="">Realizar un abono</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -86,6 +89,5 @@
                 @endcan
             @endforeach
         </div>
-
     </div>
 @endsection

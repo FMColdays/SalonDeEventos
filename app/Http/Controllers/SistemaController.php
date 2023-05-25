@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Evento;
 use App\Models\Gerente;
 use App\Models\Paquete;
 use Illuminate\Http\Request;
@@ -95,9 +96,26 @@ class SistemaController extends Controller
         return view('principal', compact('paquetes'));
     }
 
+
+    public function abonar($id)
+    {
+        $evento = Evento::find($id);
+        return view('eventos.abono', compact('evento'));
+    }
+
+    public function abonando($id, Request $abononando)
+    {
+        $evento = Evento::find($id);
+        $evento->costo = $evento->costo - $abononando->input('abono');;
+        $evento->save();
+        return redirect('eventos');
+    }
+
     public function cerrar_sesion()
     {
         Auth::logout();
         return redirect('inicio');
     }
+
+
 }

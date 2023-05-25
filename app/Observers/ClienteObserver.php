@@ -12,7 +12,7 @@ class ClienteObserver
     public function created(Cliente $cliente): void
     {
         $registro = new Registro();
-        $registro->usuario = Auth::user()->nombre;
+        $registro->usuario = Auth::user() ? Auth::user()->nombre : 'El mismo';
         $registro->accion = 'Se creó el cliente: ' . $cliente->nombre;
         $registro->save();
     }

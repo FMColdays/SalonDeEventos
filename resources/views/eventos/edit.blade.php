@@ -90,6 +90,9 @@
                 
             </select>
 
+        @if (Auth::user() instanceof App\Models\Gerente)
+            
+  
             <div class="form-group">
                 <label class="element-lg " for="radio-group">Estado:</label>
                 <div class="radio">
@@ -102,7 +105,7 @@
                     <input type="radio" name="estado" value="{{ $evento->estado == 1 ? '0' : '1' }}">
                 </div>
             </div>
-
+            @endif
             <div class="contenedor-form-img">
                 <img id="preview" class="img-media" src="{{ asset($evento->imagenMo->imagenMi) }}"
                     onchange="mostrarImagen(event)">
