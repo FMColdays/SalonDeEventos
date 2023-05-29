@@ -1,16 +1,6 @@
 @extends('plantillas.encabezado')
 @section('cuerpo')
-    @if (session('eliminado') == 'si')
-        <script>
-            Swal.fire(
-                '¡Eliminado',
-                'La imagen ha sido eliminada',
-                'success'
-            )
-        </script>
-        {{ Session::forget('eliminado') }}
-    @endif
-
+   
     @auth
         <li><a class="btn btn-success m-2" href="{{ route('album.create', ['id' => $id, 'tipo' => $tipo]) }}">Agregar
                 Imagenes</a>

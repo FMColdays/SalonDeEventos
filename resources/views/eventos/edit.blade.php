@@ -107,7 +107,7 @@
             </div>
             @endif
             <div class="contenedor-form-img">
-                <img id="preview" class="img-media" src="{{ asset($evento->imagenMo->imagenMi) }}"
+                <img id="preview" class="img-media" src="{{ asset(optional($evento->imagenMo)->imagenMi) }}"
                     onchange="mostrarImagen(event)">
 
                 <div class="imagen-file">

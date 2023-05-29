@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\album;
 use App\Http\Requests\StorealbumRequest;
+use App\Models\album;
 use App\Http\Requests\UpdatealbumRequest;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -87,6 +88,6 @@ class AlbumController extends Controller
         Storage::delete($url);
 
         $imagen->delete();
-        return  redirect()->back()->with('eliminado', 'si');
+        return  redirect()->back();
     }
 }

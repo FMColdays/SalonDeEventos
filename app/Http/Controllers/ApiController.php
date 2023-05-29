@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cliente;
+use App\Models\Cliente as Cliente;
+use App\Models\Evento;
 use App\Models\Gerente;
 use App\Models\Paquete;
+use App\Models\Servicio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\PersonalAccessToken;
 
@@ -13,40 +16,73 @@ class ApiController extends Controller
 {
     public function paquetes()
     {
+
+        $paquetesOn = [];
         $paquetes = Paquete::all();
+        if (Auth::user()  instanceof Cliente) {
+            foreach ($paquetes as $paquete) {
+                if ($paquete->estado == 1) {
+                    $paquetesOn[] = $paquete;
+                }
+            }
+            return response()->json($paquetesOn);
+        }
         return response()->json($paquetes);
     }
     public function usuarios()
     {
-        $gerentes = Gerente::all();
-        $cliente = Cliente::all();
-        $usuarios = $gerentes->concat($cliente);
-        return response()->json($usuarios);
+        if (Auth::user()  instanceof Cliente) {
+            return response()->json([
+                'res' => false,
+                'message' => 'No tienes permiso para esto'
+            ], 400);
+        } else {
+            $gerentes = Gerente::all();
+            $cliente = Cliente::all();
+            $usuarios = $gerentes->concat($cliente);
+            return response()->json($usuarios);
+        }
     }
 
-
-    public function BuscarPaquete(Request $request)
+    public function servicios()
     {
-        $paquete = Paquete::find($request->id);
-        return response()->json($paquete);
+        $serviciosOn = [];
+        $servicios = Servicio::all();
+        if (Auth::user()  instanceof Cliente) {
+            foreach ($servicios as $servicio) {
+                if ($servicio->estado == 1) {
+                    $serviciosOn[] = $servicio;
+                }
+            }
+            return response()->json($serviciosOn);
+        }
+        return response()->json($servicios);
     }
 
-    public function store(Request $request)
+    public function eventos()
     {
-        $gerente = new Gerente();
-        $gerente->fill($request->all());
-        $gerente->contraseña = Hash::make($request->contraseña);
-        $gerente->save();
-
-        return response()->json([
-            'res' => true,
-            'message' => "Usuario creado correctamente"
-        ], 200);
+        $miEvento = [];
+        $eventos = Evento::all();
+        if (Auth::user()  instanceof Cliente) {
+            foreach ($eventos as $evento) {
+                if ($evento->cliente_id == auth()->user()->id) {
+                    $miEvento[] = $evento;
+                }
+            }
+            return response()->json($miEvento);
+        }
+        return response()->json($eventos);
     }
+
 
     public function login(Request $request)
     {
         $usuario = Gerente::where('usuario', $request->usuario)->first();
+        if (is_null($usuario)) {
+            $usuario = Cliente::where('usuario', $request->usuario)->first();
+        }
+
+
         if (!is_null($usuario) && Hash::check($request->contraseña, $usuario->contraseña)) {
 
             $token = $usuario->createToken('token_api');
@@ -58,9 +94,6 @@ class ApiController extends Controller
                 'abilities' => ['create']
             ])->save();
 
-            $usuario->api_token =  $accessToken;
-            $usuario->save();
-
             return response()->json([
                 'res' => true,
                 'token' =>  $accessToken,
@@ -71,7 +104,7 @@ class ApiController extends Controller
             return response()->json([
                 'res' => false,
                 'message' => 'Usuario incorrecto'
-            ], 200);
+            ], 400);
         }
     }
 

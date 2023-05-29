@@ -1,9 +1,7 @@
-
-
 <?php
-
 namespace Database\Seeders;
 
+use App\Models\Cliente;
 use App\Models\Evento;
 use App\Models\Paquete;
 use App\Models\Servicio;
@@ -18,7 +16,7 @@ class EventoSeeder extends Seeder
      */
     public function run(): void
     {
-        $usuario = Usuario::where('nombre', 'Hugo')->firstOrFail();
+        $usuario = Cliente::where('nombre', 'Hugo')->firstOrFail();
         $paquete = Paquete::where('nombre', 'XV años')->firstOrFail();
         $serviciosIds = Servicio::all()->pluck('id');
         $servicios = Servicio::whereIn('id', $serviciosIds)->get();
@@ -33,13 +31,18 @@ class EventoSeeder extends Seeder
         $evento->capacidad = 100;
         $evento->estado = '0';
         $evento->costo =  $paquete->costo + $totalServicios;
-        $evento->usuario_id = $usuario->id;
+        $evento->cliente_id = $usuario->id;
         $evento->paquete_id = $paquete->id;
         $evento->save();
         $evento->servicios()->sync($serviciosIds);
+        $evento->imagenMo()->create([
+            'imagenMi' => 'imagenes/xv años 1.jpg',
+            'imagenable_id'  => $evento->id,
+            'imagenable_type'  => Evento::class,
+        ]);
 
 
-        $usuario = Usuario::where('nombre', 'Paco')->firstOrFail();
+        $usuario = Cliente::where('nombre', 'Paco')->firstOrFail();
         $paquete = Paquete::where('nombre', 'Fiesta infantil')->firstOrFail();
         $serviciosIds = [1, 2, 3];
         $servicios = Servicio::whereIn('id', $serviciosIds)->get();
@@ -54,13 +57,19 @@ class EventoSeeder extends Seeder
         $evento->capacidad = 200;
         $evento->estado = '1';
         $evento->costo =  $paquete->costo + $totalServicios;
-        $evento->usuario_id = $usuario->id;
+        $evento->cliente_id = $usuario->id;
         $evento->paquete_id = $paquete->id;
         $evento->save();
         $evento->servicios()->sync($serviciosIds);
+        $evento->imagenMo()->create([
+            'imagenMi' => 'imagenes/fiesta1.png',
+            'imagenable_id'  => $evento->id,
+            'imagenable_type'  => Evento::class,
+        ]);
 
 
-        $usuario = Usuario::where('nombre', 'Luis')->firstOrFail();
+
+        $usuario = Cliente::where('nombre', 'Luis')->firstOrFail();
         $paquete = Paquete::where('nombre', 'Bautizos')->firstOrFail();
         $serviciosIds = [1];
         $servicios = Servicio::whereIn('id', $serviciosIds)->get();
@@ -75,12 +84,18 @@ class EventoSeeder extends Seeder
         $evento->capacidad = 200;
         $evento->estado = '0';
         $evento->costo =  $paquete->costo + $totalServicios;
-        $evento->usuario_id = $usuario->id;
+        $evento->cliente_id = $usuario->id;
         $evento->paquete_id = $paquete->id;
         $evento->save();
         $evento->servicios()->sync($serviciosIds);
+        $evento->imagenMo()->create([
+            'imagenMi' => 'imagenes/bautizo1.webp',
+            'imagenable_id'  => $evento->id,
+            'imagenable_type'  => Evento::class,
+        ]);
 
-        $usuario = Usuario::where('nombre', 'Hugo')->firstOrFail();
+
+        $usuario = Cliente::where('nombre', 'Hugo')->firstOrFail();
         $paquete = Paquete::where('nombre', 'XV años')->firstOrFail();
         $serviciosIds = [1,2];
         $servicios = Servicio::whereIn('id', $serviciosIds)->get();
@@ -95,13 +110,19 @@ class EventoSeeder extends Seeder
         $evento->capacidad = 300;
         $evento->estado = '1';
         $evento->costo =  $paquete->costo + $totalServicios;
-        $evento->usuario_id = $usuario->id;
+        $evento->cliente_id = $usuario->id;
         $evento->paquete_id = $paquete->id;
         $evento->save();
         $evento->servicios()->sync($serviciosIds);
+        $evento->imagenMo()->create([
+            'imagenMi' => 'imagenes/xv años 1.jpg',
+            'imagenable_id'  => $evento->id,
+            'imagenable_type'  => Evento::class,
+        ]);
 
 
-        $usuario = Usuario::where('nombre', 'Paco')->firstOrFail();
+
+        $usuario = Cliente::where('nombre', 'Paco')->firstOrFail();
         $paquete = Paquete::where('nombre', 'Fiesta infantil')->firstOrFail();
         $serviciosIds = [2];
         $servicios = Servicio::whereIn('id', $serviciosIds)->get();
@@ -116,13 +137,18 @@ class EventoSeeder extends Seeder
         $evento->capacidad = 100;
         $evento->estado = '0';
         $evento->costo =  $paquete->costo + $totalServicios;
-        $evento->usuario_id = $usuario->id;
+        $evento->cliente_id = $usuario->id;
         $evento->paquete_id = $paquete->id;
         $evento->save();
         $evento->servicios()->sync($serviciosIds);
+        $evento->imagenMo()->create([
+            'imagenMi' => 'imagenes/fiesta1.png',
+            'imagenable_id'  => $evento->id,
+            'imagenable_type'  => Evento::class,
+        ]);
 
 
-        $usuario = Usuario::where('nombre', 'Luis')->firstOrFail();
+        $usuario = Cliente::where('nombre', 'Luis')->firstOrFail();
         $paquete = Paquete::where('nombre', 'Bautizos')->firstOrFail();
         $serviciosIds = [3];
         $servicios = Servicio::whereIn('id', $serviciosIds)->get();
@@ -137,13 +163,19 @@ class EventoSeeder extends Seeder
         $evento->capacidad = 100;
         $evento->estado = '1';
         $evento->costo =  $paquete->costo + $totalServicios;
-        $evento->usuario_id = $usuario->id;
+        $evento->cliente_id = $usuario->id;
         $evento->paquete_id = $paquete->id;
         $evento->save();
         $evento->servicios()->sync($serviciosIds);
+        $evento->imagenMo()->create([
+            'imagenMi' => 'imagenes/bautizo1.webp',
+            'imagenable_id'  => $evento->id,
+            'imagenable_type'  => Evento::class,
+        ]);
 
 
-        $usuario = Usuario::where('nombre', 'Hugo')->firstOrFail();
+
+        $usuario = Cliente::where('nombre', 'Hugo')->firstOrFail();
         $paquete = Paquete::where('nombre', 'XV años')->firstOrFail();
    
         $evento = new Evento();
@@ -155,12 +187,19 @@ class EventoSeeder extends Seeder
         $evento->capacidad = 100;
         $evento->estado = '0';
         $evento->costo =  $paquete->costo;
-        $evento->usuario_id = $usuario->id;
+        $evento->cliente_id = $usuario->id;
         $evento->paquete_id = $paquete->id;
         $evento->save();
+
+        $evento->imagenMo()->create([
+            'imagenMi' => 'imagenes/xv años 1.jpg',
+            'imagenable_id'  => $evento->id,
+            'imagenable_type'  => Evento::class,
+        ]);
+
         
 
-        $usuario = Usuario::where('nombre', 'Paco')->firstOrFail();
+        $usuario = Cliente::where('nombre', 'Paco')->firstOrFail();
         $paquete = Paquete::where('nombre', 'Fiesta infantil')->firstOrFail();
 
         $evento = new Evento();
@@ -172,12 +211,18 @@ class EventoSeeder extends Seeder
         $evento->capacidad = 100;
         $evento->estado = '1';
         $evento->costo =  $paquete->costo;
-        $evento->usuario_id = $usuario->id;
+        $evento->cliente_id = $usuario->id;
         $evento->paquete_id = $paquete->id;
         $evento->save();
+        $evento->imagenMo()->create([
+            'imagenMi' => 'imagenes/fiesta1.png',
+            'imagenable_id'  => $evento->id,
+            'imagenable_type'  => Evento::class,
+        ]);
+
      
 
-        $usuario = Usuario::where('nombre', 'Luis')->firstOrFail();
+        $usuario = Cliente::where('nombre', 'Luis')->firstOrFail();
         $paquete = Paquete::where('nombre', 'Bautizos')->firstOrFail();
         $serviciosIds = [1,3];
         $servicios = Servicio::whereIn('id', $serviciosIds)->get();
@@ -192,10 +237,17 @@ class EventoSeeder extends Seeder
         $evento->capacidad = 100;
         $evento->estado = '0';
         $evento->costo =  $paquete->costo + $totalServicios;
-        $evento->usuario_id = $usuario->id;
+        $evento->cliente_id = $usuario->id;
         $evento->paquete_id = $paquete->id;
         $evento->save();
         $evento->servicios()->sync($serviciosIds);
+
+        $evento->imagenMo()->create([
+            'imagenMi' => 'imagenes/bautizo1.webp',
+            'imagenable_id'  => $evento->id,
+            'imagenable_type'  => Evento::class,
+        ]);
+
 
     }
 }

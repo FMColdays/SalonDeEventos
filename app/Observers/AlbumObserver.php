@@ -12,7 +12,7 @@ class AlbumObserver
     public function created(Album $album): void
     {
         $registro = new Registro();
-        $registro->usuario = Auth::user()->nombre;
+        $registro->usuario = Auth::user() ? Auth::user()->nombre : "Por seeder";
         $registro->accion = 'Se agregó la imagen al album ' . $album->album;
         $registro->save();
     }

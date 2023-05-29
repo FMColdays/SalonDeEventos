@@ -23,6 +23,14 @@ class UsuarioSeeder extends Seeder
         $usuario->nacimiento = '2001-01-14';
         $usuario->save();
 
+        $usuario->imagenMo()->create([
+            'imagenMi' => 'imagenes/carlos.jpeg',
+            'imagenable_id'  => $usuario->id,
+            'imagenable_type'  => Gerente::class,
+        ]);
+
+
+
         $usuario = new Cliente();
         $usuario->nombre = 'Hugo';
         $usuario->usuario='Hugo';
@@ -30,12 +38,23 @@ class UsuarioSeeder extends Seeder
         $usuario->nacimiento = '2001-08-18';
         $usuario->save();
 
+        $usuario->imagenMo()->create([
+            'imagenMi' => 'imagenes/hugo.jpeg',
+            'imagenable_id'  => $usuario->id,
+            'imagenable_type'  => Cliente::class,
+        ]);
+
         $usuario = new Cliente();
         $usuario->nombre = 'Paco';
         $usuario->usuario='Paco';
         $usuario->contraseña = Hash::make('c'); //c
         $usuario->nacimiento = '2001-05-12';
         $usuario->save();
+        $usuario->imagenMo()->create([
+            'imagenMi' => 'imagenes/paco.jpeg',
+            'imagenable_id'  => $usuario->id,
+            'imagenable_type'  => Cliente::class,
+        ]);
 
         $usuario = new Cliente();
         $usuario->nombre = 'Luis';
@@ -43,6 +62,13 @@ class UsuarioSeeder extends Seeder
         $usuario->contraseña = Hash::make('c'); //c
         $usuario->nacimiento = '2001-05-12';
         $usuario->save();
+
+        $usuario->imagenMo()->create([
+            'imagenMi' => 'imagenes/luis.jpg',
+            'imagenable_id'  => $usuario->id,
+            'imagenable_type'  => Cliente::class,
+        ]);
+
     }
     
 }

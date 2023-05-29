@@ -12,7 +12,7 @@ class GerenteObserver
     public function created(Gerente $gerente): void
     {
         $registro = new Registro();
-        $registro->usuario = Auth::user()->nombre;
+        $registro->usuario = Auth::user() ? Auth::user()->nombre : "Por seeder";
         $registro->accion = 'Se creó el gerente: ' . $gerente->nombre;
         $registro->save();
     }

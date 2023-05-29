@@ -14,7 +14,7 @@
                 @can('view', $servicio)
                     <div class="col">
                         <div class="card h-100">
-                            <img src="{{ $servicio->imagenMo->imagenMi }}" alt="" class="img-fluid" width="550px">
+                            <img class="img-paquetes" src="{{ optional($servicio->imagenMo)->imagenMi }}" alt="" class="img-fluid" width="550px">
                             <div class="card-body">
                                 <h2 class="card-title">{{ $servicio->nombre }}</h2>
                                 <div class="card-text">

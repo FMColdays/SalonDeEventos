@@ -8,16 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class ClienteObserver
 {
-  
+
     public function created(Cliente $cliente): void
     {
         $registro = new Registro();
-        $registro->usuario = Auth::user() ? Auth::user()->nombre : 'El mismo';
+        $registro->usuario = Auth::user() ? Auth::user()->nombre : "Por seeder";
         $registro->accion = 'Se creó el cliente: ' . $cliente->nombre;
         $registro->save();
     }
 
-  
+
     public function updated(Cliente $cliente): void
     {
         $registro = new Registro();
@@ -26,7 +26,7 @@ class ClienteObserver
         $registro->save();
     }
 
-    
+
     public function deleted(Cliente $cliente): void
     {
         $registro = new Registro();

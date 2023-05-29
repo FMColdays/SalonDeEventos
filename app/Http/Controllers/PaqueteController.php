@@ -24,7 +24,7 @@ class PaqueteController extends Controller
      */
     public function create()
     {
-
+        $this->authorize('create', App\Models\Paquete::class);
         return view('paquetes.create');
     }
 
@@ -33,7 +33,7 @@ class PaqueteController extends Controller
      */
     public function store(StorePaqueteRequest $request)
     {
-
+        $this->authorize('create', App\Models\Paquete::class);
         $paquete = new Paquete();
         $paquete->fill($request->all());
         $paquete->gerente_id = auth()->user()->id;

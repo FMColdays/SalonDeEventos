@@ -48,7 +48,7 @@
             </div>
 
             <div class="contenedor-form-img">
-                <img id="preview" class="img-media" src="{{ asset($servicio->imagenMo->imagenMi) }}"
+                <img id="preview" class="img-media" src="{{ asset(optional($servicio->imagenMo)->imagenMi) }}"
                     onchange="mostrarImagen(event)">
 
                 <div class="imagen-file">

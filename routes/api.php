@@ -29,12 +29,10 @@ Route::middleware('auth:sanctum')->post('/logout', function (Request $request) {
 
 Route::post('login', [ApiController::class, 'login']);
 
-Route::get('paquetes', [ApiController::class, 'paquetes']);
-Route::get('paquetesBus', [ApiController::class, 'BuscarPaquete']);
-
 Route::group(['middleware' => 'auth:sanctum'], function () {
-
+    Route::get('paquetes', [ApiController::class, 'paquetes']);
     Route::get('usuarios', [ApiController::class, 'usuarios']);
-    Route::post('store', [ApiController::class, 'store']);
+    Route::get('servicios', [ApiController::class, 'servicios']);
+    Route::get('eventos', [ApiController::class, 'eventos']);
     Route::get('logout', [ApiController::class, 'logout']);
 });

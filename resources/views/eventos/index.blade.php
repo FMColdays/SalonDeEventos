@@ -14,7 +14,7 @@
                 @can('view', $evento)
                     <div class="col">
                         <div class="card h-100">
-                            <img src="{{ optional($evento->imagenMo)->imagenMi }}" alt="" class="img-fluid" width="550px">
+                            <img class="img-paquetes" src="{{ optional($evento->imagenMo)->imagenMi }}" alt="" class="img-fluid" width="550px">
                             <div class="card-body">
                                 <h2 class="card-title">{{ $evento->nombre }}</h2>
                                 <div class="card-text">

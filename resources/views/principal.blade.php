@@ -24,7 +24,7 @@
                 <div class="contenedor_tarjeta">
                     <a href="{{ route('paquetes.show', $paquete->id) }}">
                         <figure>
-                            <img src="{{ $paquete->imagenMo->imagenMi }}" class="frontal">
+                            <img src="{{ optional($paquete->imagenMo)->imagenMi }}" class="frontal">
                             <figcaption class="trasera">
                                 <h2 class="titulo">{{ $paquete->nombre }}</h2>
                                 <hr>
