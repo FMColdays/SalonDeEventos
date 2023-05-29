@@ -16,19 +16,23 @@ class ApiController extends Controller
 {
     public function paquetes()
     {
-
         $paquetesOn = [];
-        $paquetes = Paquete::all();
-        if (Auth::user()  instanceof Cliente) {
+    
+        $paquetes = Paquete::with('imagenMo')->get();
+    
+        if (Auth::user() instanceof Cliente) {
             foreach ($paquetes as $paquete) {
                 if ($paquete->estado == 1) {
-                    $paquetesOn[] = $paquete;
+                    $paquetesOn[] = $paquete->toArray();
                 }
             }
             return response()->json($paquetesOn);
         }
+    
         return response()->json($paquetes);
     }
+    
+
     public function usuarios()
     {
         if (Auth::user()  instanceof Cliente) {
@@ -37,9 +41,9 @@ class ApiController extends Controller
                 'message' => 'No tienes permiso para esto'
             ], 400);
         } else {
-            $gerentes = Gerente::all();
-            $cliente = Cliente::all();
-            $usuarios = $gerentes->concat($cliente);
+            $gerentes = Gerente::with('imagenMo')->get();
+            $clientes = Cliente::with('imagenMo')->get();
+            $usuarios = $gerentes->concat($clientes);
             return response()->json($usuarios);
         }
     }
@@ -47,7 +51,7 @@ class ApiController extends Controller
     public function servicios()
     {
         $serviciosOn = [];
-        $servicios = Servicio::all();
+        $servicios = Servicio::with('imagenMo')->get();
         if (Auth::user()  instanceof Cliente) {
             foreach ($servicios as $servicio) {
                 if ($servicio->estado == 1) {
@@ -62,7 +66,7 @@ class ApiController extends Controller
     public function eventos()
     {
         $miEvento = [];
-        $eventos = Evento::all();
+        $eventos = Evento::with('imagenMo')->get();
         if (Auth::user()  instanceof Cliente) {
             foreach ($eventos as $evento) {
                 if ($evento->cliente_id == auth()->user()->id) {
